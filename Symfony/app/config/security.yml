@@ -1,0 +1,56 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_GLOBAL_ADMIN:  ROLE_ADMIN
+        ROLE_ADMIN: [ROLE_OBSERVER, ROLE_CENTER_MANAGER]
+        ROLE_CENTER_MANAGER:    [ROLE_TUTOR]
+        ROLE_TUTOR: ROLE_STUDENT
+        ROLE_OBSERVER: ROLE_USER
+        ROLE_STUDENT: ROLE_USER
+
+    providers:
+        main:
+            entity:
+                class: Bethel\UserBundle\Entity\User
+
+    firewalls:
+        test_firewall:
+            pattern: ^/test
+            security: false
+        api_firewall:
+            pattern: ^/api/*
+            stateless: false
+            simple_preauth:
+                authenticator: bethel.apikey_authenticator
+        # this is the firewall created for the BeSimpleSsoAuthBundle
+        cas_firewall:
+            pattern: ^/
+            security: true
+            trusted_sso:
+                manager: admin_sso
+                login_action: false # BeSimpleSsoAuthBundle:TrustedSso:login
+                logout_action: false # BeSimpleSsoAuthBundle:TrustedSso:logout
+                login_path: /login
+                check_path: /login_check
+                create_users: true
+                created_users_roles: [ROLE_STUDENT]
+                # failure_path: /debug
+            logout:
+                path: /logout
+                target: /path
+
+    access_control:
+        - { path: ^/global-admin/, role: ROLE_GLOBAL_ADMIN }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/center-manager/, role: ROLE_CENTER_MANAGER }
+        - { path: ^/observer/, role: ROLE_OBSERVER }
+        - { path: ^/tutor/, role: ROLE_TUTOR }
+        - { path: ^/student/, role: ROLE_STUDENT }
+        - { path: ^/message-center/, role: ROLE_STUDENT }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/test, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/*, roles: ROLE_API_USER }

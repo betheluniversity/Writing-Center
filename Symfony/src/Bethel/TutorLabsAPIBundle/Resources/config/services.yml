@@ -1,0 +1,7 @@
+parameters:
+#    bethel_tutor_labs_api.example.class: Bethel\TutorLabsAPIBundle\Example
+
+services:
+#    bethel_tutor_labs_api.example:
+#        class: %bethel_tutor_labs_api.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

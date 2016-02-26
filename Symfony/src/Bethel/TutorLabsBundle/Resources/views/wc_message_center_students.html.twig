@@ -1,0 +1,96 @@
+{% block headadd %}
+   <style type="text/css">
+        .spin {
+            display:    none;
+            position:   fixed;
+            z-index:    1000;
+            top:        0;
+            left:       0;
+            height:     100%;
+            width:      100%;
+            background: rgba( 255, 255, 255, .8 )
+                        url("{{asset('loader.gif')}}")
+                        50% 50%
+                        no-repeat;
+        }
+
+        /* When the body has the loading class, we turn
+           the scrollbar off with overflow:hidden */
+        body.loading {
+            overflow: hidden;
+        }
+
+        /* Anytime the body has the loading class, our
+           spin element will be visible */
+        body.loading .spin {
+            display: block;
+        }
+    </style>
+
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
+          $("#modal-username").val("All Students");
+            $("#messageModal").modal();
+                  
+            
+    //Sending a message
+            $("#messageButtonSend").click(function(){
+                username = $("#modal-username").val();
+                subject = $("#modal-subject").val();
+                body = $("#modal-body").val();
+
+                if (username == "" || subject == "" || body == ""){
+                     alert("Please include a username, subject, and body in your message!");
+                    return;
+                }
+                $('body').addClass('loading');
+                $('#messageModal').modal('hide');
+
+                $.ajax({
+                  type: "POST",
+                  url: "{{path('wc_cm_message_student_email')}}",
+                  data: { username: username, subject: subject, body: body}
+                }).done(function ( data ) {
+                    $("#modal-subject").val('');
+                    $("#modal-body").val('');
+                    $("#message-user-error-space").html('<div class="alert alert-success"> Message sent successfuly </div>');
+                    $("#message-user-error-space").fadeOut(5000);
+                    $('body').removeClass('loading');
+                });
+            });
+
+            $('#closeMessageModal').click(function() {
+                $('#messageModal').modal('hide');
+            });
+
+        });
+    </script>
+{% endblock %}
+
+{% block messaging %}
+
+<div class="spin"><!-- Place at bottom of page --></div>
+    <!-- <a class="btn" data-toggle="modal" href="#messageModal">Launch Modal</a> -->
+    <div class="modal hide" id="messageModal"><!-- note the use of "hide" class -->
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Send a message</h3>
+      </div>
+        <div class="modal-body">
+            <form>
+                <label for="modal-username">Username:</label>
+                <input type="text" id="modal-username" name="username" disabled/>
+                <label for="subject">Subject:</label>
+                <input type="text" id="modal-subject" name="subject"/>
+                <br />
+                <label for="body">Body:</label>
+                <textarea rows="4" cols="50" id="modal-body" name="body"></textarea>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a id="closeMessageModal" class="btn btn-danger" data-dismiss="modal">Close</a>
+            <a href="#" class="btn btn-primary" name="messageButtonSend" id="messageButtonSend">Send</a>
+        </div>
+      </div>
+{% endblock %}

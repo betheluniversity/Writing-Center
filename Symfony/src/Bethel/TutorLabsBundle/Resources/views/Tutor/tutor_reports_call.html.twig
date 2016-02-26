@@ -1,0 +1,90 @@
+{% if appointments is empty %}
+    <div class="row-fluid">
+        <div class="span12">No appointments match search parameters.</div>
+    </div>
+{% else %}
+    
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <!-- <th>Student Username</th> -->
+                <th>Student Name</th>
+                <!-- <th>Tutor Username</th> -->
+                <th>Tutor Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Professor</th>
+                <th>Course Code</th>
+                <th>No Show</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set NamesCounter = 0 %}
+            {% for key,value in appointments %}
+            {% set rand = key %}
+                <tr>
+                    <!-- <td class="clickable-row" id="StudUsername{{rand}}">{{value.StudUsername}}</td> -->
+                    <td class="clickable-row" id="StudName{{rand}}">
+                        {% if StudentNames[NamesCounter] == "NO STUDENT" or StudentNames[NamesCounter] == "NO STUDENT" %}
+                               
+                        {% else %}
+                            {{StudentNames[NamesCounter].firstName}} {{StudentNames[NamesCounter].lastName}}
+                        {% endif %}
+                    </td>
+                    <!-- <td class="clickable-row" id="TutorUsername{{rand}}">{{value.TutorUsername}}</td> -->
+                    <td class="clickable-row" id="TutorName{{rand}}">{{TutorNames[NamesCounter].firstName}} {{TutorNames[NamesCounter].lastName}}</td>
+                    <td class="clickable-row" id="StartTime{{rand}}"> {% if value.StartTime != NULL %}{{value.StartTime | date('m/d/Y')}} {% else %}N/A {% endif %}</td>
+                    <td class="clickable-row" id="EndTime{{rand}}"> 
+                        {% if value.EndTime != NULL and value.StartTime != NULL %}
+                            {{value.StartTime | date('g:i a')}} - {{value.EndTime | date('g:i a')}} 
+                        {% else %}
+                            N/A 
+                        {% endif %}
+                        <div style="visibility:hidden;" id="id-{{rand}}">{{value.ID}}</div>
+                    </td>
+                    <td class="clickable-row" id="Prof{{rand}}"> 
+                        {% if ProfNames[NamesCounter] != "" %}
+                            {{ProfNames[NamesCounter]}}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                        
+                    </td>
+                    <td class="clickable-row" id="CourseCode{{rand}}"> 
+                        {{value.CourseCode}}
+                    </td>
+                    <td class="clickable-row" id="NoShow{{rand}}"> 
+                        {% if value.CheckIn == 4 %}
+                            No show
+                        {% endif %}
+                    </td>
+                </tr>
+                {% set NamesCounter = NamesCounter + 1 %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% set NamesCounter = 0 %}
+    {% for key,value in appointments %}
+    {% set rand = key %}
+
+        <div class="row-fluid comment-row" id="comment-row{{rand}}" style="display:none">
+                
+                <div class="span4">
+                    <label for="Assignment"> <b>Assignment:</b></label>
+                     <textarea name="Assignment" style="width:75%" cols="50" rows="4" id="Assignment" readonly>{{value.Assignment}}</textarea>
+                </div>
+                
+                <div class="span4">
+                    <label for="Comment"> <b>Worked On:</b></label>
+                     <textarea name="Comment" style="width:75%" cols="50" rows="4" id="Comment" readonly>{{value.Comment}}</textarea>
+                </div>
+                
+                <div class="span4">
+                    <label for="Suggestion"> <b>Suggestions:</b></label>
+                     <textarea name="Suggestion" style="width:75%" cols="50" rows="4" id="Suggestion" readonly>{{value.Suggestion}}</textarea>
+                </div>
+            </div>
+
+        </div>
+    {% endfor %}
+{% endif %}

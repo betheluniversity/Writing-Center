@@ -1,0 +1,78 @@
+{% extends '::base.html.twig' %}
+
+{% block headadd %}
+<script type="text/javascript">
+    //load the preferences.
+    $(document).ready(function() {
+      $(".btn-preferences").click(function(){
+        openPreferences();
+    });
+
+      function openPreferences(){
+        $.ajax({
+            type: "POST",
+            url: "{{path('wc_message_center_preferences')}}",
+            data: {}
+          }).done(function ( user ) {
+            $("#message-content").html(user);
+        });
+      }
+
+      $(".btn-users").click(function(){
+      $.ajax({
+          type: "POST",
+          url: "{{path('wc_message_center_users')}}",
+          data: {}
+        }).done(function ( user ) {
+          $("#message-content").html(user);
+      });
+    });
+
+      $(".btn-students").click(function(){
+      $.ajax({
+          type: "POST",
+          url: "{{path('wc_cm_message_student')}}",
+          data: {}
+        }).done(function ( user ) {
+          $("#message-content").html(user);
+      });
+    });
+
+      //Not sure this works
+      $(".btn-tutors").click(function(){
+      $.ajax({
+          type: "POST",
+          url: "{{path('wc_cm_message_tutor')}}",
+          data: {}
+        }).done(function ( user ) {
+          $("#message-content").html(user);
+      });
+    });
+      openPreferences();
+});
+
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="span9">
+        <div class="hero-unit">
+            <h1>Welcome to the Message Center</h1>
+        </div>
+        <div id="message-center-error-space"></div>
+        <div id="message-center-content">
+            <button class="btn btn-small btn-preferences">Message Preferences</button>
+          {% if is_granted('ROLE_TUTOR') %}
+        	<button class="btn btn-small btn-users">Message Users</button>
+          
+               <button class="btn btn-small btn-tutors">Message Tutors</button>
+          {% endif %}
+          {% if is_granted('ROLE_CENTER_MANAGER') %}
+             <button class="btn btn-small btn-students">Message Students</button>
+          {% endif %}
+            {% block messaging %}
+                <div id="message-content"></div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

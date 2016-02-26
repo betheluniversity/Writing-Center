@@ -1,0 +1,75 @@
+{% if totalVisits == 'true' %}
+	<h4>Total Visits:</h4>
+		{% for key, value in totalVisitsArray %}
+			<div>{{value}}</div>
+		{% endfor %}
+{% endif %}
+
+{% if busiestTimeOfDay == 'true' %}
+	<h4>Busiest Time of Day:</h4>
+		{% for key, value in busiestTimeOfDayArray %}
+			<div class="row-fluid">
+				<div class="span3">{{key}}</div> 
+				<div class="span2">{{value}}</div>
+			</div>
+		{% endfor %}
+{% endif %}
+
+{% if busiestDay == 'true' %}
+	<h4>Busiest Day:</h4>
+		{% for key, value in busiestDayArray %}
+			<div class="row-fluid">
+				<div class="span3">{{key}}:</div> 
+				<div class="span2">{{value}}</div>
+			</div>
+		{% endfor %}
+{% endif %}
+
+{% if busiestTutor == 'true' %}
+	<h4>Busiest Tutor:</h4>
+		{% for key, value in busiestTutorArray %}
+			<div class="row-fluid">
+				<div class="span3">{{key}}:</div> 
+				<div class="span2">{{value}}</div>
+			</div>
+		{% endfor %}
+{% endif %}
+
+{% if noShows == 'true' %}
+	<h4>No Shows:</h4>
+		<div>No Shows: {{noShowsArray}}</div>
+{% endif %}
+
+{% if busiestWeek == 'true' %}
+	<h4>Busiest Week:</h4>
+		{% for key, value in busiestWeekArray %}
+			<div class="row-fluid">
+				<div class="span3">{{key}}</div>
+				<div class="span2">{{value}}</div>
+			</div>
+		{% endfor %}
+{% endif %}
+
+{% if byCourse == 'true' %}
+	<h4>By Course:</h4>
+		{% for key, value in byCourseArray %}
+			<div class="row-fluid">
+				{% if key != "other" %}
+					<div class="span3">{{key}}</div>
+				{% else %}
+					<div class="span3">Other (scholarship essays, graduate school applications, etc)</div>
+				{% endif %}
+					<div class="span2">{{value}}</div>
+			</div>
+		{% endfor %}
+{% endif %}
+
+{% if getStudentEmail == 'true' %}
+	<h4>Get Students Email:</h4>
+		{% for key, value in getStudentEmailArray %}
+			<div>{{value}}</div>
+		{% endfor %}
+		{% if getStudentEmailArray is empty %}
+			There are no emails listed in this time range.
+		{% endif %}
+{% endif %}

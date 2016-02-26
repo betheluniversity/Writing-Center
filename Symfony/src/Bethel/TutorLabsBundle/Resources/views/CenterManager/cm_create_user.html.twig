@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block headadd %}
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $("#add").click(function(){
+      newUsername = $("#newStudUsername").val();
+        $.ajax({
+          type: "POST",
+          url: "{{path('wc_cm_create_user_call')}}",
+          data: {newUsername:newUsername}
+        }).done(function ( data ) {
+          $("#create-user-error-space").html(data);
+        });
+    });
+  });
+
+   </script>
+
+{% endblock %}
+
+{% block body %}
+    <div class="span9">
+        <div class="hero-unit">
+            <h1>Create New User.</h1>
+            <p> A simple way to create a new User. This will be replaced by banner. CAN BE REMOVED.</p>
+        </div>
+        <div id="create-user-error-space"></div>
+        <div id="create-user-content">
+          <div class="row-fluid">
+        <div class="span2">
+            <input type="text" style="width:150px" id="newStudUsername" class="new-input" name="newStudUsername" placeholder="Username">
+        </div>
+        <div class="span2">
+            <input type="button" id="add" class="new-input" name="add-button" value="Add" \>
+        </div>
+    </div> 
+        </div>
+    </div>
+{% endblock %}

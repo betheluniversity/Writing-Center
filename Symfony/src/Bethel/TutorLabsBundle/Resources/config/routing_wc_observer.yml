@@ -1,0 +1,53 @@
+wc_observer_appointments_view:
+    pattern: /observer/appointments/view
+    defaults: { _controller: BethelTutorLabsBundle:Observer\Appointments:appointmentsView}
+
+wc_observer_appointments_load:
+    pattern: /observer/appointments/load
+    defaults: { _controller: BethelTutorLabsBundle:Observer\Appointments:appointmentsLoad}
+
+wc_observer_appointments_get_student_usernames:
+    pattern: /observer/appointments/get-student-usernames
+    defaults: { _controller: BethelTutorLabsBundle:Observer\Appointments:appointmentsGetStudentUsernames}
+
+wc_observer_appointments_get_tutor_usernames:
+    pattern: /observer/appointments/get-tutor-usernames
+    defaults: { _controller: BethelTutorLabsBundle:Observer\Appointments:appointmentsGetTutorUsernames}
+
+wc_observer_appointments_get_prof_usernames:
+    pattern: /observer/appointments/get-prof-usernames
+    defaults: { _controller: BethelTutorLabsBundle:Observer\Appointments:appointmentsGetProfUsernames}
+
+wc_observer_statistics_view:
+    pattern: /observer/statistics/view
+    defaults: { _controller: BethelTutorLabsBundle:Observer\Statistics:statisticsView}
+
+wc_observer_statistics_call:
+    pattern: /observer/statistics/call
+    defaults: { _controller: BethelTutorLabsBundle:Observer\Statistics:statisticsCall}
+
+wc_observer_schedule_appointment_view:
+    pattern: /observer/schedule-one-on-one/view
+    defaults: { _controller: BethelTutorLabsBundle:Observer\ScheduleAppointment:scheduleView }
+    options:
+        expose: true
+
+wc_observer_schedule_appointment_load:
+    pattern: /observer/schedule-one-on-one/load
+    defaults: { _controller: BethelTutorLabsBundle:Observer\ScheduleAppointment:scheduleLoad }
+
+wc_observer_schedule_appointment_call:
+    pattern: /observer/schedule-one-on-one/call
+    defaults: { _controller: BethelTutorLabsBundle:Observer\ScheduleAppointment:scheduleCall }
+
+wc_observer_schedule_appointment_check_empty:
+    pattern: /observer/schedule-one-on-one/check-empty
+    defaults: { _controller: BethelTutorLabsBundle:Observer\ScheduleAppointment:scheduleCheckEmpty }
+
+wc_observer_schedule_view:
+    pattern: /observer/schedule/view
+    defaults: { _controller: BethelTutorLabsBundle:Observer\ViewScheduleTutors:scheduleView }
+
+wc_observer_schedule_load:
+    pattern: /observer/schedule/load
+    defaults: { _controller: BethelTutorLabsBundle:Observer\ViewScheduleTutors:scheduleLoad }

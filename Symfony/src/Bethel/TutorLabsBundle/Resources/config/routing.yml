@@ -1,0 +1,81 @@
+writing_center_controller:
+    resource: "@BethelTutorLabsBundle/Resources/config/routing_wc.yml"
+
+wc_homepage:
+    pattern:  /
+    defaults: { _controller: BethelTutorLabsBundle:Default:index }
+    requirements:
+        _method: GET
+
+wc_global_admin:
+    pattern:  /global_admin
+    defaults: { _controller: BethelTutorLabsBundle:Page:global_admin }
+    requirements:
+        _method: GET
+
+wc_admin:
+    pattern:  /admin
+    defaults: { _controller: BethelTutorLabsBundle:Page:admin }
+    requirements:
+        _method: GET
+
+wc_observer:
+    pattern:  /observer
+    defaults: { _controller: BethelTutorLabsBundle:Page:observer }
+    requirements:
+        _method: GET
+
+wc_center_manager:
+    pattern:  /center_manager
+    defaults: { _controller: BethelTutorLabsBundle:Page:center_manager }
+    requirements:
+        _method: GET
+
+wc_tutor:
+    pattern:  /tutor
+    defaults: { _controller: BethelTutorLabsBundle:Page:tutor }
+    requirements:
+        _method: GET
+
+wc_student:
+    pattern:  /student
+    defaults: { _controller: BethelTutorLabsBundle:Page:student }
+    requirements:
+        _method: GET
+
+wc_test:
+    pattern:  /test
+    defaults: { _controller: BethelTutorLabsBundle:CalebTest:getUsers }
+    requirements:
+        _method: GET
+
+
+
+# These are routes used in the writingcenter.js file, for general JS functions:
+
+get_usernames_like:
+    pattern: /get_usernames_like_view
+    defaults: {_controller: BethelTutorLabsBundle:Javascript:getUsernamesLike}
+    options:
+        expose: true
+
+get_usernames_like_first_last_names:
+    pattern: /get_usernames_like_first_last_names_view
+    defaults: {_controller: BethelTutorLabsBundle:Javascript:getUsernamesLikeFirstLastNames}
+    options:
+        expose: true
+
+get_lab_schedule:
+    pattern: /get-lab-schedule
+    defaults: {_controller: BethelTutorLabsBundle:Javascript:getLabSchedule}
+    options:
+        expose: true
+
+get_mustache_templates:
+    pattern: /mustache.htm
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: BethelTutorLabsBundle::mustache.html.twig
+    options:
+        expose: true
+

@@ -1,0 +1,104 @@
+{% extends '::base.html.twig' %}
+
+{% block headadd %}
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="{{asset('css/jquery.ui.timepicker.css')}}" type="text/css" rel="stylesheet">
+
+  <!--FullCalendar Dependencies-->
+  <link href="{{asset('css/fullcalendar.css')}}" type="text/css" rel='stylesheet' />
+  <link href="{{asset('css/fullcalendar.print.css')}}" rel='stylesheet' media='print' />
+  
+  <!--FullCalendar-->
+  <script src="{{asset('js/fullcalendar.min.js')}}"></script>
+  <script type="text/javascript">
+        $(document).ready(function() {
+
+        function getCalEventAsString(calEvent) {
+            eventStart = new Date(calEvent.start);
+            eventEnd = new Date(calEvent.end);
+            $multilingual = "";
+            $StudentSignIn = "";
+            $StudentSignOut = "";
+
+            if(calEvent.studentSignIn !== "no"){
+              studentStart = new Date(calEvent.studentSignIn);
+              $StudentSignIn = "<br>Student Sign In: " + studentStart.toLocaleTimeString();
+            }
+            else
+              $StudentSignIn = "";
+
+            if(calEvent.studentSignOut !== "no"){
+              studentEnd = new Date(calEvent.studentSignOut);
+              $StudentSignOut = "<br>Student Sign Out: " + studentEnd.toLocaleTimeString();
+            }
+            else
+              $StudentSignOut = "";
+
+            if(calEvent.multilingual)
+                $multilingual = '<br><br>Multilingual Appointment'
+
+            student = calEvent.studentname;
+            if( student == "")
+              student = "No student";
+
+
+            return 'Student: ' + student
+                + "<br>Tutor Name: " + calEvent.tutorname
+                + "<br>Date: " + eventStart.toLocaleDateString()
+                + "<br>Start Time: " + eventStart.toLocaleTimeString()
+                + $StudentSignIn
+                + "<br>End Time: " + eventEnd.toLocaleTimeString()
+                + $StudentSignOut
+                + "<br>" + calEvent.noshow
+                + $multilingual
+                + "<br>Assignment: " + calEvent.assignment
+                + "<br>Comments: " + calEvent.comment
+                + "<br>Suggestion: " + calEvent.suggestion;
+        }
+
+        function appointmentClicked(calEvent, jsEvent, view) {
+            console.log(calEvent.appointmentID);
+            $( "#dialog-confirm" ).html(getCalEventAsString(calEvent));
+            $( "#dialog-confirm" ).dialog({
+                buttons: {
+                    Close: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+        }
+      
+        var calendar = $('#calendar').fullCalendar({
+            header:
+            {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay'
+            },
+            defaultView: 'month',
+            editable: false,
+            minTime: 7,
+            eventSources: [
+                "{{path('wc_student_history_load')}}"
+            ],
+            eventClick: appointmentClicked
+        });
+    });
+	</script>
+{% endblock %}
+
+{% block body %}
+    <script type="text/javascript">
+    </script>
+	<div class="span9">
+        <div class="hero-unit">
+            <h1>Appointment History</h1>
+            <p>View the appointments that you have attended in the past.</p>
+        </div>
+        <div id="update-user-error-space"></div>
+      
+        <div id="calendar"></div>
+
+        <div id="dialog-confirm" style="display:none;" title="Appointment History"></div>
+{% endblock %}

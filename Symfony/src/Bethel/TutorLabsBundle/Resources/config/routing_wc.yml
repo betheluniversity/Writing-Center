@@ -1,0 +1,47 @@
+writing_center_cm:
+    resource: "@BethelTutorLabsBundle/Resources/config/routing_wc_cm.yml"
+
+writing_center_observer:
+    resource: "@BethelTutorLabsBundle/Resources/config/routing_wc_observer.yml"
+
+writing_center_tutor:
+    resource: "@BethelTutorLabsBundle/Resources/config/routing_wc_tutor.yml"
+
+writing_center_student:
+    resource: "@BethelTutorLabsBundle/Resources/config/routing_wc_student.yml"
+
+wc_message_center:
+    pattern:  /message-center/
+    defaults: { _controller: BethelTutorLabsBundle:MessageCenter:messageView }
+
+wc_message_center_preferences:
+    pattern:  /message-center/preferences
+    defaults: { _controller: BethelTutorLabsBundle:MessageCenter:messagePreferencesView }
+
+wc_message_center_users:
+    pattern:  /message-center/users
+    defaults: { _controller: BethelTutorLabsBundle:MessageCenter:messageUsersView }
+
+wc_cm_message_user_call:
+    pattern:  /message-center/call
+    defaults: { _controller: BethelTutorLabsBundle:MessageCenter:messageUserCall }
+
+wc_cm_message_user_email:
+    pattern:  /message-center/users/email
+    defaults: { _controller: BethelTutorLabsBundle:MessageCenter:messageUserEmail }
+
+wc_cm_message_student:
+    pattern:  /message-center/student
+    defaults: { _controller: BethelTutorLabsBundle:MessageCenter:messageStudentView }
+
+wc_cm_message_student_email:
+    pattern:  /message-center/student/email
+    defaults: { _controller: BethelTutorLabsBundle:MessageCenter:messageStudentEmail }
+
+wc_cm_message_tutor:
+    pattern:  /message-center/tutor
+    defaults: { _controller: BethelTutorLabsBundle:MessageCenter:messageTutorView }
+
+wc_cm_message_tutor_email:
+    pattern:  /message-center/tutor/email
+    defaults: { _controller: BethelTutorLabsBundle:MessageCenter:messageTutorEmail }

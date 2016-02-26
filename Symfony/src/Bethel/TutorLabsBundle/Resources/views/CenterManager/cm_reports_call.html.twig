@@ -1,0 +1,21 @@
+<div class="row-fluid">
+    <div class="span2"><b>Student Username</b></div>
+    <div class="span2"><b>Tutor Username</b></div>
+    <div class="span3"><b>Date/Time Completed</b></div>
+    <div class="span2"><b>Status</b></div>
+</div>
+{% for key,value in user %}
+    {% set rand = random(10000) %}
+    <div class="row-fluid">
+        <div class="span2" id="StudUsername{{rand}}">{{value.StudUsername}}</div>
+        <div class="span2" id="TutorUsername{{rand}}">{{value.TutorUsername}}</div>
+        <div class="span3" id="Date/Time Completed{{rand}}"> {{value.CompletedTime | date('n/j/Y h:i:s')}} </div>
+        {% if value.CheckIn == -1 %}
+            <div class="span2" id="numCheckIn{{rand}}">{{"Not Started"}}</div>
+        {% elseif value.CheckIn == (3 or 5) %}
+            <div class="span2" id="numCheckIn{{rand}}">{{"Finished"}}</div>
+        {% elseif value.CheckIn == 4 %}
+            <div class="span2" id="numCheckIn{{rand}}">{{"No Show"}}</div>
+        {% endif %}
+    </div>
+{% endfor %}

@@ -1,0 +1,37 @@
+wc_student_schedule_appointment_view:
+    pattern: /student/schedule-one-on-one/view
+    defaults: { _controller: BethelTutorLabsBundle:Student\ScheduleAppointment:scheduleView }
+    options:
+        expose: true
+
+wc_student_schedule_appointment_load:
+    pattern: /student/schedule-one-on-one/load
+    defaults: { _controller: BethelTutorLabsBundle:Student\ScheduleAppointment:scheduleLoad }
+
+wc_student_schedule_appointment_call:
+    pattern: /student/schedule-one-on-one/call
+    defaults: { _controller: BethelTutorLabsBundle:Student\ScheduleAppointment:scheduleCall }
+
+wc_student_schedule_appointment_check_empty:
+    pattern: /student/schedule-one-on-one/check-empty
+    defaults: { _controller: BethelTutorLabsBundle:Student\ScheduleAppointment:scheduleCheckEmpty }
+
+wc_student_appointments_view:
+    pattern: /student/appointments/view
+    defaults: { _controller: BethelTutorLabsBundle:Student\CurrentAppointments:appointmentsView }
+
+wc_student_appointments_load:
+    pattern: /student/appointments/load
+    defaults: { _controller: BethelTutorLabsBundle:Student\CurrentAppointments:appointmentsLoad }
+
+wc_student_appointments_call_cancel:
+    pattern: /student/appointments/call_cancel
+    defaults: { _controller: BethelTutorLabsBundle:Student\CurrentAppointments:appointmentsCallCancel }
+
+wc_student_history_view:
+    pattern: /student/history/view
+    defaults: { _controller: BethelTutorLabsBundle:Student\AppointmentHistory:appointmentHistoryView }
+
+wc_student_history_load:
+    pattern: /student/history/load
+    defaults: { _controller: BethelTutorLabsBundle:Student\AppointmentHistory:appointmentHistoryLoad }

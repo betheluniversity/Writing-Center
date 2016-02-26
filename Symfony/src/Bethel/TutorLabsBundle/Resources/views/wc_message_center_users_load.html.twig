@@ -1,0 +1,27 @@
+<hr/>
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key,value in user %}
+            {% set rand = random(10000) %}
+            <tr class="btn-message" id="message-{{rand}}">
+                <td>{{value.firstName}}</td> 
+                <td>{{value.lastName}}</td>
+                <td id="username{{rand}}">{{value.username}}</td> 
+                <td>
+                    <div id="current-role{{rand}}">
+                        {{value.roles.0}}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+

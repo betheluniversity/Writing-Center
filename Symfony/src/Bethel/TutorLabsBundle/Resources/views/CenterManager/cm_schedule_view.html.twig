@@ -1,0 +1,75 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="span9">
+            <div class="hero-unit">
+                <h1>Create Lab Schedule.</h1>
+                <p>This is where you create an available time slot for an appointment.</p>
+            </div>
+            <div id="update-user-error-space"></div>
+            <div id="schedule-content"></div>
+    </div>
+{% endblock %}
+
+{% block mustache %}
+    {% verbatim %}
+      <script id="schedule-table" type="text/html">
+        <div class="span9">
+          <div id="update-user-error-space"></div>
+        <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Active</th>
+            </tr>
+          </thead>
+        {{#schedule}}
+          {{#.}}
+            <tr class="schedule-row" id="schedule-row{{id}}">
+              <td class="timeStart" id="timeStart{{id}}">{{readableStartTime}}</td>
+              <td class="timeEnd" id="timeEnd{{id}}">{{readableEndTime}}</td>
+              <td class="active" id="Active{{id}}">{{isActive}}</td>
+            </tr>
+          {{/.}}
+        {{/schedule}}
+        </table>
+           <p id="schedule-add-btn">
+            <button id="scheduleAddButton" class="btn btn-primary" type="button">Add</button>
+           </p>
+           <p id="schedule-cs-btns" style="display:none">
+            <button id='scheduleCancelEdit' class="btn btn-danger" type="button">Cancel</button>
+            <button id="scheduleSaveButton" class="btn btn-success" type="button">Save</button>
+            <button id="scheduleDeleteButton" class="btn btn-warning" type="button">Remove Row</button>
+           </p>
+            <div class="row-fluid">
+            <div class="span6">
+              <form id="addScheduleForm" action="">
+                <input type="text" style="width: 70px; display:none" id="newTimeStart" value="" readonly/>
+                <input type="text" style="width: 70px; display:none" id="newTimeEnd" style="width:3em" value="" readonly/>
+                <select id="active-select" style="width: 60px; display:none">
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
+              <div class="span6">
+                <p id="schedule-cs-add-btns" style="display:none">
+                  <button id='scheduleCancelSubmit' class="btn btn-danger" type="button">Cancel</button>
+                  <button id="scheduleSubmitButton" class="btn btn-success" type="button">Submit</button>
+               </p>
+              </div>
+            </form>
+          </div>
+        </div>
+        </script>
+    {% endverbatim %}
+{% endblock %}
+
+{% block footadd %}
+  <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <link href="{{asset('css/jquery.ui.timepicker.css')}}" type="text/css" rel="stylesheet">
+  <script src="{{asset('js/jquery.ui.timepicker.js')}}"></script>
+  <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+  <script src="{{asset('bundles/betheltutorlabs/js/centermanager.js')}}"></script>
+{% endblock %}

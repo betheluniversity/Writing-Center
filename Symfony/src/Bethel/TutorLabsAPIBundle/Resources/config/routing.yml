@@ -1,0 +1,59 @@
+bethel_appointments_all:
+    pattern:  /appointments
+    defaults: { _controller: BethelTutorLabsAPIBundle:Appointments:all, _format: ~ }
+    requirements:
+        _method: GET
+
+bethel_appointments_by_student:
+    pattern:  /appointments/student/{name}
+    defaults: { _controller: BethelTutorLabsAPIBundle:Appointments:byStudent, _format: ~ }
+    requirements:
+        _method: GET
+        name: "[a-zA-Z]+[0-9]*"
+
+bethel_appointments_by_tutor:
+    pattern:  /appointments/tutor/{name}
+    defaults: { _controller: BethelTutorLabsAPIBundle:Appointments:byTutor, _format: ~ }
+    requirements:
+        _method: GET
+        name: "[a-zA-Z]+[0-9]*"
+
+# bethel_appointments_date_range:
+#     pattern:  /appointments/date-range/{start}.{_format}-{end}.{_format}
+#     defaults: { _controller: BethelTutorLabsAPIBundle:Appointments:inDateRangeAction, _format: ~ }
+#     requirements:
+#         _method: GET
+#         start: ""
+#         end: ""
+
+bethel_bans_all:
+    pattern:  /bans
+    defaults: { _controller: BethelTutorLabsAPIBundle:Bans:all, _format: ~ }
+    requirements:
+        _method: GET
+
+bethel_bans_by_id:
+    pattern:  /bans/{id}
+    defaults: { _controller: BethelTutorLabsAPIBundle:Bans:byID, _format: ~ }
+    requirements:
+        _method: GET
+        id: "[1-9][0-9]*"
+
+bethel_system_settings_all:
+    pattern:  /settings
+    defaults: { _controller: BethelTutorLabsAPIBundle:Settings:all, _format: ~ }
+    requirements:
+        _method: GET
+
+bethel_users_all:
+    pattern:  /users
+    defaults: { _controller: BethelTutorLabsAPIBundle:Users:all, _format: ~ }
+    requirements:
+        _method: GET
+
+bethel_user_by_username:
+    pattern:  /users/{username}
+    defaults: { _controller: BethelTutorLabsAPIBundle:Users:byUsername, _format: ~ }
+    requirements:
+        _method: GET
+        username: "[a-zA-Z]+[0-9]*"

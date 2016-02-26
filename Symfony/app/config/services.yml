@@ -1,0 +1,36 @@
+services:
+    bethel.entity_listener_resolver:
+        class: Bethel\UserBundle\EventListener\ListenerResolver
+        arguments: [ "@service_container" ]
+    bethel.entity_listener.user:
+        class: Bethel\UserBundle\EventListener\UserListener
+        arguments: [ "@wsapi" ]
+        tags:
+            -  { name: doctrine.entity_listener }
+    bethel.user_metadata:
+        class: Doctrine\ORM\Mapping\ClassMetaData
+        arguments:
+            name: "Bethel\UserBundle\Entity\User"
+    bethel.sso_user_provider:
+        class: Bethel\UserBundle\Entity\UserRepository
+        arguments: ["@doctrine.orm.entity_manager","@bethel.user_metadata","%bethel.apikey%"]
+    bethel.apikey_authenticator:
+        class: Bethel\TutorLabsAPIBundle\Security\ApiKeyAuthenticator
+        arguments: ["@bethel.sso_user_provider"]
+    fos_user.registration.form.type:
+        class: Bethel\UserBundle\Form\Type\RegistrationFormType
+        arguments:
+             - %fos_user.model.user.class%
+        tags:
+            - { name: form.type, alias: bethel_user_registration }
+    gedmo.listener.softdeleteable:
+        class: Gedmo\SoftDeleteable\SoftDeleteableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ @annotation_reader ] ]
+
+    app.twig_extension:
+        class: Bethel\TutorLabsBundle\Twig\AppExtension
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,193 @@
+wc_cm_promote_view:
+    pattern:  /center-manager/promote
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Promote:promoteView }
+
+wc_cm_promote_call:
+    pattern:  /center-manager/promote/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Promote:promoteCall }
+
+wc_cm_promote_update:
+    pattern:  /center-manager/promote/update
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Promote:promoteUpdate }
+    options:
+        expose: true
+
+wc_cm_reports_view:
+    pattern: /center-manager/view_reports
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Reports:reportsView }
+
+wc_cm_reports_call:
+    pattern: /center-manager/view_reports/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Reports:reportsCall }
+
+wc_cm_schedule_call_toggle:
+    pattern: /center-manager/schedule/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Schedule:scheduleCallToggle }
+    options:
+        expose: true
+
+wc_cm_schedule_call_update:
+    pattern: /center-manager/schedule/update
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Schedule:scheduleCallUpdate }
+    options:
+        expose: true
+
+wc_cm_schedule_call_add:
+    pattern: /center-manager/schedule/add/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Schedule:scheduleCallAdd }
+    options:
+        expose: true
+
+wc_cm_schedule_call_remove:
+    pattern: /center-manager/schedule/remove/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Schedule:scheduleCallRemove }
+    options:
+        expose: true
+
+wc_cm_system_settings_view:
+    pattern: /center-manager/system_settings
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\SystemSettings:systemSettingsView }
+
+wc_cm_schedule_view:
+    pattern: /center-manager/schedule/
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Schedule:scheduleView }
+
+wc_cm_schedule_load:
+    pattern: /center-manager/schedule/load
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Schedule:scheduleLoad }
+    options:
+        expose: true
+
+wc_cm_system_settings_update:
+    pattern: /center-manager/view-system-settings/update
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\SystemSettings:systemSettingsUpdate }
+    options:
+        expose: true
+
+wc_cm_message_user_view:
+    pattern: /center-manager/message-user
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\MessageUser:messageUserView }
+
+wc_cm_message_user_call:
+    pattern: /center-manager/message-user/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\MessageUser:messageUserCall }
+
+wc_cm_message_user_email:
+    pattern: /center-manager/message-user/email
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\MessageUser:messageUserEmail }
+
+wc_cm_manage_bans_load:
+    pattern: /center-manager/manage_bans/load
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageBans:manageBansLoad }
+
+wc_cm_new_bans_load:
+    pattern: /center-manager/manage_bans/load-new
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageBans:newStudentBans }
+
+wc_cm_manage_new_bans_call:
+    pattern: /center-manager/manage_bans/call-new
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageBans:newBansCall }
+
+wc_cm_manage_bans_call:
+    pattern: /center-manager/manage_bans/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageBans:manageBansCall }
+
+wc_cm_manage_bans_view:
+    pattern: /center-manager/manage_bans
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageBans:manageBansView }
+
+wc_cm_remove_all_bans:
+    pattern: /center-manager/manage_bans/remove-all
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageBans:removeAllBans }
+
+wc_cm_manage_tutors_view:
+    pattern: /center-manager/manage_tutors
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageTutors:manageTutorsView }
+    options:
+        expose: true
+
+wc_cm_manage_tutors_call:
+    pattern: /center-manager/manage_tutors/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageTutors:manageTutorsCall }
+    options:
+        expose: true
+
+wc_cm_manage_tutors_call_lookup:
+    pattern: /center-manager/manage_tutors/call/lookup
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageTutors:manageTutorsCallLookUp }
+    options:
+        expose: true
+
+wc_cm_manage_tutors_call_remove:
+    pattern: /center-manager/manage_tutors/call/remove
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageTutors:manageTutorsCallRemove }
+    options:
+        expose: true
+
+wc_cm_manage_tutors_call_update_lookup:
+    pattern: /center-manager/manage_tutors/call/lookup/update
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageTutors:manageTutorsCallUpdateLookup }
+    options:
+        expose: true
+
+wc_cm_manage_tutors_call_update:
+    pattern: /center-manager/manage_tutors/call/update
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\ManageTutors:manageTutorsCallUpdate }
+    options:
+        expose: true
+
+wc_cm_banner_preview_view:
+    pattern: /center-manager/banner_preview/
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\TESTBanner:bannerPreviewView}
+
+wc_cm_banner_preview_call:
+    pattern: /center-manager/banner_preview/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\TESTBanner:bannerPreviewCall}
+
+wc_cm_edit_appointments_view:
+    pattern: /center-manager/edit-appointments/view
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\EditAppointments:editAppointmentsView}
+
+wc_cm_edit_appointments_load:
+    pattern: /center-manager/edit-appointments/load
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\EditAppointments:editAppointmentsLoad}
+
+wc_cm_edit_appointments_call:
+    pattern: /center-manager/edit-appointments/edit/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\EditAppointments:editAppointmentsCall}
+
+wc_cm_edit_appointments_get_student_usernames:
+    pattern: /center-manager/edit-appointments/get-student-usernames
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\EditAppointments:editAppointmentsGetStudentUsernames}
+
+wc_cm_edit_appointments_get_tutor_usernames:
+    pattern: /center-manager/edit-appointments/get-tutor-usernames
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\EditAppointments:editAppointmentsGetTutorUsernames}
+
+wc_cm_edit_appointments_get_prof_usernames:
+    pattern: /center-manager/edit-appointments/get-prof-usernames
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\EditAppointments:editAppointmentsGetProfUsernames}
+
+wc_cm_delete_appointments_call:
+    pattern: /center-manager/edit-appointments/delete/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\EditAppointments:deleteAppointmentsCall}
+
+wc_cm_update_appointments_call:
+    pattern: /center-manager/edit-appointments/update/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\EditAppointments:updateAppointmentsCall}
+
+wc_cm_create_user:
+    pattern: /center-manager/create-user
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\CreateUser:createUserView}
+
+wc_cm_create_user_call:
+    pattern: /center-manager/create-user/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\CreateUser:createUserCall}
+
+wc_cm_statistics_view:
+    pattern: /center-manager/statistics/view
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Statistics:statisticsView}
+
+wc_cm_statistics_call:
+    pattern: /center-manager/statistics/call
+    defaults: { _controller: BethelTutorLabsBundle:CenterManager\Statistics:statisticsCall}

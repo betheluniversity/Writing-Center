@@ -1,0 +1,51 @@
+<script type="text/javascript">
+    //loadFormPage();
+    //loadNoShow();
+    loadCourses();
+    setCourseValues();
+</script>
+
+<div class="row-fluid" id="form">
+    <h3>Finish Form:</h3>
+    {{ form_start(form, {'action': path('wc_tutor_scheduled_appointment_call_tutor_in'), 'method': 'POST' }) }}
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="span3">
+                    {{ form_label(form.first) }}
+                    {{ form_widget(form.first, { 'value': firstName }) }}
+                    {{ form_label(form.last) }}
+                    {{ form_widget(form.last, { 'value': lastName }) }}
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email, { 'value': StudEmail }) }}
+                </div>
+                {{ form_widget(form.StudUsername, { 'display': 'hidden', 'value': StudUsername }) }}
+                {{ form_widget(form.CourseCode, { 'display': 'hidden' }) }}
+                {{ form_widget(form.CourseSection, { 'display': 'hidden' }) }}
+                {{ form_widget(form.id, { 'display': 'hidden'}) }}
+
+                <div class="span3">
+                    {{ form_label(form.ferpaAgreement) }}
+                    {{ form_widget(form.ferpaAgreement) }}
+                </div>
+                <div class="span3">
+                    {{ form_label(form.Multilingual) }}
+                    {{ form_widget(form.Multilingual) }}
+                </div>
+            </div>
+            {{ form_label(form.Assignment) }}
+            {{ form_widget(form.Assignment) }}
+
+            {{ form_label(form.Comment) }}
+            {{ form_widget(form.Comment) }}
+
+            {{ form_label(form.Suggestion) }}
+            {{ form_widget(form.Suggestion) }}
+
+            {{courses | raw}}
+            <hr />
+            <div>{{ form_widget(form.save) }}</div>
+            
+        </div>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+</div>

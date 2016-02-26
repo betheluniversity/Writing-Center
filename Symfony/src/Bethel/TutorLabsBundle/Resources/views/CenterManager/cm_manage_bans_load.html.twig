@@ -1,0 +1,33 @@
+{% if data is empty %}
+
+  <div class="row-fluid">
+    <b> There are currently no students banned from making appointments </b>
+  </div>
+
+{% else %}
+
+  {# Manage current bans #}
+  <div class="row-fluid">
+    <div class="span2"><b>First Name</b></div>
+    <div class="span2"><b>Last Name</b></div>
+    <div class="span2"><b>Username</b></div>
+    <div class="span2"><b>Date Banned</b></div>
+    <div class="span2"></div>
+    <div class="span2"></div>
+  </div>
+  {% set NamesCounter = 0 %}
+  {% for key,value in data %}
+    {% set rand = random(10000) %}
+    <div class="row-fluid {{cycle( ['even', 'odd'], loop.index ) }}">
+      <div class="span2" id="bans-first-name-{{rand}}">{{Names[NamesCounter].firstName}}</div>
+      <div class="span2" id="bans-last-name-{{rand}}">{{Names[NamesCounter].lastName}}</div>
+      <div class="span2" id="bans-username-{{rand}}">{{value.username}}</div>
+      <div class="span2">{{value.stringBannedDate}}</div>
+      <div class="span3">
+        <button class="btn btn-small btn-bans" id="bans-btn-{{rand}}"> Unban </button>
+      </div>
+    </div>
+    {% set NamesCounter = NamesCounter + 1 %}
+  {% endfor %}
+
+{% endif %}

@@ -1,0 +1,37 @@
+
+<br/>
+<i> These are examples of how to iterate over roles and courses in a Twig tempalte </i>
+<h3> Roles </h3>
+<ul>
+{% for item in roles %}
+    {% for r in item %}
+    <li> {{r}} </li>
+    {% endfor %}
+{% endfor %}
+</ul>
+
+
+<h3> Courses </h3>
+<ul>
+{% for course, info in courses %}
+    <li> {{course}}</li>
+    <ul>
+      {% for label, item in info %} 
+        <li>{{label}} : {{item}}</li>
+      {% endfor %}
+    </ul>
+{% endfor %}
+</ul>
+
+<h3> Students </h3>
+<ul>
+{% for index, info in students %}
+    <li>{{index}}</li>
+    {% for label, item in info %}
+        <ul>
+            <li>{{label}} : {{item}}</li>
+        </ul>
+    {% endfor %}
+
+{% endfor %}
+</ul>

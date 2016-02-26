@@ -1,0 +1,19 @@
+<div class="row-fluid">
+  <div class="span1"><b>ID</b></div>
+  <div class="span1"><b>Tutor Username</b></div>
+  <div class="span1"><b>Student Username</b></div>
+  <div class="span1"><b>Date and Time</b></div>
+  <div class="span3"><b>New Tutor Username</b></div>
+</div>
+{% for person in data %}
+{% set rand = random(1000000) %}
+   <div class="row-fluid">
+      <div class="span1" id="update-row-id-{{rand}}">{{person.ID}}</div>
+      <div class="span1" id="tutor-username-{{rand}}">{{person.TutorUsername}}</div>
+      <div class="span1">{{person.StudUsername}}</div>
+      {# Changed .Date => .StartTime #}
+      <div class="span1">{{person.StartTime | date('Y-m-d H:i:s')}}</div>
+      <div class="span3" id="update-select-{{rand}}">{{select | raw}}</div>
+      <div class="span1"> <button class="btn btn-small btn-update-select" id="update-btn-{{rand}}"> Update </button> </div>
+   </div>
+{% endfor %}

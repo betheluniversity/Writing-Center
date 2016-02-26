@@ -1,0 +1,115 @@
+wc_tutor_schedule_view:
+    pattern: /tutor/schedule/view
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\Schedule:scheduleView }
+
+wc_tutor_schedule_load:
+    pattern: /tutor/schedule/load
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\Schedule:scheduleLoad }
+
+wc_tutor_hours_worked_view:
+    pattern: /tutor/hours_worked/view
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\HoursWorked:hoursWorkedView }
+
+wc_tutor_hours_worked_load:
+    pattern: /tutor/hours_worked/load
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\HoursWorked:hoursWorkedLoad }
+
+wc_tutor_appointment_comments_view:
+    pattern: /tutor/appointment-comments
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\AppointmentComments:appointmentCommentsView }
+
+wc_tutor_appointment_comments_load:
+    pattern: /tutor/appointment-comments/load
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\AppointmentComments:appointmentCommentsLoad}
+
+wc_tutor_appointment_comments_call:
+    pattern: /tutor/appointment-comments/call
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\AppointmentComments:appointmentCommentsCall}
+
+wc_tutor_request_substitute_view:
+    pattern: /tutor/request_substitute/view
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\RequestSubstitute:requestSubstituteView }
+
+wc_tutor_substitute_for_tutor_view:
+    pattern: /tutor/substitute_for_tutor/view
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\SubstituteForTutor:substituteForTutorView }
+
+wc_tutor_substitute_for_tutor_load:
+    pattern: /tutor/substitute_for_tutor/load
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\SubstituteForTutor:substituteForTutorLoad }
+
+wc_tutor_substitute_for_tutor_call:
+    pattern: /tutor/substitute_for_tutor/call
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\SubstituteForTutor:substituteForTutorCall }
+
+wc_tutor_scheduled_appointment_view:
+    pattern: /tutor/scheduled-appointment/view
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\ScheduledAppointment:scheduledAppointmentView}
+
+wc_tutor_scheduled_appointment_call:
+    pattern: /tutor/scheduled-appointment/call
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\ScheduledAppointment:scheduledAppointmentCall}
+
+wc_tutor_scheduled_appointment_call_tutor_in:
+    pattern: /tutor/scheduled-appointment/call/tutor-in
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\ScheduledAppointment:scheduledAppointmentCallTutorIn}
+
+wc_tutor_scheduled_appointment_call_tutor_out:
+    pattern: /tutor/scheduled-appointment/call/tutor-out
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\ScheduledAppointment:scheduledAppointmentCallTutorOut}
+
+wc_tutor_scheduled_appointment_call_student_in:
+    pattern: /tutor/scheduled-appointment/call/student-in
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\ScheduledAppointment:scheduledAppointmentCallStudentIn}
+
+wc_tutor_scheduled_appointment_call_student_out:
+    pattern: /tutor/scheduled-appointment/call/student-out
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\ScheduledAppointment:scheduledAppointmentCallStudentOut}
+
+wc_tutor_scheduled_appointment_noshow_page:
+    pattern: /tutor/scheduled-appointment/no-show
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\ScheduledAppointment:scheduledAppointmentNoShow}
+
+wc_tutor_schedule_request_sub:
+    pattern: /tutor/schedule/requestSub
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\Schedule:requestSub }
+
+wc_tutor_schedule_remove_sub:
+    pattern: /tutor/schedule/removeSub
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\Schedule:removeSub }
+
+wc_tutor_request_substitute_load:
+    pattern: /tutor/request_substitute/load
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\RequestSubstitute:requestSubstituteLoad }
+
+wc_tutor_walk_in_view:
+    pattern: /tutor/walk-in/view
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\WalkIn:walkInView }
+
+wc_tutor_walk_in_begin_session:
+    pattern: /tutor/walk-in/begin-session
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\WalkIn:walkInBeginSession }
+
+wc_tutor_walk_in_exit_page:
+    pattern: /tutor/walk-in/exit
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\WalkIn:walkInExitPage }
+
+wc_tutor_reports_view:
+    pattern: /tutor/view_reports
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\TutorReports:reportsView }
+
+wc_tutor_reports_call:
+    pattern: /tutor/view_reports/call
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\TutorReports:reportsCall }
+
+wc_tutor_reports_get_student_usernames:
+    pattern: /tutor/view_reports/get-student-usernames
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\TutorReports:reportsGetStudentUsernames }
+
+wc_tutor_reports_get_tutor_usernames:
+    pattern: /tutor/view_reports/get-tutor-usernames
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\TutorReports:reportsGetTutorUsernames }
+
+wc_tutor_reports_get_prof_usernames:
+    pattern: /tutor/view_reports/get-prof-usernames
+    defaults: { _controller: BethelTutorLabsBundle:Tutor\TutorReports:reportsGetProfUsernames }

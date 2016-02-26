@@ -1,0 +1,44 @@
+{% if data is empty %}
+  <div class="row-fluid">
+    <b> You have not worked in this time period! </b>
+  </div>
+{% endif %}
+
+{% if data is not empty %}
+<div class="row-fluid">
+  <div class="row-fluid">
+      <div class="span2"><b>Total Time Worked</b></div>
+      <div class="span2">{{totalHours}} hour(s)</div>
+  </div>
+</div>
+
+<hr />
+
+<div class="row-fluid">
+  <div class="span2"><b>Student</b></div>
+  <div class="span2"><b>Tutor Username</b></div>
+  <div class="span1"><b>Date</b></div>
+  <div class="span1"><b>Start Time</b></div>
+  <div class="span1"><b>Completed Time</b></div>
+  <div class="span2"><b>Hours worked</b></div>
+</div>
+{% for key,appointment in data %}
+
+{% set rand = random(1000000) %}
+   <div class="row-fluid">
+      <div class="span2">{{appointment.StudUsername}}</div>
+      <div class="span2">{{appointment.TutorUsername}}</div>
+      <div class="span1">{{appointment.StartTime | date('n/j/Y')}}</div>
+      <div class="span1">
+        {% if appointment.ActualStartTime == null %}
+          {{appointment.StartTime | date('g:i a')}}
+        {% else %}
+          {{appointment.ActualStartTime | date('g:i a')}}
+        {% endif %}
+      </div>
+      <div class="span1">{{appointment.CompletedTime | date('g:i a')}}</div>
+      <div class="span2">{{ attribute(hoursWorkedArray, key) }}</div>
+      <div class="span1" style="display:none" id="row-id-{{rand}}">{{appointment.ID}}</div>
+   </div>
+{% endfor %}
+{% endif %}

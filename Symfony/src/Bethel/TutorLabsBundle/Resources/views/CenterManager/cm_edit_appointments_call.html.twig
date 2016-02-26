@@ -1,0 +1,111 @@
+<script type="text/javascript">
+    //Load the datepicker jquery
+    $(function() {
+      $( ".date" ).datepicker({dateFormat: 'yy-mm-dd'});
+      $('.time').timepicker({
+          showPeriod: true,
+        });
+    });
+</script>
+
+<div style="visibility:hidden;" id="id">{{user.ID}}</div>
+<div class="row-fluid">
+        <div class="span2">
+            <label for="newStudUsername"> <b>Student Username:</b></label>
+            <input type="text" style="width:150px" id="newStudUsername" class="new-view-reports-input" name="newStudUsername" placeholder="{{user.StudUsername}}">
+        </div>
+        <div class="span2">
+            <label for="newTutorUsername"> <b>Tutor Username:</b></label>
+            <input type="text" style="width:150px" id="newTutorUsername" class="new-view-reports-input" name="newTutorUsername" placeholder="{{user.TutorUsername}}">
+        </div>
+        <div class="span2">
+            <label for="newCourseCode"> <b>Course Code:</b></label>
+            <input type="text" style="width:150px" id="newCourseCode" class="new-view-reports-input" name="newCourseCode" placeholder="{{user.CourseCode}}">
+        </div>
+        <div class="span2">
+            <label for="newProgram"> <b>Program:</b></label>
+            <input type="text" style="width:150px" id="newProgram" class="new-view-reports-input" name="newProgram" placeholder="{{user.Program}}">
+        </div>
+        <div class="span2">
+            <label for="newRequestSub"> <b>Requests Sub:</b></label>
+            <select style="width:150px" id="newRequestSub" class="new-view-reports-input" name="newRequestSub">
+                {% if user.RequestSub == "Yes" %}
+                    <option value="Yes" selected>Yes</option>
+                    <option value="No">No</option>
+                {% else %}
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                {% endif %}
+            </select>
+         </div>
+    </div> 
+
+<div class="row-fluid">
+    <div class="span2">
+        <label for="newStartDate"> <b>Scheduled Start Time:</b></label>
+        <input type="datetime" style="width: 150px;" id="newStartDate" class="date new-view-reports-input" placeholder="{{user.StartTime | date('n/j/Y')}}" readonly/>
+        <input type="text" style="width: 150px;" class="time" id="newStartTime" placeholder="{{user.StartTime | date('h:i A')}}" readonly />
+    </div>
+    <div class="span2">
+        <label for="newActualStartDate"> <b>Actual Start Time:</b></label>
+        <input type="datetime" style="width: 150px;" id="newActualStartDate" class="date new-view-reports-input" placeholder="{{user.ActualStartTime | date('n/j/Y')}}" readonly/>
+        <input type="text" style="width: 150px;" class="time" id="newActualStartTime" placeholder="{{user.ActualStartTime | date('h:i A')}}" readonly />
+    </div>
+    <div class="span2">
+        <label for="newEndDate"> <b>Scheduled End Time:</b></label>
+        <input type="datetime" style="width: 150px;" id="newEndDate" class="date new-view-reports-input" placeholder="{{user.EndTime | date('n/j/Y')}}" readonly/>
+        <input type="text" style="width: 150px;" class="time" id="newEndTime" placeholder="{{user.EndTime | date('h:i A')}}" readonly />
+    </div>
+    <div class="span2">
+        <label for="newCompletedDate"> <b>Actual Completed Time:</b></label>
+        <input type="datetime" style="width: 150px;" id="newCompletedDate" class="date new-view-reports-input" placeholder="{{user.CompletedTime | date('n/j/Y')}}" readonly/>
+        <input type="text" style="width: 150px;" class="time" id="newCompletedTime" placeholder="{{user.CompletedTime | date('h:i A')}}" readonly />
+    </div>
+    <div class="span2">
+        <label for="newProfEmail"> <b>Prof Email:</b></label>
+        <input type="text" style="width:150px" id="newProfEmail" class="new-view-reports-input" name="newProfEmail" placeholder="{{user.ProfEmail}}">
+    </div>
+    <div class="span1" style="visibility:hidden;" id="id">{{user.ID}}</div>
+</div> 
+
+<div class="row-fluid">
+    <div class="span2">
+        <label for="newMultilingual"> <b>Multilingual:</b></label>
+        <select style="width:150px" id="newMultilingual" class="new-view-reports-input" name="newMultilingual">
+            {% if user.Multilingual == 1 %}
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+            {% else %}
+                <option value="1">Yes</option>
+                <option value="0" selected>No</option>
+            {% endif %}
+        </select>
+     </div>
+ </div>
+
+<div class="row-fluid">
+    <div class="span5">
+        <label for="newAssignment"> <b>Assignment:</b></label>
+         <textarea style="width:400px" cols="50" rows="5" id="newAssignment" class="new-view-reports-input" name="newComment" placeholder="{{user.Assignment}}" ></textarea>
+    </div>
+    <div class="span5">
+        <label for="newComment"> <b>What We Worked On:</b></label>
+         <textarea style="width:400px" cols="50" rows="5" id="newComment" class="new-view-reports-input" name="newComment" placeholder="{{user.Comment}}" ></textarea>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span5">
+        <label for="newSuggestion"> <b>Suggestions:</b></label>
+         <textarea style="width:400px" cols="50" rows="5" id="newSuggestion" class="new-view-reports-input" name="newComment" placeholder="{{user.Suggestion}}" ></textarea>
+    </div>
+    <div class="span1">
+        <button class="btn btn-small btn-update" id="update-btn"> Update </button>
+    </div>
+    <div class="span1">
+        <button class="btn btn-small btn-cancel" id="cancel-btn"> Cancel </button>
+    </div>
+    <div class="span1">
+        <button class="btn btn-small btn-delete" id="delete-btn"> Delete </button>
+    </div>
+</div> 

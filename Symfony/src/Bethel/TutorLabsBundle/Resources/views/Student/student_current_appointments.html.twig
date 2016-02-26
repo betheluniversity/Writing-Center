@@ -1,0 +1,109 @@
+{% extends '::base.html.twig' %}
+
+{% block headadd %}
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="{{asset('css/jquery.ui.timepicker.css')}}" type="text/css" rel="stylesheet">
+
+  <!--FullCalendar Dependencies-->
+  <link href="{{asset('css/fullcalendar.css')}}" type="text/css" rel='stylesheet' />
+  <link href="{{asset('css/fullcalendar.print.css')}}" rel='stylesheet' media='print' />
+  
+  <!--FullCalendar-->
+  <script src="{{asset('js/fullcalendar.min.js')}}"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+        function getCalEventAsString(calEvent) {
+            eventStart = new Date(calEvent.start);
+            eventEnd = new Date(calEvent.end);
+            $multilingual = "";
+            if(calEvent.multilingual)
+                $multilingual = '<br>Multilingual Appointment'
+            return 'Student: ' + calEvent.studentname
+                + "<br>Tutor Name: " + calEvent.tutorname
+                + "<br>Date: " + eventStart.toLocaleDateString()
+                + "<br>Start Time: " + eventStart.toLocaleTimeString()
+                + "<br>End Time: " + eventEnd.toLocaleTimeString()
+                + "<br>Assignment: " + calEvent.assignment + "<br>"
+                + $multilingual
+                + "<br>" + calEvent.noshow;
+        }
+
+        function appointmentClicked(calEvent, jsEvent, view) {
+            console.log(calEvent.appointmentID);
+
+            $( "#dialog-confirm" ).html(getCalEventAsString(calEvent));
+
+            $( "#dialog-confirm" ).dialog({
+                buttons: {
+                    Remove: function() {
+                        // when the button is pressed, update the server
+                        $.ajax({
+                            type: "POST",
+                            url: "{{path('wc_student_appointments_call_cancel')}}",
+                            data: { 
+                                appointmentID : calEvent.appointmentID
+                            }
+                        }).done(function ( data ) {
+                            console.log(data);
+                            if (data == "Success") {
+                                $("#update-user-error-space").html(
+                                    '<div class="alert alert-success"> Successfully removed the appointment.</div>');
+                            }
+                            else {
+                                $("#update-user-error-space").html(
+                                    '<div class="alert alert-error"> Failed to remove appointment: ' 
+                                    + data + 
+                                    '</div>');
+                            }
+
+                            $("#update-user-error-space").stop(true, true).show();
+                            $('html, body').animate({
+                                    // for whatever reason top doesn't make it go to the top... so -50 fixes the "scroll to" location
+                                    scrollTop: $("#update-user-error-space").offset()-50
+                                }, 400);
+
+
+                            $('#calendar').fullCalendar('refetchEvents');
+                        });
+                        $( this ).dialog( "close" );
+                    },
+                    Close: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+        }
+      
+        var calendar = $('#calendar').fullCalendar({
+            header:
+            {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay'
+            },
+            defaultView: 'month',
+            editable: false,
+            minTime: 7,
+            eventSources: [
+                "{{path('wc_student_appointments_load')}}"
+            ],
+            eventClick: appointmentClicked
+        });
+
+});
+</script>
+
+{% endblock %}
+
+{% block body %}
+	<div class="span9">
+		<div class="hero-unit">
+			<h1>Scheduled Appointments.</h1>
+			<p>View or edit your scheduled appointments here.</p>
+		</div>
+        <div id="update-user-error-space"></div>
+		<div id="calendar"></div>
+		<div id="dialog-confirm" style="display:none" title="Cancel an Appointment"></div>
+	</div>
+{% endblock %}

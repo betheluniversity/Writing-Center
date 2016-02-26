@@ -1,0 +1,16 @@
+<div class="row-fluid">
+  <div class="span1"><b>ID</b></div>
+  <div class="span2"><b>Tutor Username</b></div>
+  <div class="span3"><b>Date and Time</b></div>
+</div>
+{% for person in data %}
+{% set rand = random(1000000) %}
+   <div class="row-fluid">
+      <div class="span1" id="row-id-{{rand}}">{{person.ID}}</div>
+      <div class="span2">{{person.TutorUsername}}</div>
+
+      {# Changed .Date => .StartTime #}
+      <div class="span3">{{person.StartTime | date('Y-m-d H:i A')}} - {{person.EndTime | date('h:i A')}}</div>
+      <div class="span3"> <button class="btn btn-small btn-remove-schedule-entry" id="remove-btn-{{rand}}"> Remove </button> </div>
+   </div>
+{% endfor %}

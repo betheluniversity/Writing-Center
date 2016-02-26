@@ -1,0 +1,76 @@
+{% extends '::base.html.twig' %}
+
+{% block headadd %}
+<script>
+	$(document).ready(function(){
+        $("#begin-btn").click(function(){
+        	//Get either field. If both have text, return an error.
+        	student = $("#existingStudUsername").val();
+            $.ajax({
+                type: "POST",
+                url: "{{path('wc_tutor_walk_in_begin_session')}}",
+                data: {studentUsername: student}
+            }).done(function ( data ) {
+                if( data == "CAPS"){
+                    alert("This site manages appointments for the CAS Writing Center. Graduate and CAPS students should contact the CAPS/GS Academic Resource Center to schedule appointments with writing consultants. Our apologies for any inconvenience.");
+                }
+                else if(data == "GS"){
+                    alert("This site manages appointments for the CAS Writing Center. Graduate and CAPS students should contact the CAPS/GS Academic Resource Center to schedule appointments with writing consultants. Our apologies for any inconvenience.");
+                }
+                else if(data == "other"){
+                    alert("This site manages appointments for the CAS Writing Center. Only CAS students are allowed to access the Writing Center. Our apologies for any inconvenience.");
+                }
+                else if(data == "Failed"){
+                    alert("Error: The username specified was not found in Banner. Please try entering a username again. If this problem persists, notify April Schmidt and continue tutoring.");
+                }
+                else{
+                    $("#walk-in-content").html(data);
+                    loadCourses()
+                    setCourseValues();
+                }
+            });   
+        });
+
+        // Uses the select box to auto-fill the hidden course code field.
+        function loadCourses(){
+            $("#course-select").change(function(){
+                setCourseValues();
+            });
+        }
+        function setCourseValues(){
+            if( $('#course-select option').size() > 0 ){
+                courseInfo = $('#course-select').val();
+                courseCode = courseInfo.split(" ")[0];
+                courseSection = courseInfo.split(" ")[1];
+                $("#bethel_tutorlabsbundle_wcwcappointmentdata_CourseSection").val(courseSection);
+                $("#bethel_tutorlabsbundle_wcwcappointmentdata_CourseCode").val(courseCode);
+            }
+        }
+    })
+</script>
+{% endblock %}
+
+
+{% block body %}
+	<div class="span9">
+        <div class="hero-unit">
+            <h1>Walk In Student.</h1>
+            <p>Tutor students who walk in without an appointment.</p>
+          </div>
+        <div id="tutor-walk-in-error-space"></div>
+        <div id="walk-in-content">
+
+	        	<h3>Enter Student Username To Begin Appointment:</h3>
+
+		          <div class="control-group">
+                    <label class="control-label" for="existingStudUsername">Username</label>
+                    <input type="text" style="width:150px" id="existingStudUsername" class="existing-student-input" name="newStudUsername" placeholder="username..." />
+                  </div>
+
+
+	  		<div class="span1">
+		        <button class="btn btn-small btn-submit btn-primary" id="begin-btn"> Begin </button>
+		    </div>
+        </div>
+    </div>
+{% endblock %}

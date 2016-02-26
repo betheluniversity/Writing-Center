@@ -1,0 +1,15 @@
+parameters:
+    ws_api.class: Bethel\WsapiBundle\Wsapi\WsRestApi
+    ws_api.api_key: 'thisIsMyApiKey'
+    #These should be in app/config/parameters, but they didn't work there.
+
+services:
+    wchelper:
+        class: Bethel\TutorLabsBundle\Helper\WCHelper
+        arguments: [@service_container]
+    wsapi:
+        class: "%ws_api.class%"
+        arguments: [@service_container]
+    # wsapiUsername:
+    #     class: "%ws_api_un.class%"
+    #     arguments: [@wsapi]

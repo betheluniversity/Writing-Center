@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body %}
+    <div class="span9">
+        <div class="hero-unit">
+            <h1>System Settings</h1>
+            <p>Adjust system settings here.</p>
+        </div>
+        <div id="sys-settings-error-space"></div>
+            <label for="apptLimit" style="font-size:18px">Appointment Limit:</label>
+            <p id="apptLimitDescription"><i> Each student can sign up for <b>{{apptLimit}}</b> appointments in a week.</i></p>
+            <input type="text" id="apptLimit" name="apptLimit" value="{{apptLimit}}" readonly>
+            <br />
+
+            <label for="timeLimit" style="font-size:18px">Time Limit:</label>
+            <p id="timeLimitDescription"><i> Each appointment closes sign-ups <b>{{timeLimit}}</b> hours before the start time.</i></p>
+            <input type="text" id="timeLimit" name="timeLimit" value="{{timeLimit}}" readonly>
+            <br />
+
+            <label for="banLimit" style="font-size:18px">Ban Limit:</label>
+            <p id="banLimitDescription"><i> Each student will be banned after <b>{{banLimit}}</b> no shows.</i></p>
+            <input type="text" id="banLimit" name="banLimit" value="{{banLimit}}" readonly>
+            <br />
+
+            <label for="qualtricsLink" style="font-size:18px">Qualtrics Link:</label>
+            <p id="apptLimitDescription"><i> Here is the link that will be given after each appointment.</i></p>
+            <input type="text" id="qualtricsLink" name="qualtricsLink" value="{{qualtricsLink}}" readonly>
+            <br />
+
+            <button class="btn btn-primary" id="sys-settings-edit"> Edit </button>
+            <button class="btn btn-danger" id="sys-settings-cancel" style="display:none"> Cancel </button>
+            <button class="btn btn-primary" id="sys-settings-submit" style="display:none"> Submit </button>
+
+        <div id="results"></div>
+    </div>
+{% endblock %}
+
+{% block footadd %}
+        <script src="{{asset('bundles/betheltutorlabs/js/centermanager.js')}}"></script>
+{% endblock %}

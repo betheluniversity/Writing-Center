@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block headadd %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#username").change(function(){
+               username = $("#username").val();
+                $.ajax({
+                  type: "POST",
+                  url: "{{path('wc_cm_banner_preview_call')}}",
+                  data: { username: username}
+                }).done(function ( data ) {
+                    $("#demo-results").html(data);
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    {# The header for the page #}
+    <div class="span9">
+            <div class="hero-unit">
+                <h1>Hello.</h1>
+                <p>Banner Api Demo. Still a work in progress.</p>
+            </div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Username…">
+            
+            <div id="demo-results"></div>
+            <div id="demo-error-space"></div>
+    </div>
+
+{% endblock %}
