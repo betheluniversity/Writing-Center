@@ -25,7 +25,6 @@ Symfony/web/bundles/
 Symfony/.DS_Store
 .hgrc
 
-Symfony/composer.json
 Symfony/composer.phar
 Symfony/composer.lock
 ~
