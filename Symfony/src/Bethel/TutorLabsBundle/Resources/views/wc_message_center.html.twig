@@ -55,7 +55,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="span9">
+    <div class="span9">
         <div class="hero-unit">
             <h1>Welcome to the Message Center</h1>
         </div>
@@ -64,7 +64,7 @@
             <button class="btn btn-small btn-preferences">Message Preferences</button>
           {% if is_granted('ROLE_TUTOR') %}
         	<button class="btn btn-small btn-users">Message Users</button>
-          
+
                <button class="btn btn-small btn-tutors">Message Tutors</button>
           {% endif %}
           {% if is_granted('ROLE_CENTER_MANAGER') %}
