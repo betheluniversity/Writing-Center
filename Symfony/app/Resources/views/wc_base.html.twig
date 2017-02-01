@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% import 'navbar.html.twig' as navbar %}
+
+
+{% block body_content %}
+
+    {{ navbar.render() }}
+
+    {% block main_content %}{% endblock %}
+
+{% endblock %}
