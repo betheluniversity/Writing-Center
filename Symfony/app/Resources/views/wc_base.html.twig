@@ -1,18 +1,11 @@
 {% extends 'base.html.twig' %}
 {% import 'navbar.html.twig' as navbar %}
-{% import 'sidebar.html.twig' as sidebar %}
-{% import 'footer.html.twig' as footer %}
+
 
 {% block body_content %}
 
-    <div>
-        {{ navbar.render() }}
-        {{ sidebar.render() }}
-        <div>
-            {% block main_content %}{% endblock %}
+    {{ navbar.render() }}
 
-            {{ footer.render() }}
-        </div>
-    </div>
+    {% block main_content %}{% endblock %}
 
 {% endblock %}
