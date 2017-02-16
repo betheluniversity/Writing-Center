@@ -15,7 +15,10 @@
 
         <div class="main-content">
 
-            {% block main_content %}{% endblock %}
+            <div class="container">
+                {% block main_content %}{% endblock %}
+            </div>
+
 
             {{ footer.render() }}
         </div>

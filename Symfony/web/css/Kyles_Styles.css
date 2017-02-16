@@ -1,9 +1,11 @@
 .main-content{
     float: right;
+    width: 84%;
 }
 
 
 .sidebar{
+    width: 16%;
     position: fixed;
     top: 51px;
     bottom: 0;
