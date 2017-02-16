@@ -5,14 +5,21 @@
 
 {% block body_content %}
 
+
     <div>
         {{ navbar.render() }}
-        {{ sidebar.render() }}
-        <div>
+
+        <div class="sidebar">
+            {{ sidebar.render() }}
+        </div>
+
+        <div class="main-content">
+
             {% block main_content %}{% endblock %}
 
             {{ footer.render() }}
         </div>
+
     </div>
 
 {% endblock %}

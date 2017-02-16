@@ -1,100 +1,100 @@
 {% macro render() %}
 
-    <div class="card" style="width: 20rem;">
-        <div class="card-block">
-            <nav class="nav flex-column">
+    <div class="col-sm-3 col-md-2">
 
-                {% if is_granted('ROLE_TUTOR') %}
-                    <nav class="nav flex-column">
-                        <li><a href="{{ path('wc_message_center') }}">Message Center</a></li>
-                    </nav>
-                {% endif %}
+        <nav class="nav flex-column">
 
-                {#<a class="nav-link active" href="#">Active</a>#}
-                {#<a class="nav-link" href="#">Link</a>#}
-                {#<a class="nav-link" href="#">Link</a>#}
+            {% if is_granted('ROLE_TUTOR') %}
+                <nav class="nav flex-column">
+                    <li><a href="{{ path('wc_message_center') }}">Message Center</a></li>
+                </nav>
+            {% endif %}
 
-                {% if is_granted('ROLE_GLOBAL_ADMIN') %}
-                    {#TODO find out what this part is for#}
-                {% endif %}
+            {#<a class="nav-link active" href="#">Active</a>#}
+            {#<a class="nav-link" href="#">Link</a>#}
+            {#<a class="nav-link" href="#">Link</a>#}
 
-                {% if is_granted('ROLE_ADMIN') %}
-                    {# TODO link the css files (may be causing lack of display) #}
-                    {#TODO add collapse function on header#}
-                    <nav class="nav flex-column">
-                        <h6 class="dropdown-header">Admin</h6>
-                        <a class="nav-link" href="#">Link</a>
-                        <a class="nav-link" href="#">Link</a>
+            {% if is_granted('ROLE_GLOBAL_ADMIN') %}
+                {#TODO find out what this part is for#}
+            {% endif %}
 
-                    </nav>
+            {% if is_granted('ROLE_ADMIN') %}
+                {# TODO link the css files (may be causing lack of display) #}
+                {#TODO add collapse function on header#}
+                <nav class="nav flex-column">
+                    <h6 class="dropdown-header">Admin</h6>
+                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Link</a>
 
-                {% endif %}
+                </nav>
 
-                {% if is_granted('ROLE_CENTER_MANAGER') %}
-                    {# TODO link the css files (may be causing lack of display) #}
-                    {#TODO add collapse function on header#}
-                    <nav class="nav flex-column">
-                        <h6 class="dropdown-header">Center Manager</h6>
-                        <a class="nav-link" href="{{ path('wc_cm_promote_view') }}">Change Role</a>
-                        <a class="nav-link" href="{{ path('wc_cm_system_settings_view') }}">Adjust System Settings</a>
-                        <a class="nav-link" href="{{ path('wc_cm_schedule_view') }}">Create Lab Schedule</a>
-                        <a class="nav-link" href="{{ path('wc_cm_manage_tutors_view') }}">Manage Tutor Schedule</a>
-                        <a class="nav-link" href="{{ path('wc_cm_manage_bans_view') }}">Manage Student Bans</a>
-                        <a class="nav-link" href="{{ path('wc_cm_statistics_view') }}">View Statistics</a>
-                        <a class="nav-link" href="{{ path('wc_cm_edit_appointments_view') }}">View All Appointments</a>
-                    </nav>
+            {% endif %}
 
-                {% endif %}
+            {% if is_granted('ROLE_CENTER_MANAGER') %}
+                {# TODO link the css files (may be causing lack of display) #}
+                {#TODO add collapse function on header#}
+                <nav class="nav flex-column">
+                    <h6 class="dropdown-header">Center Manager</h6>
+                    <a class="nav-link" href="{{ path('wc_cm_promote_view') }}">Change Role</a>
+                    <a class="nav-link" href="{{ path('wc_cm_system_settings_view') }}">Adjust System Settings</a>
+                    <a class="nav-link" href="{{ path('wc_cm_schedule_view') }}">Create Lab Schedule</a>
+                    <a class="nav-link" href="{{ path('wc_cm_manage_tutors_view') }}">Manage Tutor Schedule</a>
+                    <a class="nav-link" href="{{ path('wc_cm_manage_bans_view') }}">Manage Student Bans</a>
+                    <a class="nav-link" href="{{ path('wc_cm_statistics_view') }}">View Statistics</a>
+                    <a class="nav-link" href="{{ path('wc_cm_edit_appointments_view') }}">View All Appointments</a>
+                </nav>
 
-                {% if is_granted('ROLE_OBSERVER') %}
-                    {# TODO link the css files (may be causing lack of display) #}
-                    {#TODO add collapse function on header#}
-                    <nav class="nav flex-column">
-                        <h6 class="dropdown-header">Role Observer</h6>
-                        <a class="nav-link" href="{{ path('wc_observer_schedule_view') }}">View ALl Appointments</a>
-                        <a class="nav-link" href="{{ path('wc_observer_appointments_view') }}">View Finished
-                            Appointments</a>
-                        <a class="nav-link" href="{{ path('wc_observer_statistics_view') }}">View Statistics</a>
-                        <a class="nav-link" href="{{ path('wc_observer_schedule_appointment_view') }}">View Scheduled
-                            Appointments</a>
-                    </nav>
+            {% endif %}
 
-                {% endif %}
+            {% if is_granted('ROLE_OBSERVER') %}
+                {# TODO link the css files (may be causing lack of display) #}
+                {#TODO add collapse function on header#}
+                <nav class="nav flex-column">
+                    <h6 class="dropdown-header">Role Observer</h6>
+                    <a class="nav-link" href="{{ path('wc_observer_schedule_view') }}">View ALl Appointments</a>
+                    <a class="nav-link" href="{{ path('wc_observer_appointments_view') }}">View Finished
+                        Appointments</a>
+                    <a class="nav-link" href="{{ path('wc_observer_statistics_view') }}">View Statistics</a>
+                    <a class="nav-link" href="{{ path('wc_observer_schedule_appointment_view') }}">View Scheduled
+                        Appointments</a>
+                </nav>
 
-                {% if is_granted('ROLE_TUTOR') %}
-                    {# TODO link the css files (may be causing lack of display) #}
-                    {#TODO add collapse function on header#}
-                    <nav class="nav flex-column">
-                        <h6 class="dropdown-header">Tutor</h6>
-                        <a class="nav-link" href="{{ path('wc_tutor_schedule_view') }}">View Tutor Schedule</a>
-                        <a class="nav-link" href="{{ path('wc_tutor_substitute_for_tutor_view') }}">Substitute for
-                            Tutor</a>
-                        <a class="nav-link" href="{{ path('wc_tutor_walk_in_view') }}">Walk in Student</a>
-                        <a class="nav-link" href="{{ path('wc_tutor_scheduled_appointment_view') }}">Scheduled
-                            Appointments</a>
-                        <a class="nav-link" href="{{ path('wc_tutor_hours_worked_view') }}">View Hours Worked</a>
-                        <a class="nav-link" href="{{ path('wc_tutor_reports_view') }}">View Reports</a>
-                    </nav>
+            {% endif %}
 
-                {% endif %}
+            {% if is_granted('ROLE_TUTOR') %}
+                {# TODO link the css files (may be causing lack of display) #}
+                {#TODO add collapse function on header#}
+                <nav class="nav flex-column">
+                    <h6 class="dropdown-header">Tutor</h6>
+                    <a class="nav-link" href="{{ path('wc_tutor_schedule_view') }}">View Tutor Schedule</a>
+                    <a class="nav-link" href="{{ path('wc_tutor_substitute_for_tutor_view') }}">Substitute for
+                        Tutor</a>
+                    <a class="nav-link" href="{{ path('wc_tutor_walk_in_view') }}">Walk in Student</a>
+                    <a class="nav-link" href="{{ path('wc_tutor_scheduled_appointment_view') }}">Scheduled
+                        Appointments</a>
+                    <a class="nav-link" href="{{ path('wc_tutor_hours_worked_view') }}">View Hours Worked</a>
+                    <a class="nav-link" href="{{ path('wc_tutor_reports_view') }}">View Reports</a>
+                </nav>
+
+            {% endif %}
 
 
-                {% if is_granted('ROLE_STUDENT') %}
-                    {# TODO link the css files (may be causing lack of display) #}
-                    {#TODO add collapse function on header#}
-                    <nav class="nav flex-column">
-                        <h6 class="dropdown-header">Student</h6>
-                        <a class="nav-link" href="{{ path('wc_student_schedule_appointment_view') }}">Schedule
-                            One-on-One Appointments</a>
-                        <a class="nav-link" href="{{ path('wc_student_appointments_view') }}">View Your Schedule</a>
-                        <a class="nav-link" href="{{ path('wc_student_history_view') }}">View Appointment History</a>
-                    </nav>
+            {% if is_granted('ROLE_STUDENT') %}
+                {# TODO link the css files (may be causing lack of display) #}
+                {#TODO add collapse function on header#}
+                <nav class="nav flex-column">
+                    <h6 class="dropdown-header">Student</h6>
+                    <a class="nav-link" href="{{ path('wc_student_schedule_appointment_view') }}">Schedule
+                        One-on-One Appointments</a>
+                    <a class="nav-link" href="{{ path('wc_student_appointments_view') }}">View Your Schedule</a>
+                    <a class="nav-link" href="{{ path('wc_student_history_view') }}">View Appointment History</a>
+                </nav>
 
-                {% endif %}
+            {% endif %}
 
-            </nav>
+        </nav>
 
-        </div>
+
     </div>
 
 
