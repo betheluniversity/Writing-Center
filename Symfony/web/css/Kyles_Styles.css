@@ -1,13 +1,22 @@
 .main-content{
     float: right;
     width: 84%;
+    min-height: calc(100% - 123px);
 }
 
+.navbar{
+    z-index: 1000;
+}
+
+.jumbotron{
+    margin-top: 2em;
+    margin-bottom: 300px;
+}
 
 .sidebar{
     width: 16%;
     position: fixed;
-    top: 51px;
+    top: 60px;
     bottom: 0;
     left: 0;
     /*z-index: 1000;*/
@@ -19,7 +28,8 @@
     border-right: 1px solid #eee;
 }
 
-/*html, .sidebar{*/
-    /*height: 100% !important;*/
-
-/*}*/
+.footer{
+    position: absolute;
+    /*line-height: 20px;*/
+    bottom: 0;
+}
