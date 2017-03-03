@@ -1,9 +1,9 @@
 .main-content{
+    padding: 30px 15px;
     margin-top: 50px;
     float: right;
     width: 84%;
     min-height: calc(100% - 123px);
-    overflow-y: scroll
 }
 
 .navbar{
@@ -33,7 +33,13 @@
 }
 
 .footer{
-    /*position: absolute;*/
-    /*line-height: 20px;*/
-    bottom: 0;
+
+}
+
+.navbar{
+    background-color: #0F2C52 !important;
+}
+
+.header-txt{
+    color: white !important;
 }

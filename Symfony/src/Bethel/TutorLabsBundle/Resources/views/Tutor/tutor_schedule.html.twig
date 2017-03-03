@@ -1,4 +1,5 @@
 {% extends '::wc_base.html.twig' %}
+
 {% block headadd %}
 <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -137,8 +138,8 @@
 </script>
 {% endblock %}
 
-{% block body %}
-    <div class="span9">
+{% block main_content %}
+    <div class="jumbotron">
         <div class="hero-unit">
             <h1>View Tutor Schedule.</h1>
             <p>Displays the appointments a tutor is assigned to.</p>
