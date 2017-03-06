@@ -6,7 +6,7 @@
 
             {% if is_granted('ROLE_TUTOR') %}
                 <nav class="nav flex-column">
-                    <li><a href="{{ path('wc_message_center') }}">Message Center</a></li>
+                    <li><a class="nav-link" href="{{ path('wc_message_center') }}">Message Center Home</a></li>
                 </nav>
             {% endif %}
 
