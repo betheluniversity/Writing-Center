@@ -1,87 +1,88 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block headadd %}
-<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-  <script type="text/javascript">
-    //This stuff is all for the datepicker
-    //Load the datepicker jquery
-    $(function() {
-      $( "#startdate" ).datepicker({dateFormat: 'yy-mm-dd'});
-      $( "#enddate" ).datepicker({dateFormat: 'yy-mm-dd'});
-    });
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <script type="text/javascript">
+        //This stuff is all for the datepicker
+        //Load the datepicker jquery
+        $(function () {
+            $("#startdate").datepicker({dateFormat: 'yy-mm-dd'});
+            $("#enddate").datepicker({dateFormat: 'yy-mm-dd'});
+        });
         //Clear the startdate and enddate
-    $(document).ready(function() {
-      $("#clear").click(function(){      
-        $(".view-reports-input").change();
-        $("#hours-worked-content").html("");
-      })
+        $(document).ready(function () {
+            $("#clear").click(function () {
+                $(".view-reports-input").change();
+                $("#hours-worked-content").html("");
+            })
 
-    });
+        });
 
 
-    //load the schedule.
-    function loadHoursWorked(){
-    	username = "{{ app.user.username }}";
-      if($("#startdate").val() != "")
-          startdate = $("#startdate").val();
-         else
-          startdate = "none";
-         if($("#enddate").val() != "")
-          enddate = $("#enddate").val();
-         else
-          enddate = "none";
-      $.ajax({
-          type: "POST",
-          url: "{{path('wc_tutor_hours_worked_load')}}",
-          data: { username: username, startdate: startdate, enddate: enddate}
-        }).done(function ( data) {
-            $("#hours-worked-content").html(data);
-      });
-    }
-    //on change re-display everything.
-    $(document).ready(function() {
-      $(".view-reports-input").change(function(){
-        startdate = $("#startdate").val();
-        enddate = $("#enddate").val();
-        if(startdate == "" && enddate == "")
-        {
-          //do nothing, for some reason it only works if we check it this way
+        //load the schedule.
+        function loadHoursWorked() {
+            username = "{{ app.user.username }}";
+            if ($("#startdate").val() != "")
+                startdate = $("#startdate").val();
+            else
+                startdate = "none";
+            if ($("#enddate").val() != "")
+                enddate = $("#enddate").val();
+            else
+                enddate = "none";
+            $.ajax({
+                type: "POST",
+                url: "{{ path('wc_tutor_hours_worked_load') }}",
+                data: {username: username, startdate: startdate, enddate: enddate}
+            }).done(function (data) {
+                $("#hours-worked-content").html(data);
+            });
         }
-        else
-          loadHoursWorked();
-      });
-    });
-</script>
+        //on change re-display everything.
+        $(document).ready(function () {
+            $(".view-reports-input").change(function () {
+                startdate = $("#startdate").val();
+                enddate = $("#enddate").val();
+                if (startdate == "" && enddate == "") {
+                    //do nothing, for some reason it only works if we check it this way
+                }
+                else
+                    loadHoursWorked();
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block main_content %}
-  <script type="text/javascript">
-    //Clear the dates.
-    function clearSearch()
-    {
-      document.getElementById('startdate').value="";
-      document.getElementById('enddate').value="";
-    };
-  </script>
-    <div class="jumbotron">
-        <div class="hero-unit">
-            <h1>View Hours Worked.</h1>
-            <p>Displays the hours worked within a given time period.</p>
-          </div>
-        <div id="tutor-schedule-error-space"></div>
-        <div class="span12">
-              <div class="span3">
-                Click Start Date: <input type="datetime" id="startdate" class="view-reports-input" placeholder="Choose a Starting Date…" readonly/>
-              </div>
-              <div class="span3">
-                Click End Date: <input type="datetime" id="enddate" class="view-reports-input" placeholder="Choose an Ending Date…" readonly/>
-              </div>
-              <div class="span3">
-                <input type="button" id="clear" class="btn view-reports-input btn-danger" value="Clear Search" onclick="clearSearch()"/>
-              </div>
-            </div>
-        <div id="hours-worked-content"></div>
+    <script type="text/javascript">
+        //Clear the dates.
+        function clearSearch() {
+            document.getElementById('startdate').value = "";
+            document.getElementById('enddate').value = "";
+        }
+        ;
+    </script>
+
+    <div class="hero-unit">
+        <h1>View Hours Worked.</h1>
+        <p>Displays the hours worked within a given time period.</p>
     </div>
+    <div id="tutor-schedule-error-space"></div>
+    <div class="span12">
+        <div class="span3">
+            Click Start Date: <input type="datetime" id="startdate" class="view-reports-input"
+                                     placeholder="Choose a Starting Date…" readonly/>
+        </div>
+        <div class="span3">
+            Click End Date: <input type="datetime" id="enddate" class="view-reports-input"
+                                   placeholder="Choose an Ending Date…" readonly/>
+        </div>
+        <div class="span3">
+            <input type="button" id="clear" class="btn view-reports-input btn-danger" value="Clear Search"
+                   onclick="clearSearch()"/>
+        </div>
+    </div>
+    <div id="hours-worked-content"></div>
 
 {% endblock %}

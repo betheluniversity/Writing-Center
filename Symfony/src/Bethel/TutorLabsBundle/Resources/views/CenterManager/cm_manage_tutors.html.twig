@@ -1,227 +1,229 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block headadd %}
-  <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <link href="{{asset('css/jquery.ui.timepicker.css')}}" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <link href="{{ asset('css/jquery.ui.timepicker.css') }}" type="text/css" rel="stylesheet">
 
-  <!--FullCalendar Dependencies-->
-  <link href="{{asset('css/fullcalendar.css')}}" type="text/css" rel='stylesheet' />
-  <link href="{{asset('css/fullcalendar.print.css')}}" rel='stylesheet' media='print' />
-  
-  <!--FullCalendar-->
-  <script src="{{asset('js/fullcalendar.min.js')}}"></script>
-  <script type="text/javascript">
+    <!--FullCalendar Dependencies-->
+    <link href="{{ asset('css/fullcalendar.css') }}" type="text/css" rel='stylesheet'/>
+    <link href="{{ asset('css/fullcalendar.print.css') }}" rel='stylesheet' media='print'/>
 
-  //Load the datepicker jquery
-  $(function() {
-    $( "#start-datepicker" ).datepicker({dateFormat:"mm/dd/yy"});
-    $( "#end-datepicker" ).datepicker({dateFormat:"mm/dd/yy"});
-  });
+    <!--FullCalendar-->
+    <script src="{{ asset('js/fullcalendar.min.js') }}"></script>
+    <script type="text/javascript">
 
-  $(document).ready(function() {
-    var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth() + 1; //Months are zero based
-    var curr_year = d.getFullYear();
-    var now = curr_month+"/"+curr_date+"/"+curr_year;
-    $("#start-datepicker").val(now);
-    $("#end-datepicker").val(now);
-    var usernames = new Array();
-    // add the accordion functionality
-    
-
-    // Lookup user when the textbox changes
-      $("#lookup-tutor-username").change(function(){
-         usernames = $("#lookup-tutor-username").val();
-         calendar.fullCalendar( 'refetchEvents' );
+        //Load the datepicker jquery
+        $(function () {
+            $("#start-datepicker").datepicker({dateFormat: "mm/dd/yy"});
+            $("#end-datepicker").datepicker({dateFormat: "mm/dd/yy"});
         });
 
-    //To make the Calendar work:
-    function getCalEventAsString(calEvent) {
-            eventStart = new Date(calEvent.start);
-            eventEnd = new Date(calEvent.end);
-            if( calEvent.dropin)
-            {
-              return "Drop-in Hours"
-                  + "<br>Tutor: " + calEvent.tutorname
-                  + "<br>Date: " + eventStart.toLocaleDateString()
-                  + "<br>Start Time: " + eventStart.toLocaleTimeString()
-                  + "<br>End Time: " + eventEnd.toLocaleTimeString();
+        $(document).ready(function () {
+            var d = new Date();
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+            var now = curr_month + "/" + curr_date + "/" + curr_year;
+            $("#start-datepicker").val(now);
+            $("#end-datepicker").val(now);
+            var usernames = new Array();
+            // add the accordion functionality
+
+
+            // Lookup user when the textbox changes
+            $("#lookup-tutor-username").change(function () {
+                usernames = $("#lookup-tutor-username").val();
+                calendar.fullCalendar('refetchEvents');
+            });
+
+            //To make the Calendar work:
+            function getCalEventAsString(calEvent) {
+                eventStart = new Date(calEvent.start);
+                eventEnd = new Date(calEvent.end);
+                if (calEvent.dropin) {
+                    return "Drop-in Hours"
+                            + "<br>Tutor: " + calEvent.tutorname
+                            + "<br>Date: " + eventStart.toLocaleDateString()
+                            + "<br>Start Time: " + eventStart.toLocaleTimeString()
+                            + "<br>End Time: " + eventEnd.toLocaleTimeString();
+                }
+                else {
+                    return "Tutor: " + calEvent.tutorname
+                            + "<br>Student: " + calEvent.studentname
+                            + "<br>Date: " + eventStart.toLocaleDateString()
+                            + "<br>Start Time: " + eventStart.toLocaleTimeString()
+                            + "<br>End Time: " + eventEnd.toLocaleTimeString()
+                            + "<br>Sub requested: " + calEvent.sub
+                            + "<br>" + calEvent.multilingualTitle;
+                }
             }
-            else
-            {
-              return "Tutor: " + calEvent.tutorname
-                  + "<br>Student: " + calEvent.studentname
-                  + "<br>Date: " + eventStart.toLocaleDateString()
-                  + "<br>Start Time: " + eventStart.toLocaleTimeString()
-                  + "<br>End Time: " + eventEnd.toLocaleTimeString()
-                  + "<br>Sub requested: " + calEvent.sub
-                  + "<br>" + calEvent.multilingualTitle;
-            }
-        }
 
-      function appointmentClicked(calEvent, jsEvent, view) {
-            
-            $( "#dialog-confirm" ).html(getCalEventAsString(calEvent));
+            function appointmentClicked(calEvent, jsEvent, view) {
 
-            $( "#dialog-confirm" ).dialog({
-                buttons: {
-                    Remove: function() {
-                        var url = "{{path('wc_cm_manage_tutors_call_remove')}}";
-                        // when the button is pressed, update the server
-                        $.ajax({
-                            type: "POST",
-                            url: url,
-                            data: { 
-                                appointmentID : calEvent.appointmentID
-                            }
-                        }).done(function ( data ) {
-                            console.log(data);
-                            if (data == "Success") {
-                                $("#lookup-tutor-error-space").html(
-                                    '<div class="alert alert-success"> Successfully removed scheduled appointment.</div>');
-                            }
-                            else {
-                                $("#lookup-tutor-error-space").html(
-                                    '<div class="alert alert-error"> Failed to remove selected appointment: ' 
-                                    + data + 
-                                    '</div>');
-                            }
+                $("#dialog-confirm").html(getCalEventAsString(calEvent));
 
-                            $("#lookup-tutor-error-space").stop(true, true).show();
-                            $('html, body').animate({
+                $("#dialog-confirm").dialog({
+                    buttons: {
+                        Remove: function () {
+                            var url = "{{ path('wc_cm_manage_tutors_call_remove') }}";
+                            // when the button is pressed, update the server
+                            $.ajax({
+                                type: "POST",
+                                url: url,
+                                data: {
+                                    appointmentID: calEvent.appointmentID
+                                }
+                            }).done(function (data) {
+                                console.log(data);
+                                if (data == "Success") {
+                                    $("#lookup-tutor-error-space").html(
+                                            '<div class="alert alert-success"> Successfully removed scheduled appointment.</div>');
+                                }
+                                else {
+                                    $("#lookup-tutor-error-space").html(
+                                            '<div class="alert alert-error"> Failed to remove selected appointment: '
+                                            + data +
+                                            '</div>');
+                                }
+
+                                $("#lookup-tutor-error-space").stop(true, true).show();
+                                $('html, body').animate({
                                     // for whatever reason top doesn't make it go to the top... so -50 fixes the "scroll to" location
-                                    scrollTop: $("#lookup-tutor-error-space").offset()-50
+                                    scrollTop: $("#lookup-tutor-error-space").offset() - 50
                                 }, 400);
 
 
-                    calendar.fullCalendar( 'refetchEvents' );
-                        });
-                        $( this ).dialog( "close" );
-                    },
-                    Cancel: function() {
-                        $( this ).dialog( "close" );
+                                calendar.fullCalendar('refetchEvents');
+                            });
+                            $(this).dialog("close");
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                        }
                     }
-                }
+                });
+            }
+
+            var calendar = $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultView: 'month',
+                allDayDefault: false,
+                minTime: 7,
+                editable: false,
+                slotEventOverlap: false,
+                eventSources: [
+                    {
+                        url: "{{ path('wc_cm_manage_tutors_call_lookup') }}",
+                        type: 'POST',
+                        data: function () {
+                            return {tutors: usernames};
+                        }
+                    }
+                ],
+                eventClick: appointmentClicked
             });
-        }
-
-        var calendar = $('#calendar').fullCalendar({
-            header:
-            {
-              left: 'prev,next today',
-              center: 'title',
-              right: 'month,agendaWeek,agendaDay'
-            },
-            defaultView: 'month',
-            allDayDefault: false,
-            minTime: 7,
-            editable: false,
-            slotEventOverlap: false,
-            eventSources: [
-                {
-                    url: "{{path('wc_cm_manage_tutors_call_lookup')}}",
-                    type: 'POST',
-                    data: function() {
-                        return {tutors: usernames};
-                    }
-                }
-            ],
-            eventClick: appointmentClicked
         });
-  });
 
-   </script>
+    </script>
 
 {% endblock %}
 
 {% block main_content %}
-<div class="jumbotron">
-  <div class="hero-unit">
-            <h1>Manage Tutor Schedules</h1>
-            <p>Assign shifts to a Tutor or view a Tutor's schedule.</p>
-        </div>
+
+    <div class="hero-unit">
+        <h1>Manage Tutor Schedules</h1>
+        <p>Assign shifts to a Tutor or view a Tutor's schedule.</p>
+    </div>
     <h3> Assign Shifts to a Tutor </h3>
     <div id="add-tutor-content">
-        
+
         <div id="manage-results"></div>
         <div class="row-fluid">
-          <div class="span3"><label><b>Click Start Date</b> <input type="text" style="width:90%" id="start-datepicker" readonly/></label></div>
-          <div class="span3"><label><b>Click End Date</b> <input type="text" style="width:90%" id="end-datepicker" readonly/></label></div>
-          <div class="span2">
-            <label for="multilingual"><b>Multilingual Appointment</b></label>
-            <select name="multilingual" style="width:90%" id="MultilingualSelect">
-              <option value="Yes">Yes</option>
-              <option value="No" selected>No</option>
-            </select>
-          </div>
-          <div class="span2">
-            <label for="drop-in"><b>Drop-in Hours Appointment</b></label>
-            <select name="drop-in" style="width:90%" id="DropInSelect">
-              <option value="Yes">Yes</option>
-              <option value="No" selected>No</option>
-            </select>
-          </div>
+            <div class="span3"><label><b>Click Start Date</b> <input type="text" style="width:90%" id="start-datepicker"
+                                                                     readonly/></label></div>
+            <div class="span3"><label><b>Click End Date</b> <input type="text" style="width:90%" id="end-datepicker"
+                                                                   readonly/></label></div>
+            <div class="span2">
+                <label for="multilingual"><b>Multilingual Appointment</b></label>
+                <select name="multilingual" style="width:90%" id="MultilingualSelect">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+            </div>
+            <div class="span2">
+                <label for="drop-in"><b>Drop-in Hours Appointment</b></label>
+                <select name="drop-in" style="width:90%" id="DropInSelect">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+            </div>
         </div>
         <div class="row-fluid">
-          <div class="span3">
-            <label for="tutorselect"><b>Select Tutors</b></label>
-            <select size="7" multiple="multiple" style="width:90%" id="tutorselect" >
-              {% for key, value in tutors %}
-                <option id="option-{{value.id}}" value="{{value.id}}">{{value.firstName}} {{value.lastName}}</option>
-                   {# <option id="option-{{key}}" value="{{value}}">{{value}}</option> #}
-              {% endfor %}
-            </select>
-          </div>
-          <div class="span3">
-            <label for="manage_tutors_days"><b>Select Days</b></label>
-            <select id="manage_tutors_days" size="7" multiple="multiple" style="width:90%;">
-              <option value="Monday">Monday</option>
-              <option value="Tuesday">Tuesday</option>
-              <option value="Wednesday">Wednesday</option>
-              <option value="Thursday">Thursday</option>
-              <option value="Friday">Friday</option>
-              <option value="Saturday">Saturday</option>
-              <option value="Sunday">Sunday</option>
-            </select>
-          </div>
-          <div class="span3">
-            <label for="timeselect"><b>Select Time Slots</b></label>
-            <select size="7" id="timeselect" multiple="multiple" >
-                {% for key, value in slots %}
-                  <option value="{{value.timeStart | date('g:i a')}} - {{value.timeEnd | date('g:i a')}}">{{value.timeStart | date('g:i a')}} - {{value.timeEnd | date('g:i a')}}</option>
-                {% endfor %}
-            </select>
-          </div>
-          
+            <div class="span3">
+                <label for="tutorselect"><b>Select Tutors</b></label>
+                <select size="7" multiple="multiple" style="width:90%" id="tutorselect">
+                    {% for key, value in tutors %}
+                        <option id="option-{{ value.id }}"
+                                value="{{ value.id }}">{{ value.firstName }} {{ value.lastName }}</option>
+                        {# <option id="option-{{key}}" value="{{value}}">{{value}}</option> #}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="span3">
+                <label for="manage_tutors_days"><b>Select Days</b></label>
+                <select id="manage_tutors_days" size="7" multiple="multiple" style="width:90%;">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+            </div>
+            <div class="span3">
+                <label for="timeselect"><b>Select Time Slots</b></label>
+                <select size="7" id="timeselect" multiple="multiple">
+                    {% for key, value in slots %}
+                        <option value="{{ value.timeStart | date('g:i a') }} - {{ value.timeEnd | date('g:i a') }}">{{ value.timeStart | date('g:i a') }}
+                            - {{ value.timeEnd | date('g:i a') }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
         </div>
         <div class="row-fluid">
-          <div class="span4">
-            <button class="btn btn-primary" id="manage-tutor-submit"> Submit </button>
-          </div>
+            <div class="span4">
+                <button class="btn btn-primary" id="manage-tutor-submit"> Submit</button>
+            </div>
         </div>
     </div>
     <hr/>
 
     <h3> View Tutor Schedule </h3>
-      <p>Click a tutor or multiple tutors to have their schedules display.</p>
-      <p>If you assign shifts to a tutor, make sure you click the tutor's name here to see the new shifts. </p>
-        <div id="lookup-tutor-error-space"></div>
-            <label for="lookup-tutor-username" style="display:block"><b>Tutors</b></label>
-              <select size="7" multiple="multiple" id="lookup-tutor-username">
-                {% for key, value in tutors %}
-                    <option id="option-{{value.id}}" value="{{value.username}}">{{value.firstName}} {{value.lastName}}</option>
-                   {# <option id="option-{{key}}" value="{{value}}">{{value}}</option> #}
-                {% endfor %}
-              </select>
-        <div id="lookup-tutor-results"></div>
-        <hr/>
-        <div id="calendar"></div>
-        <div id="dialog-confirm" style="display:none" title="View Appointment"></div>
-</div>
+    <p>Click a tutor or multiple tutors to have their schedules display.</p>
+    <p>If you assign shifts to a tutor, make sure you click the tutor's name here to see the new shifts. </p>
+    <div id="lookup-tutor-error-space"></div>
+    <label for="lookup-tutor-username" style="display:block"><b>Tutors</b></label>
+    <select size="7" multiple="multiple" id="lookup-tutor-username">
+        {% for key, value in tutors %}
+            <option id="option-{{ value.id }}"
+                    value="{{ value.username }}">{{ value.firstName }} {{ value.lastName }}</option>
+            {# <option id="option-{{key}}" value="{{value}}">{{value}}</option> #}
+        {% endfor %}
+    </select>
+    <div id="lookup-tutor-results"></div>
+    <hr/>
+    <div id="calendar"></div>
+    <div id="dialog-confirm" style="display:none" title="View Appointment"></div>
+
 {% endblock %}
 
 {% block footadd %}
-   <script src="{{asset('bundles/betheltutorlabs/js/centermanager.js')}}"></script>
+    <script src="{{ asset('bundles/betheltutorlabs/js/centermanager.js') }}"></script>
 {% endblock %}

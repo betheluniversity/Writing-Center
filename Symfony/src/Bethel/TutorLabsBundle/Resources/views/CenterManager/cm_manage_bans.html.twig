@@ -3,172 +3,173 @@
 {% block headadd %}
 
 
-  <script type="text/javascript">
-  $(document).ready(function() {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-    // ajax fucntion to load the data so we can refresh it easily after the button callback
-    function loadBansHTML(){
-      // if($("#username").val() == "" && $("#firstName").val() == "" && $("#lastName").val() == "")
-      //   return
-        $.ajax({
-          type: "POST",
-          url: "{{path('wc_cm_manage_bans_load')}}",
-          data: {}
-        }).done(function ( response ) {
-            $("#manage-bans-content").html(response);
-            createManageBansButtonCallback();
-        });
-    }
+            // ajax fucntion to load the data so we can refresh it easily after the button callback
+            function loadBansHTML() {
+                // if($("#username").val() == "" && $("#firstName").val() == "" && $("#lastName").val() == "")
+                //   return
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('wc_cm_manage_bans_load') }}",
+                    data: {}
+                }).done(function (response) {
+                    $("#manage-bans-content").html(response);
+                    createManageBansButtonCallback();
+                });
+            }
 
-    //Search for students to ban.
-    function loadUsersToBan(){        
-          username = $("#username").val();
-          firstName = $("#firstName").val();
-          lastName = $("#lastName").val();
-          if(username == "" && firstName == "" && lastName == "")
-          {
-            $("#new-ban-content").html("<b>Enter parameters to search for a student to ban</b>");
-          }
-          else
-          {
-            $.ajax({
-              type: "POST",
-              url: "{{path('wc_cm_new_bans_load')}}",
-              data: {username: username, firstName: firstName, lastName:lastName}
-            }).done(function ( response ) {
-                $("#new-ban-content").html(response);
-                createManageBansButtonCallback();
-                createNewBanButtonCallback();
+            //Search for students to ban.
+            function loadUsersToBan() {
+                username = $("#username").val();
+                firstName = $("#firstName").val();
+                lastName = $("#lastName").val();
+                if (username == "" && firstName == "" && lastName == "") {
+                    $("#new-ban-content").html("<b>Enter parameters to search for a student to ban</b>");
+                }
+                else {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('wc_cm_new_bans_load') }}",
+                        data: {username: username, firstName: firstName, lastName: lastName}
+                    }).done(function (response) {
+                        $("#new-ban-content").html(response);
+                        createManageBansButtonCallback();
+                        createNewBanButtonCallback();
+                    });
+                }
+            }
+
+            //Removes students from the ban list.
+            function createManageBansButtonCallback() {
+                $(".btn-bans").click(function () {
+                    // $username = $("#username").val();
+                    // $url=$("#usernameForm").attr("action");
+                    numID = this.id.replace(/\D/g, ''); //get only the numbers (numerical ID)
+                    // Use this to get the username and new role.
+                    username = $("#bans-username-" + numID).text();
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('wc_cm_manage_bans_call') }}",
+                        data: {username: username}
+                    }).done(function (response) {
+                        $("#manage-bans-error-space").show();
+                        $("#manage-bans-error-space").html('<div class="alert alert-success"> Student successfuly removed from ban list </div>');
+                        $("#manage-bans-error-space").fadeOut(5000);
+                        loadBansHTML();
+                        loadUsersToBan();
+                    });
+                });
+            }
+
+            //Register new ban callback
+            function createNewBanButtonCallback() {
+                $(".btn-bans-new").click(function () {
+                    // $username = $("#username").val();
+                    // $url=$("#usernameForm").attr("action");
+                    numID = this.id.replace(/\D/g, ''); //get only the numbers (numerical ID)
+                    // Use this to get the username and new role.
+                    username = $("#new-bans-username-" + numID).text();
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('wc_cm_manage_new_bans_call') }}",
+                        data: {username: username}
+                    }).done(function (response) {
+                        $("#manage-bans-error-space").show();
+                        $("#manage-bans-error-space").html('<div class="alert alert-success"> Student successfuly banned </div>');
+                        $("#manage-bans-error-space").fadeOut(5000);
+                        loadBansHTML();
+                        loadUsersToBan();
+                    });
+                });
+            }
+
+            function createRemoveAllBansButtonCallback() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('wc_cm_remove_all_bans') }}"
+                }).done(function (response) {
+                    $("#manage-bans-error-space").show();
+                    $("#manage-bans-error-space").html('<div class="alert alert-success"> All bans removed </div>');
+                    $("#manage-bans-error-space").fadeOut(5000);
+                    loadBansHTML();
+                    loadUsersToBan();
+                });
+            }
+
+            // Call the inital ajax to load the data.
+            loadBansHTML();
+            $(".input").keyup(function () {
+                loadUsersToBan();
             });
-          }
-    }
 
-    //Removes students from the ban list.
-    function createManageBansButtonCallback(){
-       $( ".btn-bans" ).click(function(){
-         // $username = $("#username").val();
-         // $url=$("#usernameForm").attr("action");
-          numID = this.id.replace(/\D/g,''); //get only the numbers (numerical ID)
-          // Use this to get the username and new role.
-          username = $("#bans-username-" + numID).text();
-          $.ajax({
-            type: "POST",
-            url: "{{path('wc_cm_manage_bans_call')}}",
-            data: { username: username }
-          }).done(function ( response ) {
-              $("#manage-bans-error-space").show();
-              $("#manage-bans-error-space").html('<div class="alert alert-success"> Student successfuly removed from ban list </div>');
-              $("#manage-bans-error-space").fadeOut(5000);
-              loadBansHTML();
-              loadUsersToBan();
-          });
+            $(".btn-remove-all").click(function () {
+                var answer = confirm("You are about to delete all bans.");
+                if (answer == true) {
+                    createRemoveAllBansButtonCallback();
+                }
+            });
+
+            $("#clear-params").click(function () {
+                $("#username").val("");
+                $("#firstName").val("");
+                $("#lastName").val("");
+                loadUsersToBan();
+            })
+
         });
-    }
 
-    //Register new ban callback
-    function createNewBanButtonCallback(){
-      $( ".btn-bans-new" ).click(function(){
-         // $username = $("#username").val();
-         // $url=$("#usernameForm").attr("action");
-          numID = this.id.replace(/\D/g,''); //get only the numbers (numerical ID)
-          // Use this to get the username and new role.
-          username = $("#new-bans-username-" + numID).text();
-          $.ajax({
-            type: "POST",
-            url: "{{path('wc_cm_manage_new_bans_call')}}",
-            data: { username: username }
-          }).done(function ( response ) {
-              $("#manage-bans-error-space").show();
-              $("#manage-bans-error-space").html('<div class="alert alert-success"> Student successfuly banned </div>');
-              $("#manage-bans-error-space").fadeOut(5000);
-              loadBansHTML();
-              loadUsersToBan();
-          });
-        });
-    }
-
-    function createRemoveAllBansButtonCallback(){
-      $.ajax({
-        type: "POST",
-        url: "{{path('wc_cm_remove_all_bans')}}"
-      }).done(function ( response ) {
-        $("#manage-bans-error-space").show();
-        $("#manage-bans-error-space").html('<div class="alert alert-success"> All bans removed </div>');
-        $("#manage-bans-error-space").fadeOut(5000);
-        loadBansHTML();
-        loadUsersToBan();
-      });
-    }
-
-    // Call the inital ajax to load the data.
-    loadBansHTML();
-    $(".input").keyup(function(){
-      loadUsersToBan();
-    });
-
-    $( ".btn-remove-all" ).click(function(){
-      var answer=confirm("You are about to delete all bans.");
-      if (answer==true) {
-        createRemoveAllBansButtonCallback();
-      }
-    });
-
-    $( "#clear-params" ).click(function(){
-      $("#username").val("");
-      $("#firstName").val("");
-      $("#lastName").val("");
-      loadUsersToBan();
-    })
-
-  });
-
-   </script>
+    </script>
 
 {% endblock %}
 
 {% block main_content %}
-    <div class="jumbotron">
-        <div class="hero-unit">
-          <h1>Manage Bans.</h1>
-          <p>Ban or unban a student. A banned student is unable to sign-up for appointments.</p>
-        </div>
-        
-        <div id="manage-bans-error-space"></div>
 
-        <div class="row-fluid">
-          <div class="span12"><h1>Ban a Student</h1></div>
-        </div>
-        <div class="row-fluid">
-          <div class="span3">
+    <div class="hero-unit">
+        <h1>Manage Bans.</h1>
+        <p>Ban or unban a student. A banned student is unable to sign-up for appointments.</p>
+    </div>
+
+    <div id="manage-bans-error-space"></div>
+
+    <div class="row-fluid">
+        <div class="span12"><h1>Ban a Student</h1></div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
             <label for="username">Student Username:</label>
-            <input type="text" id="username" style="width:90%" class="input" name="username" placeholder="Student Username…">
-          </div>
-          <div class="span3">
+            <input type="text" id="username" style="width:90%" class="input" name="username"
+                   placeholder="Student Username…">
+        </div>
+        <div class="span3">
             <label for="firstName">Student First Name:</label>
-            <input type="text" id="firstName" style="width:90%" class="input" name="firstName" placeholder="Student First Name…">
-          </div>
-          <div class="span3">
+            <input type="text" id="firstName" style="width:90%" class="input" name="firstName"
+                   placeholder="Student First Name…">
+        </div>
+        <div class="span3">
             <label for="lastName">Student Last Name:</label>
-            <input type="text" id="lastName" style="width:90%" class="input" name="lastName" placeholder="Student Last Name…">
-          </div>
-          <div class="span3">
+            <input type="text" id="lastName" style="width:90%" class="input" name="lastName"
+                   placeholder="Student Last Name…">
+        </div>
+        <div class="span3">
             <button class="btn btn-small btn-primary" id="clear-params">Clear search</button>
-          </div>
-        </div>
-        <div id="new-ban-content">
-          <b>Enter parameters to search for a student to ban</b>
-        </div>
-        <hr/>
-        <div class="row-fluid">
-          <div class="span4">
-            <h1>Remove Ban</h1>
-            <button class="btn btn-small btn-remove-all" id="unban-all"> Remove all bans </button>
-          </div>
-        </div>
-        <div class="row-fluid" style="margin-top:20px;">
-          <div class="span12">
-            <div id="manage-bans-content"></div>
-          </div>
         </div>
     </div>
+    <div id="new-ban-content">
+        <b>Enter parameters to search for a student to ban</b>
+    </div>
+    <hr/>
+    <div class="row-fluid">
+        <div class="span4">
+            <h1>Remove Ban</h1>
+            <button class="btn btn-small btn-remove-all" id="unban-all"> Remove all bans</button>
+        </div>
+    </div>
+    <div class="row-fluid" style="margin-top:20px;">
+        <div class="span12">
+            <div id="manage-bans-content"></div>
+        </div>
+    </div>
+
 {% endblock %}

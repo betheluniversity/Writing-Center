@@ -2,97 +2,97 @@
 
 
 {% block headadd %}
-	<script type="text/javascript">
-		$(document).ready(function() {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-		});
-	</script>
+        });
+    </script>
 {% endblock %}
 
 {% block main_content %}
-	<div class="jumbotron">
-        <div class="hero-unit">
-            <h1>Admin page</h1>
-            <p> Displays information about the labs a student has attended. </p>
-        </div>
-        <div class="row-fluid">
-        	<h2>{{username}}:</h2>
-        	<p>This student has attended <b>{{totalAppointments}}</b> appointment(s) total.</p>
-        	<h3>WC:</h3>
-        	<p>This student has attended <b>{{wcNumAppointments}}</b> Writing Center appointment(s).</p>
-        	<div id="data">
-        		<div class="row-fluid">
-				    <div class="span2"><b>Student Username</b></div>
-				    <div class="span2"><b>Tutor Username</b></div>
-				    <div class="span1"><b>Date</b></div>
-				    <div class="span1"><b>Start Time</b></div>
-				    <div class="span1"><b>End Time</b></div>
-				    <div class="span1"><b>Actual Start Time</b></div>
-				    <div class="span1"><b>Actual End Time</b></div>
-				    <div class="span1"><b>Multilingual Appointment</b></div>
-				    <div class="span1"><b>Missed</b></div>
-				    <div class="span1"><b>Walk in</b></div>
-				</div>
-				{% for key,value in wcappointments %}
-					{% if value.CompletedTime != null %}
-				    	{% set rand = random(10000) %}
-					    <div class="row-fluid">
-					        <div class="span2" id="StudUsername{{rand}}">{{value.StudUsername}}</div>
-					        <div class="span2" id="TutorUsername{{rand}}">{{value.TutorUsername}}</div>
-					        <div class="span1" id="StartDate{{rand}}">{{value.StartTime | date('m/d/Y')}}</div>
-					        <div class="span1" id="StartTime{{rand}}">{{value.StartTime | date('g:i a')}}</div>
-					        <div class="span1" id="EndTime{{rand}}">{{value.EndTime | date('g:i a')}}</div>
-					        <div class="span1" id="ActualStartTime{{rand}}">
-					        	{% if value.ActualStartTime == null %}
-					        		N/A
-					        	{% else %}
-					        		{{value.ActualStartTime | date('g:i a')}}
-					        	{% endif %}
-					        </div>
-					        <div class="span1" id="CompletedTime{{rand}}">
-					        	{% if value.CompletedTime == null %}
-					        		N/A
-					        	{% else %}
-					        		{{value.CompletedTime | date('g:i a')}}
-					        	{% endif %}
-					        </div>
-					        <div class="span1" id="Multilingual{{rand}}">
-					        	{% if value.Multilingual == 1 %}
-					        		Yes
-					        	{% else %}
-					        		No
-					        	{% endif %}
-					        </div>
-					        <div class="span1" id="NoShow{{rand}}">
-					        	{% if value.CheckIn == 4 %} {# 4 is no show #}
-					        		Yes
-					        	{% else %}
-					        		No
-					        	{% endif %}
-					        </div>
-					        <div class="span1" id="WalkIn{{rand}}">
-					        	{% if value.CheckIn == 5 %} {# 4 is walk in#}
-					        		Yes
-					        	{% else %}
-					        		No
-					        	{% endif %}
-					        </div>
-					    </div>
-					 {% endif %}
-				{% endfor %}
-        	</div>
 
-        	<h3>Math Lab:</h3>
-        	<p>This student has attended <b>{{mathlabNumAppointments}}</b> Math Lab appointment(s).</p>
-        	<div class="row-fluid">
-				    <div class="span2"><b>Student Username</b></div>
-				    <div class="span2"><b>Tutor Username</b></div>
-				    <div class="span1"><b>Date</b></div>
-				    <div class="span1"><b>Start Time</b></div>
-				    <div class="span1"><b>End Time</b></div>
-				</div>
+    <div class="hero-unit">
+        <h1>Admin page</h1>
+        <p> Displays information about the labs a student has attended. </p>
+    </div>
+    <div class="row-fluid">
+        <h2>{{ username }}:</h2>
+        <p>This student has attended <b>{{ totalAppointments }}</b> appointment(s) total.</p>
+        <h3>WC:</h3>
+        <p>This student has attended <b>{{ wcNumAppointments }}</b> Writing Center appointment(s).</p>
+        <div id="data">
+            <div class="row-fluid">
+                <div class="span2"><b>Student Username</b></div>
+                <div class="span2"><b>Tutor Username</b></div>
+                <div class="span1"><b>Date</b></div>
+                <div class="span1"><b>Start Time</b></div>
+                <div class="span1"><b>End Time</b></div>
+                <div class="span1"><b>Actual Start Time</b></div>
+                <div class="span1"><b>Actual End Time</b></div>
+                <div class="span1"><b>Multilingual Appointment</b></div>
+                <div class="span1"><b>Missed</b></div>
+                <div class="span1"><b>Walk in</b></div>
+            </div>
+            {% for key,value in wcappointments %}
+                {% if value.CompletedTime != null %}
+                    {% set rand = random(10000) %}
+                    <div class="row-fluid">
+                        <div class="span2" id="StudUsername{{ rand }}">{{ value.StudUsername }}</div>
+                        <div class="span2" id="TutorUsername{{ rand }}">{{ value.TutorUsername }}</div>
+                        <div class="span1" id="StartDate{{ rand }}">{{ value.StartTime | date('m/d/Y') }}</div>
+                        <div class="span1" id="StartTime{{ rand }}">{{ value.StartTime | date('g:i a') }}</div>
+                        <div class="span1" id="EndTime{{ rand }}">{{ value.EndTime | date('g:i a') }}</div>
+                        <div class="span1" id="ActualStartTime{{ rand }}">
+                            {% if value.ActualStartTime == null %}
+                                N/A
+                            {% else %}
+                                {{ value.ActualStartTime | date('g:i a') }}
+                            {% endif %}
+                        </div>
+                        <div class="span1" id="CompletedTime{{ rand }}">
+                            {% if value.CompletedTime == null %}
+                                N/A
+                            {% else %}
+                                {{ value.CompletedTime | date('g:i a') }}
+                            {% endif %}
+                        </div>
+                        <div class="span1" id="Multilingual{{ rand }}">
+                            {% if value.Multilingual == 1 %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </div>
+                        <div class="span1" id="NoShow{{ rand }}">
+                            {% if value.CheckIn == 4 %} {# 4 is no show #}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </div>
+                        <div class="span1" id="WalkIn{{ rand }}">
+                            {% if value.CheckIn == 5 %} {# 4 is walk in#}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <h3>Math Lab:</h3>
+        <p>This student has attended <b>{{ mathlabNumAppointments }}</b> Math Lab appointment(s).</p>
+        <div class="row-fluid">
+            <div class="span2"><b>Student Username</b></div>
+            <div class="span2"><b>Tutor Username</b></div>
+            <div class="span1"><b>Date</b></div>
+            <div class="span1"><b>Start Time</b></div>
+            <div class="span1"><b>End Time</b></div>
         </div>
     </div>
+
 
 
 {% endblock %}

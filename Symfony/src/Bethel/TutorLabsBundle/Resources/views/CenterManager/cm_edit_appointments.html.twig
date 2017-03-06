@@ -359,121 +359,121 @@
 {% endblock %}
 
 {% block main_content %}
-    <div class="jumbotron">
-        <div class="hero-unit">
-            <h1>View All Appointments</h1>
-            <p>Enter in Student/Tutor usernames, or use first name and last name to find their username</p>
-        </div>
-        <div id="parameters">
-            <h3>Search Appointments</h3>
-            <div class="row-fluid">
-                <div class="span3">
-                    <label for="studentfirstname">Student First:</label>
-                    <input type="text" id="studentfirstname" class="student-display-input" style="width:90%"
-                           name="studentfirstname" placeholder="Student First Name…">
-                </div>
-                <div class="span3">
-                    <label for="studentlastname">Student Last:</label>
-                    <input type="text" id="studentlastname" class="student-display-input" style="width:90%"
-                           name="studentlastname" placeholder="Student Last Name…">
-                </div>
-                <div class="span3">
-                    <label for="studentusername">Student Username:</label>
-                    <input type="text" id="studentusername" class="view-reports-input" style="width:90%"
-                           name="studentusername" placeholder="Student Username…">
-                </div>
-            </div>
 
-            <div class="row-fluid">
-                <div class="span9">
-                    <label for="display-student">Select a Student</label>
-                    <div id="display-student" class="display-student" name="display-student">
-                        <select id='select-student-username' size='5' style='width:90%'
-                                multiple='multiple'></select> {# A dummy select. #}
-                    </div>
-                </div>
-            </div>
-
-            <hr/>
-            <div id="row-fluid">
-                <div class="span3">
-                    <label for="tutorfirstname">Tutor First:</label>
-                    <input type="text" id="tutorfirstname" class="tutor-display-input" style="width:90%"
-                           name="tutorfirstname" placeholder="Tutor First Name…">
-                </div>
-                <div class="span3">
-                    <label for="tutorlastname">Tutor Last:</label>
-                    <input type="text" id="tutorlastname" class="tutor-display-input" style="width:90%"
-                           name="tutorlastname" placeholder="Tutor Last Name…">
-                </div>
-                <div class="span3">
-                    <label for="tutorusername">Tutor Username:</label>
-                    <input type="text" id="tutorusername" class="view-reports-input" style="width:90%"
-                           name="tutorusername" placeholder="Tutor Username…">
-                </div>
-
-                <div class="row-fluid">
-                    <div class="span9">
-                        <label for="display-tutor">Select a Tutor</label>
-                        <div id="display-tutor" class="display-tutor" name="display-tutor">
-                            <select id='select-tutor-username' size='5' style='width:90%'
-                                    multiple='multiple'></select> {# A dummy select. #}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr/>
-            <div class="row-fluid">
-                <div class="span3">
-                    <label for="profusername">Instructor Name:</label>
-                    <input type="text" id="profusername" class="view-reports-input" style="width:90%"
-                           name="profusername" placeholder="Instructor Name…">
-                </div>
-            </div>
-
-            <div class="row-fluid">
-                <div class="span9">
-                    <label for="display-prof">Select a Instructor</label>
-                    <div id="display-prof" class="display-prof" name="display-prof">
-                        <select id='select-prof-username' size='5' style='width:90%'
-                                multiple='multiple'></select> {# A dummy select. #}
-                    </div>
-                </div>
-            </div>
-
-            <div class="row-fluid">
-                <div class="span3">
-                    <label for="startdate">Click Start Date:</label>
-                    <input type="datetime" id="startdate" class="date view-reports-input" style="width:90%"
-                           placeholder="Choose a Starting Date…" readonly/>
-                </div>
-
-                <div class="span3">
-                    <label for="enddate">Click End Date:</label>
-                    <input type="datetime" id="enddate" class="date view-reports-input" style="width:90%"
-                           placeholder="Choose an Ending Date…" readonly/>
-                </div>
-
-                <div class="span3">
-                    <label for="courses">Course or Tag:</label>
-                    <select id="select-courses" class='view-reports-input' style="width:90%"></select>
-                </div>
-            </div>
-
-            <hr/>
-            <div class="row-fluid">
-                <div class="span3">
-                    <input type="button" id="clear" class="btn btn-primary" value="Clear Search"
-                           onclick="clearSearch()"/>
-                </div>
-            </div>
-        </div>
-        <hr/>
-        <h3>Appointments:</h3>
-        <div id="update-user-error-space"></div>
-        <div id="searchResults"></div>
-        <div id="appointment" class="span12"></div>
+    <div class="hero-unit">
+        <h1>View All Appointments</h1>
+        <p>Enter in Student/Tutor usernames, or use first name and last name to find their username</p>
     </div>
+    <div id="parameters">
+        <h3>Search Appointments</h3>
+        <div class="row-fluid">
+            <div class="span3">
+                <label for="studentfirstname">Student First:</label>
+                <input type="text" id="studentfirstname" class="student-display-input" style="width:90%"
+                       name="studentfirstname" placeholder="Student First Name…">
+            </div>
+            <div class="span3">
+                <label for="studentlastname">Student Last:</label>
+                <input type="text" id="studentlastname" class="student-display-input" style="width:90%"
+                       name="studentlastname" placeholder="Student Last Name…">
+            </div>
+            <div class="span3">
+                <label for="studentusername">Student Username:</label>
+                <input type="text" id="studentusername" class="view-reports-input" style="width:90%"
+                       name="studentusername" placeholder="Student Username…">
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span9">
+                <label for="display-student">Select a Student</label>
+                <div id="display-student" class="display-student" name="display-student">
+                    <select id='select-student-username' size='5' style='width:90%'
+                            multiple='multiple'></select> {# A dummy select. #}
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <div id="row-fluid">
+            <div class="span3">
+                <label for="tutorfirstname">Tutor First:</label>
+                <input type="text" id="tutorfirstname" class="tutor-display-input" style="width:90%"
+                       name="tutorfirstname" placeholder="Tutor First Name…">
+            </div>
+            <div class="span3">
+                <label for="tutorlastname">Tutor Last:</label>
+                <input type="text" id="tutorlastname" class="tutor-display-input" style="width:90%"
+                       name="tutorlastname" placeholder="Tutor Last Name…">
+            </div>
+            <div class="span3">
+                <label for="tutorusername">Tutor Username:</label>
+                <input type="text" id="tutorusername" class="view-reports-input" style="width:90%"
+                       name="tutorusername" placeholder="Tutor Username…">
+            </div>
+
+            <div class="row-fluid">
+                <div class="span9">
+                    <label for="display-tutor">Select a Tutor</label>
+                    <div id="display-tutor" class="display-tutor" name="display-tutor">
+                        <select id='select-tutor-username' size='5' style='width:90%'
+                                multiple='multiple'></select> {# A dummy select. #}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="row-fluid">
+            <div class="span3">
+                <label for="profusername">Instructor Name:</label>
+                <input type="text" id="profusername" class="view-reports-input" style="width:90%"
+                       name="profusername" placeholder="Instructor Name…">
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span9">
+                <label for="display-prof">Select a Instructor</label>
+                <div id="display-prof" class="display-prof" name="display-prof">
+                    <select id='select-prof-username' size='5' style='width:90%'
+                            multiple='multiple'></select> {# A dummy select. #}
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span3">
+                <label for="startdate">Click Start Date:</label>
+                <input type="datetime" id="startdate" class="date view-reports-input" style="width:90%"
+                       placeholder="Choose a Starting Date…" readonly/>
+            </div>
+
+            <div class="span3">
+                <label for="enddate">Click End Date:</label>
+                <input type="datetime" id="enddate" class="date view-reports-input" style="width:90%"
+                       placeholder="Choose an Ending Date…" readonly/>
+            </div>
+
+            <div class="span3">
+                <label for="courses">Course or Tag:</label>
+                <select id="select-courses" class='view-reports-input' style="width:90%"></select>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="row-fluid">
+            <div class="span3">
+                <input type="button" id="clear" class="btn btn-primary" value="Clear Search"
+                       onclick="clearSearch()"/>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <h3>Appointments:</h3>
+    <div id="update-user-error-space"></div>
+    <div id="searchResults"></div>
+    <div id="appointment" class="span12"></div>
+
 
 {% endblock %}

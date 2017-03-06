@@ -1,157 +1,155 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block headadd %}
-<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-  <link href="{{asset('css/jquery.ui.timepicker.css')}}" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <link href="{{ asset('css/jquery.ui.timepicker.css') }}" type="text/css" rel="stylesheet">
 
-  <!--FullCalendar Dependencies-->
-  <link href="{{asset('css/fullcalendar.css')}}" type="text/css" rel='stylesheet' />
-  <!-- <link href="{{asset('css/fullcalendar.print.css')}}" rel='stylesheet' media='print' /> -->
-  
-  <!--FullCalendar-->
-  <script src="{{asset('js/fullcalendar.min.js')}}"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-        function checkIfEmpty(){
-            $.ajax({
-                type: "POST",
-                url: "{{path('wc_observer_schedule_appointment_check_empty')}}",
-            }).done(function(done){
-                if(done == "EMPTY")
-                    alert("We are sorry, but there are currently no available appointments at this time. Try again later.");
-            });
-        }
+    <!--FullCalendar Dependencies-->
+    <link href="{{ asset('css/fullcalendar.css') }}" type="text/css" rel='stylesheet'/>
+    <!-- <link href="{{ asset('css/fullcalendar.print.css') }}" rel='stylesheet' media='print' /> -->
 
-        function getCalEventAsString(calEvent) {
-            eventStart = new Date(calEvent.start);
-            eventEnd = new Date(calEvent.end);
+    <!--FullCalendar-->
+    <script src="{{ asset('js/fullcalendar.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function checkIfEmpty() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('wc_observer_schedule_appointment_check_empty') }}",
+                }).done(function (done) {
+                    if (done == "EMPTY")
+                        alert("We are sorry, but there are currently no available appointments at this time. Try again later.");
+                });
+            }
 
-            return 'Are you sure you want to sign-up for the appointment?<br>' 
-                + "<br>Tutor Name:" + calEvent.tutorname
-                + "<br>Date:" + eventStart.toLocaleDateString()
-                + "<br>Start:" + eventStart.toLocaleTimeString()
-                + "<br>End:" + eventEnd.toLocaleTimeString();
-        }
+            function getCalEventAsString(calEvent) {
+                eventStart = new Date(calEvent.start);
+                eventEnd = new Date(calEvent.end);
 
-        function appointmentClicked(calEvent, jsEvent, view) {
-            
-            if( calEvent.dropin == true)
-                return;
+                return 'Are you sure you want to sign-up for the appointment?<br>'
+                        + "<br>Tutor Name:" + calEvent.tutorname
+                        + "<br>Date:" + eventStart.toLocaleDateString()
+                        + "<br>Start:" + eventStart.toLocaleTimeString()
+                        + "<br>End:" + eventEnd.toLocaleTimeString();
+            }
 
-            $multilingual = "";
-            if( calEvent.multilingual)
-                $multilingual = "MULTILINGUAL ";
-            $( "#dialog-confirm" ).html(getCalEventAsString(calEvent));
-            
-            $( "#dialog-confirm" ).dialog({
-                buttons: {
-                    Yes: function() {
-                        // when the button is pressed, update the server
-                        $.ajax({
-                            type: "POST",
-                            url: "{{path('wc_observer_schedule_appointment_call')}}",
-                            data: { 
-                                ID : calEvent.appointmentID,
-                                startTime : calEvent.start,
-                            }
-                        }).done(function ( data ) {
-                            if (data == "Success") {
-                                $("#update-user-error-space").html(
-                                    '<div class="alert alert-success"> Successfully signed-up for the appointment.</div>');
-                            }
-                            else {
-                                $("#update-user-error-space").html(
-                                    '<div class="alert alert-error"> Failed to sign-up for appointment: ' 
-                                    + data + 
-                                    '</div>');
-                            }
+            function appointmentClicked(calEvent, jsEvent, view) {
 
-                            $("#update-user-error-space").stop(true, true).show();
-                            $('html, body').animate({
+                if (calEvent.dropin == true)
+                    return;
+
+                $multilingual = "";
+                if (calEvent.multilingual)
+                    $multilingual = "MULTILINGUAL ";
+                $("#dialog-confirm").html(getCalEventAsString(calEvent));
+
+                $("#dialog-confirm").dialog({
+                    buttons: {
+                        Yes: function () {
+                            // when the button is pressed, update the server
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ path('wc_observer_schedule_appointment_call') }}",
+                                data: {
+                                    ID: calEvent.appointmentID,
+                                    startTime: calEvent.start,
+                                }
+                            }).done(function (data) {
+                                if (data == "Success") {
+                                    $("#update-user-error-space").html(
+                                            '<div class="alert alert-success"> Successfully signed-up for the appointment.</div>');
+                                }
+                                else {
+                                    $("#update-user-error-space").html(
+                                            '<div class="alert alert-error"> Failed to sign-up for appointment: '
+                                            + data +
+                                            '</div>');
+                                }
+
+                                $("#update-user-error-space").stop(true, true).show();
+                                $('html, body').animate({
                                     // for whatever reason top doesn't make it go to the top... so -50 fixes the "scroll to" location
-                                    scrollTop: $("#update-user-error-space").offset()-50
+                                    scrollTop: $("#update-user-error-space").offset() - 50
                                 }, 400);
 
 
-                            $('#calendar').fullCalendar('refetchEvents');
-                        });
-                        $( this ).dialog( "close" );
-                    },
-                    Cancel: function() {
-                        $( this ).dialog( "close" );
+                                $('#calendar').fullCalendar('refetchEvents');
+                            });
+                            $(this).dialog("close");
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                        }
                     }
-                }
+                });
+            }
+
+            var calendar = $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultView: 'month',
+                allDayDefault: false,
+                editable: false,
+                minTime: 7,
+                slotEventOverlap: false,
+                eventSources: [{
+                    url: "{{ path('wc_observer_schedule_appointment_load') }}",
+                }],
+                eventClick: appointmentClicked,
             });
-        }
-      
-        var calendar = $('#calendar').fullCalendar({
-            header:
-            {
-              left: 'prev,next today',
-              center: 'title',
-              right: 'month,agendaWeek,agendaDay'
-            },
-            defaultView: 'month',
-            allDayDefault: false,
-            editable: false,
-            minTime: 7,
-            slotEventOverlap: false,
-            eventSources: [{
-                url: "{{path('wc_observer_schedule_appointment_load')}}",
-            }],
-            eventClick: appointmentClicked,
+            checkIfEmpty();
         });
-        checkIfEmpty();
-    });
-</script>
+    </script>
 {% endblock %}
 
 {% block main_content %}
 
-    <div class="jumbotron">
-        <div class="hero-unit">
-            <h1>Schedule One On One Appointment.</h1>
-            <p>Search for an appointment you would like to sign up for.</p>
-        </div>
 
-        <div class="calendar-color-key">
-            <h3>Calendar Color Key</h3>
-            <hr />
-            <div class="row-fluid">
-                    <div class="span1" style="text-align:center"></div>
-                    <div class="span1" style="text-align:center"><b>Color</b></div>
-                    <div class="span2"><b>Type</b></div>
-            </div>
-            
-            <div class="row-fluid">
-                    <div class="span1" style="background-color:#4169E1; text-align:center"></div>
-                    <div class="span1" style="text-align:center">Blue</div>
-                    <div class="span3">Open Appointment</div>
-            </div>
-            <div class="row-fluid">
-                    <div class="span1" style="background-color:#D4AF37; text-align:center"></div>
-                    <div class="span1" style="text-align:center">Yellow</div>
-                    <div class="span3">Multilingual Writing Support Appointment</div>
-            </div>
-            <div class="row-fluid">
-                    <div class="span1" style="background-color:Green; text-align:center"></div>
-                    <div class="span1" style="text-align:center">Green</div>
-                    <div class="span3">Drop-in Hours</div>
-            </div>
-        </div>
-        <hr />
-
-        <div id="update-user-error-space"></div>
-        
-        <div id="calendar"></div>
+    <div class="hero-unit">
+        <h1>Schedule One On One Appointment.</h1>
+        <p>Search for an appointment you would like to sign up for.</p>
     </div>
+
+    <div class="calendar-color-key">
+        <h3>Calendar Color Key</h3>
+        <hr/>
+        <div class="row-fluid">
+            <div class="span1" style="text-align:center"></div>
+            <div class="span1" style="text-align:center"><b>Color</b></div>
+            <div class="span2"><b>Type</b></div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span1" style="background-color:#4169E1; text-align:center"></div>
+            <div class="span1" style="text-align:center">Blue</div>
+            <div class="span3">Open Appointment</div>
+        </div>
+        <div class="row-fluid">
+            <div class="span1" style="background-color:#D4AF37; text-align:center"></div>
+            <div class="span1" style="text-align:center">Yellow</div>
+            <div class="span3">Multilingual Writing Support Appointment</div>
+        </div>
+        <div class="row-fluid">
+            <div class="span1" style="background-color:Green; text-align:center"></div>
+            <div class="span1" style="text-align:center">Green</div>
+            <div class="span3">Drop-in Hours</div>
+        </div>
+    </div>
+    <hr/>
+
+    <div id="update-user-error-space"></div>
+
+    <div id="calendar"></div>
 
     <div id="dialog-confirm" style="display:none" title="Sign-up for Appointment">
         <p>
             Please confirm that you want to sign-up for this Appointment.
         </p>
-    
+
     </div>
 
 {% endblock %}

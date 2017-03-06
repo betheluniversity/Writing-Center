@@ -17,9 +17,12 @@
         <div class="main-content">
 
             <div class="container">
-                {% block main_content %}{% endblock %}
+                <div class="jumbotron">
+                    {% block main_content %}{% endblock %}
+                </div>
             </div>
-
+            
+            <hr>
             {{ footer.render() }}
 
         </div>

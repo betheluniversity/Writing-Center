@@ -1,39 +1,41 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block main_content %}
-    <div class="jumbotron">
-        <div class="hero-unit">
-            <h1>Change Role</h1>
-            <p>Search for a user to change their role.</p>
-        </div>
-        <div id="update-user-error-space"></div>
-        <div class="row-fluid">
-            
-            <div class="span3">
-                <label for="first">First Name</label>
-                <input class="promote-input" type="text" style="width:90%" id="first" name="first" placeholder="First Name…">
-            </div>
 
-            <div class="span3">
-                <label for="last">Last Name</label>
-                <input class="promote-input" type="text" style="width:90%" id="last" name="last" placeholder="Last Name…">
-            </div>
+    <div class="hero-unit">
+        <h1>Change Role</h1>
+        <p>Search for a user to change their role.</p>
+    </div>
+    <div id="update-user-error-space"></div>
+    <div class="row-fluid">
 
-            <div class="span3">
-                <label for="username">Username</label>
-                <input class="promote-input" type="text" style="width:90%" id="username" name="username" placeholder="Username…">
-            </div>
-            <div class="span3">
-                <button class="btn btn-small btn-primary" style="width:90%" id="clear-params">Clear search</button>
-            </div>
+        <div class="span3">
+            <label for="first">First Name</label>
+            <input class="promote-input" type="text" style="width:90%" id="first" name="first"
+                   placeholder="First Name…">
         </div>
-        <div id="results"><b>Enter parameters to search for a user to promote</b><p style="color:gray"></p>
+
+        <div class="span3">
+            <label for="last">Last Name</label>
+            <input class="promote-input" type="text" style="width:90%" id="last" name="last" placeholder="Last Name…">
         </div>
+
+        <div class="span3">
+            <label for="username">Username</label>
+            <input class="promote-input" type="text" style="width:90%" id="username" name="username"
+                   placeholder="Username…">
+        </div>
+        <div class="span3">
+            <button class="btn btn-small btn-primary" style="width:90%" id="clear-params">Clear search</button>
+        </div>
+    </div>
+    <div id="results"><b>Enter parameters to search for a user to promote</b>
+        <p style="color:gray"></p>
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            $("#clear-params").click(function(){
+        $(document).ready(function () {
+            $("#clear-params").click(function () {
                 $("#first").val("");
                 $("#last").val("");
                 $("#username").val("");
@@ -44,7 +46,7 @@
 {% endblock %}
 
 {% block footadd %}
-        <script src="{{asset('bundles/betheltutorlabs/js/centermanager.js')}}"></script>
+    <script src="{{ asset('bundles/betheltutorlabs/js/centermanager.js') }}"></script>
 {% endblock %}
 
 {% block mustache %}
@@ -70,7 +72,7 @@
                         {{roles.0.name}}
                     </div>
                 </div>
-                <div class="span2" id="new-role{{id}}">{% endverbatim %} {{select | raw}} {% verbatim %}</div>
+                <div class="span2" id="new-role{{id}}">{% endverbatim %} {{ select | raw }} {% verbatim %}</div>
                 <div class="span1">
                     <button class="btn btn-small btn-promote btn-primary" id="promote-btn-{{id}}"> Update </button>
                 </div>

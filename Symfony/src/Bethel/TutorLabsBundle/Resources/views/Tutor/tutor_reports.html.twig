@@ -1,325 +1,343 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block headadd %}
-  <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	<script type="text/javascript">
-    function clearSearch()//Clears parameter values
-    {
-      document.getElementById('startdate').value="";
-      document.getElementById('enddate').value="";
-      document.getElementById('studentusername').value="";
-      document.getElementById('studentfirstname').value="";
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <script type="text/javascript">
+        function clearSearch()//Clears parameter values
+        {
+            document.getElementById('startdate').value = "";
+            document.getElementById('enddate').value = "";
+            document.getElementById('studentusername').value = "";
+            document.getElementById('studentfirstname').value = "";
 
-      document.getElementById('studentlastname').value="";
-      document.getElementById('tutorusername').value="";
-      document.getElementById('tutorfirstname').value="";
-      document.getElementById('tutorlastname').value="";
+            document.getElementById('studentlastname').value = "";
+            document.getElementById('tutorusername').value = "";
+            document.getElementById('tutorfirstname').value = "";
+            document.getElementById('tutorlastname').value = "";
 
-      document.getElementById('profusername').value="";
+            document.getElementById('profusername').value = "";
 
-      var select = document.getElementById('select-student-username');
-      for(var option in select)
-      {
-        select.remove(option);
-      }
-      select = document.getElementById('select-tutor-username');
-      for(var option in select)
-      {
-        select.remove(option);
-      }
-      select = document.getElementById('select-prof-username');
-      for(var option in select)
-      {
-        select.remove(option);
-      }
-    };
-  </script>
-  <script type="text/javascript">
-    //Load the datepicker jquery
-    $(function() {
-      $( "#startdate" ).datepicker({dateFormat: 'yy-mm-dd'});
-      $( "#enddate" ).datepicker({dateFormat: 'yy-mm-dd'});
-    });
-    //Clear the startdate and enddate
-    $(document).ready(function() {
-      $("#clear").click(function(){      
-        $(".view-reports-input").change();
-      })
-
-    });
-    $(document).ready(function() {
-      //Allows the rows to display comments once you click on them 
-      function ClickableCommentRows(){
-          $(".clickable-row").click(function(){
-
-
-
-            $(".comment-row").css("display", "none");//hides all so only one appears at a time
-            numID = this.id.replace(/\D/g,''); //removes non-numeric characters
-            if ($('#comment-row' + numID).is(':visible'))
-              $("#comment-row" + numID).css("display", "none");
-            else
-              $("#comment-row" + numID).css("display", "block");
-              
-            $(".clickable-row").css("backgroundColor", "#ffffff;");
-            $("#StudUsername" + numID).css("backgroundColor", "#dddddd;");
-            $("#StudName" + numID).css("backgroundColor", "#dddddd;");
-            $("#TutorUsername" + numID).css("backgroundColor", "#dddddd;");
-            $("#TutorName" + numID).css("backgroundColor", "#dddddd;");
-            $("#StartTime" + numID).css("backgroundColor", "#dddddd;");
-            $("#EndTime" + numID).css("backgroundColor", "#dddddd;");
-          });
-      }
-
-      /////////////////Functions for First/Last name searches.//////////////////////
-      //Updates the Display field
-      function GetStudentUsername(){
-        $(".student-display-input").keyup(function(){
-           studentfirstname = $("#studentfirstname").val();
-           studentlastname = $("#studentlastname").val();
-
-          $.ajax({
-              type: "POST",
-              url: "{{path('wc_tutor_reports_get_student_usernames')}}",
-              data: {studentfirstname: studentfirstname, studentlastname: studentlastname}
-            }).done(function ( data ) {
-              $("#display-student").html(data);
-              UpdateStudentUsernameField();
-            });
-        });
-      }
-
-      //Updates the Username field, then calls the load function.
-      function UpdateStudentUsernameField(){
-        $("select#select-student-username").change(function(){
-          $("#studentusername").val($("#select-student-username").val());
-          SearchAppointments();
-        });
-      }
-
-      //Updates the Display field
-      function GetTutorUsername(){
-        $(".tutor-display-input").keyup(function(){
-           tutorfirstname = $("#tutorfirstname").val();
-           tutorlastname = $("#tutorlastname").val();
-
-          $.ajax({
-              type: "POST",
-              url: "{{path('wc_tutor_reports_get_tutor_usernames')}}",
-              data: {tutorfirstname: tutorfirstname, tutorlastname: tutorlastname}
-            }).done(function ( data ) {
-              $("#display-tutor").html(data);
-              UpdateTutorUsernameField();
-            });
-        });
-      }
-
-      //Updates the Username field, then calls the load function.
-      function UpdateTutorUsernameField(){
-        $("select#select-tutor-username").change(function(){
-          $("#tutorusername").val($("#select-tutor-username").val());
-          SearchAppointments();
-        });
-      }
-
-      //Updates the Username field, then calls the load function.
-      function UpdateCoursesField(){
-          select = document.getElementById('select-courses');
-          {% for course in courses | jsonDecode %}
-              var opt = document.createElement('option');
-              opt.value = "{{course}}";
-              opt.innerHTML = "{{course}}";
-              select.appendChild(opt);
-          {% endfor %}
-      }; 
-      UpdateCoursesField();
-
-       //Updates the Display field
-      function GetProfUsername(){
-
-        $.ajax({
-            type: "POST",
-            url: "{{path('wc_tutor_reports_get_prof_usernames')}}",
-            data: {}
-          }).done(function ( data ) {
-            $("#display-prof").html(data);
-            $("select#select-prof-username").change(function(){
-              $("#profusername").val($("#select-prof-username").val());
-              SearchAppointments();
-            });
-          });
-      }
-
-      
-
-        $(".prof-display-input").keyup(function(){
-           GetProfUsername();
-        });
-
-      //////////////////////////End Functions///////////////////////////////
-
-      function LoadAppointments(){
-        $(".view-reports-input").change(function(){
-           SearchAppointments();
-        });
-        //$("#searchResults").html("Enter parameters to begin searching for an appointment.");
-      }
-
-      function SearchAppointments(){
-         studentusername = $("#studentusername").val();
-         tutorusername = $("#tutorusername").val();
-         profusername = $("#profusername").val();
-         courses = $("#select-courses").val();
-
-         if($("#startdate").val() != "")
-          startdate = $("#startdate").val();
-         else
-          startdate = "none";
-         if($("#enddate").val() != "")
-          enddate = $("#enddate").val();
-         else
-          enddate = "none";
-         $url=$("#usernameForm").attr("action");
-          $.ajax({
-            type: "POST",
-            url: "{{path('wc_tutor_reports_call')}}",
-            data: {studentusername: studentusername, tutorusername: tutorusername, profusername:profusername, startdate: startdate, enddate: enddate, courses: courses }
-          }).done(function ( data ) {
-            //if all are empty, display nothing (might want to move this earlier so call isn't used in this situation)
-            if (studentusername == "" && tutorusername == "" && profusername=="" && startdate == "none" && enddate == "none" && courses == null) {
-              $("#results").html("");
+            var select = document.getElementById('select-student-username');
+            for (var option in select) {
+                select.remove(option);
             }
-            //else display the results from our call
-            else{
-              $("#results").html(data);
+            select = document.getElementById('select-tutor-username');
+            for (var option in select) {
+                select.remove(option);
             }
-              ClickableCommentRows();
-          });
-      }
-
-      GetStudentUsername();
-      GetTutorUsername();
-      GetProfUsername();
-      LoadAppointments();
-
-      $(".view-reports-input").change(function(){
-           SearchAppointments();
+            select = document.getElementById('select-prof-username');
+            for (var option in select) {
+                select.remove(option);
+            }
+        }
+        ;
+    </script>
+    <script type="text/javascript">
+        //Load the datepicker jquery
+        $(function () {
+            $("#startdate").datepicker({dateFormat: 'yy-mm-dd'});
+            $("#enddate").datepicker({dateFormat: 'yy-mm-dd'});
         });
+        //Clear the startdate and enddate
+        $(document).ready(function () {
+            $("#clear").click(function () {
+                $(".view-reports-input").change();
+            })
 
-    });
-	</script>
+        });
+        $(document).ready(function () {
+            //Allows the rows to display comments once you click on them
+            function ClickableCommentRows() {
+                $(".clickable-row").click(function () {
 
-  <style>
 
-  </style>
+                    $(".comment-row").css("display", "none");//hides all so only one appears at a time
+                    numID = this.id.replace(/\D/g, ''); //removes non-numeric characters
+                    if ($('#comment-row' + numID).is(':visible'))
+                        $("#comment-row" + numID).css("display", "none");
+                    else
+                        $("#comment-row" + numID).css("display", "block");
+
+                    $(".clickable-row").css("backgroundColor", "#ffffff;");
+                    $("#StudUsername" + numID).css("backgroundColor", "#dddddd;");
+                    $("#StudName" + numID).css("backgroundColor", "#dddddd;");
+                    $("#TutorUsername" + numID).css("backgroundColor", "#dddddd;");
+                    $("#TutorName" + numID).css("backgroundColor", "#dddddd;");
+                    $("#StartTime" + numID).css("backgroundColor", "#dddddd;");
+                    $("#EndTime" + numID).css("backgroundColor", "#dddddd;");
+                });
+            }
+
+            /////////////////Functions for First/Last name searches.//////////////////////
+            //Updates the Display field
+            function GetStudentUsername() {
+                $(".student-display-input").keyup(function () {
+                    studentfirstname = $("#studentfirstname").val();
+                    studentlastname = $("#studentlastname").val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('wc_tutor_reports_get_student_usernames') }}",
+                        data: {studentfirstname: studentfirstname, studentlastname: studentlastname}
+                    }).done(function (data) {
+                        $("#display-student").html(data);
+                        UpdateStudentUsernameField();
+                    });
+                });
+            }
+
+            //Updates the Username field, then calls the load function.
+            function UpdateStudentUsernameField() {
+                $("select#select-student-username").change(function () {
+                    $("#studentusername").val($("#select-student-username").val());
+                    SearchAppointments();
+                });
+            }
+
+            //Updates the Display field
+            function GetTutorUsername() {
+                $(".tutor-display-input").keyup(function () {
+                    tutorfirstname = $("#tutorfirstname").val();
+                    tutorlastname = $("#tutorlastname").val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('wc_tutor_reports_get_tutor_usernames') }}",
+                        data: {tutorfirstname: tutorfirstname, tutorlastname: tutorlastname}
+                    }).done(function (data) {
+                        $("#display-tutor").html(data);
+                        UpdateTutorUsernameField();
+                    });
+                });
+            }
+
+            //Updates the Username field, then calls the load function.
+            function UpdateTutorUsernameField() {
+                $("select#select-tutor-username").change(function () {
+                    $("#tutorusername").val($("#select-tutor-username").val());
+                    SearchAppointments();
+                });
+            }
+
+            //Updates the Username field, then calls the load function.
+            function UpdateCoursesField() {
+                select = document.getElementById('select-courses');
+                {% for course in courses | jsonDecode %}
+                var opt = document.createElement('option');
+                opt.value = "{{ course }}";
+                opt.innerHTML = "{{ course }}";
+                select.appendChild(opt);
+                {% endfor %}
+            };
+            UpdateCoursesField();
+
+            //Updates the Display field
+            function GetProfUsername() {
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('wc_tutor_reports_get_prof_usernames') }}",
+                    data: {}
+                }).done(function (data) {
+                    $("#display-prof").html(data);
+                    $("select#select-prof-username").change(function () {
+                        $("#profusername").val($("#select-prof-username").val());
+                        SearchAppointments();
+                    });
+                });
+            }
+
+
+            $(".prof-display-input").keyup(function () {
+                GetProfUsername();
+            });
+
+            //////////////////////////End Functions///////////////////////////////
+
+            function LoadAppointments() {
+                $(".view-reports-input").change(function () {
+                    SearchAppointments();
+                });
+                //$("#searchResults").html("Enter parameters to begin searching for an appointment.");
+            }
+
+            function SearchAppointments() {
+                studentusername = $("#studentusername").val();
+                tutorusername = $("#tutorusername").val();
+                profusername = $("#profusername").val();
+                courses = $("#select-courses").val();
+
+                if ($("#startdate").val() != "")
+                    startdate = $("#startdate").val();
+                else
+                    startdate = "none";
+                if ($("#enddate").val() != "")
+                    enddate = $("#enddate").val();
+                else
+                    enddate = "none";
+                $url = $("#usernameForm").attr("action");
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('wc_tutor_reports_call') }}",
+                    data: {
+                        studentusername: studentusername,
+                        tutorusername: tutorusername,
+                        profusername: profusername,
+                        startdate: startdate,
+                        enddate: enddate,
+                        courses: courses
+                    }
+                }).done(function (data) {
+                    //if all are empty, display nothing (might want to move this earlier so call isn't used in this situation)
+                    if (studentusername == "" && tutorusername == "" && profusername == "" && startdate == "none" && enddate == "none" && courses == null) {
+                        $("#results").html("");
+                    }
+                    //else display the results from our call
+                    else {
+                        $("#results").html(data);
+                    }
+                    ClickableCommentRows();
+                });
+            }
+
+            GetStudentUsername();
+            GetTutorUsername();
+            GetProfUsername();
+            LoadAppointments();
+
+            $(".view-reports-input").change(function () {
+                SearchAppointments();
+            });
+
+        });
+    </script>
+
+    <style>
+
+    </style>
 
 {% endblock %}
 
 {% block main_content %}
-	<div class="jumbotron">
-        <div class="hero-unit">
-            <h1>View Reports.</h1>
-            <p>Search for various completed appointments. You can also search appointments where the student did not show up.</p>
-            <p>First and last name searches allow for finding usernames.</p>
-            <p>Clicking on the appointments expands them.</p>
-        </div>
-        <div id="update-user-error-space"></div>
-        <div id="parameters">
-            <h3>Search Appointments</h3>
-            <div class="row-fluid">
-              <div class="span3">
-                <label for="studentfirstname">Student First:</label>
-                <input type="text" id="studentfirstname" class="student-display-input" style="width:90%" name="studentfirstname" placeholder="Student First Name…">
-              </div>
-              <div class="span3">
-                <label for="studentlastname">Student Last:</label>
-                <input type="text" id="studentlastname" class="student-display-input" style="width:90%" name="studentlastname" placeholder="Student Last Name…">
-              </div>
-              <div class="span3">
-                <label for="studentusername">Student Username:</label>
-                <input type="text" id="studentusername" class="view-reports-input" style="width:90%" name="studentusername" placeholder="Student Username…">
-              </div>
-            </div>
 
-            <div class="row-fluid">
-                <div class="span9">
-                  <label for="display-student">Select a Student</label>
-                  <div id="display-student" class="display-student" name="display-student">
-                    <select id='select-student-username' size='5' style='width:90%' multiple='multiple'></select> {# A dummy select. #}
-                  </div>
-                </div>
-            </div>
-
-            <hr/>
-            <div id="row-fluid">
-              <div class="span3">
-                <label for="tutorfirstname">Tutor First:</label>
-                <input type="text" id="tutorfirstname" class="tutor-display-input" style="width:90%" name="tutorfirstname" placeholder="Tutor First Name…">
-              </div>
-              <div class="span3">
-                <label for="tutorlastname">Tutor Last:</label>
-                <input type="text" id="tutorlastname" class="tutor-display-input" style="width:90%" name="tutorlastname" placeholder="Tutor Last Name…">
-              </div>
-              <div class="span3">
-                <label for="tutorusername">Tutor Username:</label>
-                <input type="text" id="tutorusername" class="view-reports-input" style="width:90%" name="tutorusername" placeholder="Tutor Username…">
-              </div>
-
-              <div class="row-fluid">
-                <div class="span9">
-                  <label for="display-tutor">Select a Tutor</label>
-                  <div id="display-tutor" class="display-tutor" name="display-tutor">
-                    <select id='select-tutor-username' size='5' style='width:90%' multiple='multiple'></select> {# A dummy select. #}
-                  </div>
-                </div>
-            </div>
-            </div>  
-
-              <hr/>
-              <div class="row-fluid">
-              <div class="span3">
-                <label for="profusername">Instructor Name:</label>
-                <input type="text" id="profusername" class="view-reports-input" style="width:90%" name="profusername" placeholder="Instructor Name…">
-              </div>
-              </div>
-
-              <div class="row-fluid">
-                <div class="span9">
-                  <label for="display-prof">Select a Instructor</label>
-                  <div id="display-prof" class="display-prof" name="display-prof">
-                    <select id='select-prof-username' size='5' style='width:90%' multiple='multiple'></select> {# A dummy select. #}
-                  </div>
-                </div>
-              </div>
-
-            
-            <div class="row-fluid">
-                <div class="span3">
-                  <label for="startdate">Click Start Date:</label>
-                  <input type="datetime" id="startdate" class="date view-reports-input" style="width:90%" placeholder="Choose a Starting Date…" readonly/>
-                </div>
-
-                <div class="span3">
-                  <label for="enddate">Click End Date:</label>
-                  <input type="datetime" id="enddate" class="date view-reports-input" style="width:90%" placeholder="Choose an Ending Date…" readonly/>
-                </div>
-
-                <div class="span3">
-                  <label for="courses">Course:</label>
-                  <select id="select-courses" class='view-reports-input' style="width:90%" ><option value=''>Any</option></select>
-                </div>
-            </div>
-            <hr/>
-            <div class="row-fluid">
-              <div class="span3">
-                <input type="button" id="clear" class="btn btn-primary" value="Clear Search" onclick="clearSearch()"/>
-              </div>
-            </div>
-          </div>
-          <hr/>
-          
-        <h3>Search Results:</h3>
-        <div id="results" class="span12">Please enter parameters to search by.</div>
+    <div class="hero-unit">
+        <h1>View Reports.</h1>
+        <p>Search for various completed appointments. You can also search appointments where the student did not show
+            up.</p>
+        <p>First and last name searches allow for finding usernames.</p>
+        <p>Clicking on the appointments expands them.</p>
     </div>
+    <div id="update-user-error-space"></div>
+    <div id="parameters">
+        <h3>Search Appointments</h3>
+        <div class="row-fluid">
+            <div class="span3">
+                <label for="studentfirstname">Student First:</label>
+                <input type="text" id="studentfirstname" class="student-display-input" style="width:90%"
+                       name="studentfirstname" placeholder="Student First Name…">
+            </div>
+            <div class="span3">
+                <label for="studentlastname">Student Last:</label>
+                <input type="text" id="studentlastname" class="student-display-input" style="width:90%"
+                       name="studentlastname" placeholder="Student Last Name…">
+            </div>
+            <div class="span3">
+                <label for="studentusername">Student Username:</label>
+                <input type="text" id="studentusername" class="view-reports-input" style="width:90%"
+                       name="studentusername" placeholder="Student Username…">
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span9">
+                <label for="display-student">Select a Student</label>
+                <div id="display-student" class="display-student" name="display-student">
+                    <select id='select-student-username' size='5' style='width:90%'
+                            multiple='multiple'></select> {# A dummy select. #}
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <div id="row-fluid">
+            <div class="span3">
+                <label for="tutorfirstname">Tutor First:</label>
+                <input type="text" id="tutorfirstname" class="tutor-display-input" style="width:90%"
+                       name="tutorfirstname" placeholder="Tutor First Name…">
+            </div>
+            <div class="span3">
+                <label for="tutorlastname">Tutor Last:</label>
+                <input type="text" id="tutorlastname" class="tutor-display-input" style="width:90%" name="tutorlastname"
+                       placeholder="Tutor Last Name…">
+            </div>
+            <div class="span3">
+                <label for="tutorusername">Tutor Username:</label>
+                <input type="text" id="tutorusername" class="view-reports-input" style="width:90%" name="tutorusername"
+                       placeholder="Tutor Username…">
+            </div>
+
+            <div class="row-fluid">
+                <div class="span9">
+                    <label for="display-tutor">Select a Tutor</label>
+                    <div id="display-tutor" class="display-tutor" name="display-tutor">
+                        <select id='select-tutor-username' size='5' style='width:90%'
+                                multiple='multiple'></select> {# A dummy select. #}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="row-fluid">
+            <div class="span3">
+                <label for="profusername">Instructor Name:</label>
+                <input type="text" id="profusername" class="view-reports-input" style="width:90%" name="profusername"
+                       placeholder="Instructor Name…">
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span9">
+                <label for="display-prof">Select a Instructor</label>
+                <div id="display-prof" class="display-prof" name="display-prof">
+                    <select id='select-prof-username' size='5' style='width:90%'
+                            multiple='multiple'></select> {# A dummy select. #}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row-fluid">
+            <div class="span3">
+                <label for="startdate">Click Start Date:</label>
+                <input type="datetime" id="startdate" class="date view-reports-input" style="width:90%"
+                       placeholder="Choose a Starting Date…" readonly/>
+            </div>
+
+            <div class="span3">
+                <label for="enddate">Click End Date:</label>
+                <input type="datetime" id="enddate" class="date view-reports-input" style="width:90%"
+                       placeholder="Choose an Ending Date…" readonly/>
+            </div>
+
+            <div class="span3">
+                <label for="courses">Course:</label>
+                <select id="select-courses" class='view-reports-input' style="width:90%">
+                    <option value=''>Any</option>
+                </select>
+            </div>
+        </div>
+        <hr/>
+        <div class="row-fluid">
+            <div class="span3">
+                <input type="button" id="clear" class="btn btn-primary" value="Clear Search" onclick="clearSearch()"/>
+            </div>
+        </div>
+    </div>
+    <hr/>
+
+    <h3>Search Results:</h3>
+    <div id="results" class="span12">Please enter parameters to search by.</div>
+
 {% endblock %}

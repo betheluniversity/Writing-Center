@@ -1,185 +1,185 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block headadd %}
-<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <link href="{{asset('css/jquery.ui.timepicker.css')}}" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <link href="{{ asset('css/jquery.ui.timepicker.css') }}" type="text/css" rel="stylesheet">
 
-  <!--FullCalendar Dependencies-->
-  <link href="{{asset('css/fullcalendar.css')}}" type="text/css" rel='stylesheet' />
-  <link href="{{asset('css/fullcalendar.print.css')}}" rel='stylesheet' media='print' />
-  
-  <!--FullCalendar-->
-  <script src="{{asset('js/fullcalendar.min.js')}}"></script>
-  <script type="text/javascript">
-   $(document).ready(function() {
-        usernames = ["{{user}}"];
-        $("#lookup-tutor-username").val("{{user}}");
+    <!--FullCalendar Dependencies-->
+    <link href="{{ asset('css/fullcalendar.css') }}" type="text/css" rel='stylesheet'/>
+    <link href="{{ asset('css/fullcalendar.print.css') }}" rel='stylesheet' media='print'/>
 
-        // Lookup user when the textbox changes
-      $("#lookup-tutor-username").change(function(){
-         usernames = $("#lookup-tutor-username").val();
-         calendar.fullCalendar( 'refetchEvents' );
-        });
+    <!--FullCalendar-->
+    <script src="{{ asset('js/fullcalendar.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            usernames = ["{{ user }}"];
+            $("#lookup-tutor-username").val("{{ user }}");
 
-        function getCalEventAsString(calEvent) {
-            eventStart = new Date(calEvent.start);
-            eventEnd = new Date(calEvent.end);
-            student = calEvent.studentname;
-            if(student == "")
-                student = "No Student.";
-            return 'Student: ' + student 
-                + "<br>Tutor Name: " + calEvent.tutorname
-                + "<br>Date: " + eventStart.toLocaleDateString()
-                + "<br>Start Time: " + eventStart.toLocaleTimeString()
-                + "<br>End Time: " + eventEnd.toLocaleTimeString()
-                + "<br>Sub requested: " + calEvent.sub
-                + "<br>" + calEvent.multilingualTitle
-                + "<br>";
-        }
-
-        function appointmentClicked(calEvent, jsEvent, view) {
-            $( "#dialog-confirm" ).html(getCalEventAsString(calEvent) + "<br>Would you like to Request a sub?");
-
-            $( "#dialog-confirm" ).dialog({
-                buttons: {
-                    Yes: function() {
-                        // when the button is pressed, update the server
-                        $.ajax({
-                            type: "POST",
-                            url: "{{path('wc_tutor_schedule_request_sub')}}",
-                            data: { 
-                                appointmentID : calEvent.appointmentID
-                            }
-                        }).done(function ( data ) {
-                            if (data == "Success") {
-                                $("#update-user-error-space").html(
-                                    '<div class="alert alert-success"> Successfully requested a substitute and emailed all tutors.</div>');
-                            }
-                            else {
-                                $("#update-user-error-space").html(
-                                    '<div class="alert alert-error"> Failed to update appointment: ' 
-                                    + data + 
-                                    '</div>');
-                            }
-
-                            $("#update-user-error-space").stop(true, true).show();
-                            $('html, body').animate({
-                                    // for whatever reason top doesn't make it go to the top... so -50 fixes the "scroll to" location
-                                    scrollTop: $("#update-user-error-space").offset()-50
-                                }, 400);
-
-
-                            $('#calendar').fullCalendar('refetchEvents');
-                        });
-                        $( this ).dialog( "close" );
-                    },
-                    No: function() {
-                        // when the button is pressed, update the server
-                        $.ajax({
-                            type: "POST",
-                            url: "{{path('wc_tutor_schedule_remove_sub')}}",
-                            data: { 
-                                appointmentID : calEvent.appointmentID
-                            }
-                        }).done(function ( data ) {
-                            console.log(data);
-                            if (data == "Success") {
-                                $("#update-user-error-space").html(
-                                    '<div class="alert alert-success"> Successfully unrequested a substitute.</div>');
-                            }
-                            else {
-                                $("#update-user-error-space").html(
-                                    '<div class="alert alert-error"> Failed to update appointment: ' 
-                                    + data + 
-                                    '</div>');
-                            }
-
-                            $("#update-user-error-space").stop(true, true).show();
-                            $('html, body').animate({
-                                    // for whatever reason top doesn't make it go to the top... so -50 fixes the "scroll to" location
-                                    scrollTop: $("#update-user-error-space").offset()-50
-                                }, 400);
-
-
-                            $('#calendar').fullCalendar('refetchEvents');
-                        });
-                        $( this ).dialog( "close" );
-                    },
-                    Cancel: function() {
-                        $( this ).dialog( "close" );
-                    }
-                }
+            // Lookup user when the textbox changes
+            $("#lookup-tutor-username").change(function () {
+                usernames = $("#lookup-tutor-username").val();
+                calendar.fullCalendar('refetchEvents');
             });
-        }
-      
-        var calendar = $('#calendar').fullCalendar({
-            header:
-            {
-              left: 'prev,next today',
-              center: 'title',
-              right: 'month,agendaWeek,agendaDay'
-            },
-            defaultView: 'month',
-            editable: false,
-            minTime: 7,
-            eventSources: [
-                {
-                    url: "{{path('wc_tutor_schedule_load')}}",
-                    type: 'POST',
-                    data: function() {
-                        return {tutors: usernames};
+
+            function getCalEventAsString(calEvent) {
+                eventStart = new Date(calEvent.start);
+                eventEnd = new Date(calEvent.end);
+                student = calEvent.studentname;
+                if (student == "")
+                    student = "No Student.";
+                return 'Student: ' + student
+                        + "<br>Tutor Name: " + calEvent.tutorname
+                        + "<br>Date: " + eventStart.toLocaleDateString()
+                        + "<br>Start Time: " + eventStart.toLocaleTimeString()
+                        + "<br>End Time: " + eventEnd.toLocaleTimeString()
+                        + "<br>Sub requested: " + calEvent.sub
+                        + "<br>" + calEvent.multilingualTitle
+                        + "<br>";
+            }
+
+            function appointmentClicked(calEvent, jsEvent, view) {
+                $("#dialog-confirm").html(getCalEventAsString(calEvent) + "<br>Would you like to Request a sub?");
+
+                $("#dialog-confirm").dialog({
+                    buttons: {
+                        Yes: function () {
+                            // when the button is pressed, update the server
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ path('wc_tutor_schedule_request_sub') }}",
+                                data: {
+                                    appointmentID: calEvent.appointmentID
+                                }
+                            }).done(function (data) {
+                                if (data == "Success") {
+                                    $("#update-user-error-space").html(
+                                            '<div class="alert alert-success"> Successfully requested a substitute and emailed all tutors.</div>');
+                                }
+                                else {
+                                    $("#update-user-error-space").html(
+                                            '<div class="alert alert-error"> Failed to update appointment: '
+                                            + data +
+                                            '</div>');
+                                }
+
+                                $("#update-user-error-space").stop(true, true).show();
+                                $('html, body').animate({
+                                    // for whatever reason top doesn't make it go to the top... so -50 fixes the "scroll to" location
+                                    scrollTop: $("#update-user-error-space").offset() - 50
+                                }, 400);
+
+
+                                $('#calendar').fullCalendar('refetchEvents');
+                            });
+                            $(this).dialog("close");
+                        },
+                        No: function () {
+                            // when the button is pressed, update the server
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ path('wc_tutor_schedule_remove_sub') }}",
+                                data: {
+                                    appointmentID: calEvent.appointmentID
+                                }
+                            }).done(function (data) {
+                                console.log(data);
+                                if (data == "Success") {
+                                    $("#update-user-error-space").html(
+                                            '<div class="alert alert-success"> Successfully unrequested a substitute.</div>');
+                                }
+                                else {
+                                    $("#update-user-error-space").html(
+                                            '<div class="alert alert-error"> Failed to update appointment: '
+                                            + data +
+                                            '</div>');
+                                }
+
+                                $("#update-user-error-space").stop(true, true).show();
+                                $('html, body').animate({
+                                    // for whatever reason top doesn't make it go to the top... so -50 fixes the "scroll to" location
+                                    scrollTop: $("#update-user-error-space").offset() - 50
+                                }, 400);
+
+
+                                $('#calendar').fullCalendar('refetchEvents');
+                            });
+                            $(this).dialog("close");
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                        }
                     }
-                }
-            ],
-            eventClick: appointmentClicked
+                });
+            }
+
+            var calendar = $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultView: 'month',
+                editable: false,
+                minTime: 7,
+                eventSources: [
+                    {
+                        url: "{{ path('wc_tutor_schedule_load') }}",
+                        type: 'POST',
+                        data: function () {
+                            return {tutors: usernames};
+                        }
+                    }
+                ],
+                eventClick: appointmentClicked
+            });
         });
-    });
-</script>
+    </script>
 {% endblock %}
 
 {% block main_content %}
-    <div class="jumbotron">
-        <div class="hero-unit">
-            <h1>View Tutor Schedule.</h1>
-            <p>Displays the appointments a tutor is assigned to.</p>
-        </div>
-        <div id="update-user-error-space"></div>
-         <div class="calendar-color-key">
-            <h3>Calendar Color Key</h3>
-            <hr />
-            <div class="row-fluid">
-                    <div class="span1" style="text-align:center"></div>
-                    <div class="span1" style="text-align:center"><b>Color</b></div>
-                    <div class="span2"><b>Type</b></div>
-            </div>
-            
-            <div class="row-fluid">
-                    <div class="span1" style="background-color:#4169E1; text-align:center"></div>
-                    <div class="span1" style="text-align:center">Blue</div>
-                    <div class="span3">General Appointment</div>
-            </div>
-            <div class="row-fluid">
-                    <div class="span1" style="background-color:#D4AF37; text-align:center"></div>
-                    <div class="span1" style="text-align:center">Yellow</div>
-                    <div class="span3">Multilingual Writing Support Appointment</div>
-            </div>
-            <div class="row-fluid">
-                    <div class="span1" style="background-color:Green; text-align:center"></div>
-                    <div class="span1" style="text-align:center">Green</div>
-                    <div class="span3">Drop-in Hours</div>
-            </div>
-        </div>
-        <hr />
-        <label for="lookup-tutor-username" style="display:block"><b>Tutors</b></label>
-          <select size="7" multiple="multiple" id="lookup-tutor-username">
-            {% for key, value in tutors %}
-                <option id="option-{{value.id}}" value="{{value.username}}">{{value.firstName}} {{value.lastName}}</option>
-               {# <option id="option-{{key}}" value="{{value}}">{{value}}</option> #}
-            {% endfor %}
-          </select>
-        <div id="calendar"></div>
-        <div id="dialog-confirm" style="display:none" title="View Appointment"></div>
+    =
+    <div class="hero-unit">
+        <h1>View Tutor Schedule.</h1>
+        <p>Displays the appointments a tutor is assigned to.</p>
     </div>
+    <div id="update-user-error-space"></div>
+    <div class="calendar-color-key">
+        <h3>Calendar Color Key</h3>
+        <hr/>
+        <div class="row-fluid">
+            <div class="span1" style="text-align:center"></div>
+            <div class="span1" style="text-align:center"><b>Color</b></div>
+            <div class="span2"><b>Type</b></div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span1" style="background-color:#4169E1; text-align:center"></div>
+            <div class="span1" style="text-align:center">Blue</div>
+            <div class="span3">General Appointment</div>
+        </div>
+        <div class="row-fluid">
+            <div class="span1" style="background-color:#D4AF37; text-align:center"></div>
+            <div class="span1" style="text-align:center">Yellow</div>
+            <div class="span3">Multilingual Writing Support Appointment</div>
+        </div>
+        <div class="row-fluid">
+            <div class="span1" style="background-color:Green; text-align:center"></div>
+            <div class="span1" style="text-align:center">Green</div>
+            <div class="span3">Drop-in Hours</div>
+        </div>
+    </div>
+    <hr/>
+    <label for="lookup-tutor-username" style="display:block"><b>Tutors</b></label>
+    <select size="7" multiple="multiple" id="lookup-tutor-username">
+        {% for key, value in tutors %}
+            <option id="option-{{ value.id }}"
+                    value="{{ value.username }}">{{ value.firstName }} {{ value.lastName }}</option>
+            {# <option id="option-{{key}}" value="{{value}}">{{value}}</option> #}
+        {% endfor %}
+    </select>
+    <div id="calendar"></div>
+    <div id="dialog-confirm" style="display:none" title="View Appointment"></div>
+
 
 {% endblock %}

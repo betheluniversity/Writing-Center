@@ -1,107 +1,120 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block headadd %}
-  <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	<script type="text/javascript">
-    function clearSearch()//Clears parameter values
-    {
-      document.getElementById('startdate').value="";
-      document.getElementById('enddate').value="";
-      document.getElementById('username').value="";
-      document.getElementById('tutorusername').value="";
-      document.getElementById('noshowbox').checked =false;
-    };
-  </script>
-  <script type="text/javascript">
-    //Load the datepicker jquery
-    $(function() {
-      $( "#startdate" ).datepicker({dateFormat: 'yy-mm-dd'});
-      $( "#enddate" ).datepicker({dateFormat: 'yy-mm-dd'});
-    });
-    //Clear the startdate and enddate
-    $(document).ready(function() {
-      $("#clear").click(function(){      
-        $(".view-reports-input").change();
-      })
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <script type="text/javascript">
+        function clearSearch()//Clears parameter values
+        {
+            document.getElementById('startdate').value = "";
+            document.getElementById('enddate').value = "";
+            document.getElementById('username').value = "";
+            document.getElementById('tutorusername').value = "";
+            document.getElementById('noshowbox').checked = false;
+        }
+        ;
+    </script>
+    <script type="text/javascript">
+        //Load the datepicker jquery
+        $(function () {
+            $("#startdate").datepicker({dateFormat: 'yy-mm-dd'});
+            $("#enddate").datepicker({dateFormat: 'yy-mm-dd'});
+        });
+        //Clear the startdate and enddate
+        $(document).ready(function () {
+            $("#clear").click(function () {
+                $(".view-reports-input").change();
+            })
 
-    });
-    //Updates results when any parameter changes
-    $(document).ready(function() {
-      $(".view-reports-input").change(function(){
-         username = $("#username").val();
-         tutorusername = $("#tutorusername").val();
-         if(document.getElementById("noshowbox").checked == true)
-            noShow = 2;
-          else
-            noShow = 1;
-         if($("#startdate").val() != "")
-          startdate = $("#startdate").val();
-         else
-          startdate = "none";
-         if($("#enddate").val() != "")
-          enddate = $("#enddate").val();
-         else
-          enddate = "none";
-         $url=$("#usernameForm").attr("action");
-          $.ajax({
-            type: "POST",
-            url: "{{path('wc_cm_reports_call')}}",
-            data: {StudUsername: username, TutorUsername: tutorusername, startdate: startdate, enddate: enddate, CheckIn: noShow}
-          }).done(function ( data ) {
-            //if all are empty, display nothing (might want to move this earlier so call isn't used in this situation)
-            if (username == "" && startdate == "none" && enddate == "none") {
-              $("#results").html("");
-            }
-            //else display the results from our call
-            else{
-              $("#results").html(data);
-            }
-              
-          });
-      });
-    });
-	</script>
+        });
+        //Updates results when any parameter changes
+        $(document).ready(function () {
+            $(".view-reports-input").change(function () {
+                username = $("#username").val();
+                tutorusername = $("#tutorusername").val();
+                if (document.getElementById("noshowbox").checked == true)
+                    noShow = 2;
+                else
+                    noShow = 1;
+                if ($("#startdate").val() != "")
+                    startdate = $("#startdate").val();
+                else
+                    startdate = "none";
+                if ($("#enddate").val() != "")
+                    enddate = $("#enddate").val();
+                else
+                    enddate = "none";
+                $url = $("#usernameForm").attr("action");
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('wc_cm_reports_call') }}",
+                    data: {
+                        StudUsername: username,
+                        TutorUsername: tutorusername,
+                        startdate: startdate,
+                        enddate: enddate,
+                        CheckIn: noShow
+                    }
+                }).done(function (data) {
+                    //if all are empty, display nothing (might want to move this earlier so call isn't used in this situation)
+                    if (username == "" && startdate == "none" && enddate == "none") {
+                        $("#results").html("");
+                    }
+                    //else display the results from our call
+                    else {
+                        $("#results").html(data);
+                    }
+
+                });
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block main_content %}
-	<div class="jumbotron">
-        <div class="hero-unit">
-            <h1>View Reports.</h1>
-            <p>Search for various completed appointments. You can also just search by appointments where the student did not show up.</p>
-            <p>Clicking on the appointments expands them.</p>
-        </div>
-        <div id="update-user-error-space"></div>
-        <div id="parameters">
-            <div class="span12">
-              <h3>Search completed appointments by:</h3>
-              <div class="span3">
+
+    <div class="hero-unit">
+        <h1>View Reports.</h1>
+        <p>Search for various completed appointments. You can also just search by appointments where the student did not
+            show up.</p>
+        <p>Clicking on the appointments expands them.</p>
+    </div>
+    <div id="update-user-error-space"></div>
+    <div id="parameters">
+        <div class="span12">
+            <h3>Search completed appointments by:</h3>
+            <div class="span3">
                 <label for="username">Student Username:</label>
-                <input type="text" id="username" class="view-reports-input" name="username" placeholder="Student Username…">
-              </div>
-              <div class="span3">
-                <label for="tutorusername">Tutor Username:</label>
-                <input type="text" id="tutorusername" class="view-reports-input" name="tutorusername" placeholder="Tutor Username…">
-              </div>
+                <input type="text" id="username" class="view-reports-input" name="username"
+                       placeholder="Student Username…">
             </div>
-            <div class="span12">
-              <div class="span3">
-                Start Date: <input type="datetime" id="startdate" class="view-reports-input" value="" placeholder="Choose a Starting Date…" readonly/>
-              </div>
-              <div class="span3">
-                End Date: <input type="datetime" id="enddate" class="view-reports-input" value="" placeholder="Choose an Ending Date…" readonly/>
-              </div>
-              <div class="span3">
-                <input type="button" id="clear" class="view-reports-input" value="Clear Search" onclick="clearSearch()"/>
-              </div> 
-                <div class="span3">
+            <div class="span3">
+                <label for="tutorusername">Tutor Username:</label>
+                <input type="text" id="tutorusername" class="view-reports-input" name="tutorusername"
+                       placeholder="Tutor Username…">
+            </div>
+        </div>
+        <div class="span12">
+            <div class="span3">
+                Start Date: <input type="datetime" id="startdate" class="view-reports-input" value=""
+                                   placeholder="Choose a Starting Date…" readonly/>
+            </div>
+            <div class="span3">
+                End Date: <input type="datetime" id="enddate" class="view-reports-input" value=""
+                                 placeholder="Choose an Ending Date…" readonly/>
+            </div>
+            <div class="span3">
+                <input type="button" id="clear" class="view-reports-input" value="Clear Search"
+                       onclick="clearSearch()"/>
+            </div>
+            <div class="span3">
                 <label for="noshowbox">No Show:</label>
                 <input type="checkbox" id="noshowbox" class="view-reports-input" name="noshowbox"/>
-              </div>
             </div>
         </div>
-        <h3>Completed appointments:</h3>
-        <div id="results" class="span12">
-        </div>
     </div>
+    <h3>Completed appointments:</h3>
+    <div id="results" class="span12">
+    </div>
+
 {% endblock %}

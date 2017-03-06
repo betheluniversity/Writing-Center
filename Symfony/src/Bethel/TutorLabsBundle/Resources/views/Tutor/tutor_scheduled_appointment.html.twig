@@ -1,113 +1,112 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block headadd %}
-  <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
     <script type="text/javascript">
 
-     function loadPage(){
-        tutorusername = "{{ app.user.username }}";
-        $.ajax({
-            type: "POST",
-            url: "{{path('wc_tutor_scheduled_appointment_call')}}",
-            data: {TutorUsername: tutorusername}
-        }).done(function ( data ) {
-            $("#results").html(data);
-            loadScheduledAppointment();
-            loadNoShow();
-        });
-    }
-
-    function loadScheduledAppointment(){
-        tutorusername = "{{ app.user.username }}";
-
-    //Tutor Starts the appointment.
-        $(".btn-tutor-sign-in").click(function(){
-            numID = this.id.replace(/\D/g,'');
-            id = $("#row-id-" + numID).attr("value");
+        function loadPage() {
+            tutorusername = "{{ app.user.username }}";
             $.ajax({
                 type: "POST",
-                url: "{{path('wc_tutor_scheduled_appointment_call_tutor_in')}}",
-                data: {TutorUsername: tutorusername, id:id}
-            }).done(function ( data ) { 
+                url: "{{ path('wc_tutor_scheduled_appointment_call') }}",
+                data: {TutorUsername: tutorusername}
+            }).done(function (data) {
                 $("#results").html(data);
-                $("#update-user-error-space").html('<div class="alert alert-success"> Successfully signed in. </div>');
-                $("#update-user-error-space").stop(true, true).show().fadeOut(5000);
+                loadScheduledAppointment();
+                loadNoShow();
             });
-        });
-    }
+        }
 
-    function loadFormPage(){
-    //Student signs in
-        $("#student-sign-in").click(function(){
-            id = $("#bethel_tutorlabsbundle_wcwcappointmentdata_id").attr("value");
-            $.ajax({
-                type: "POST",
-                url: "{{path('wc_tutor_scheduled_appointment_call_student_in')}}",
-                data: {TutorUsername: tutorusername, id:id}
-            }).done(function ( data ) {
-                $("#form").css("display", "block");
-                $("#no-show").css("display", "none");
-                $("#student-sign-in").css("display", "none");
-                $("#update-user-error-space").html('<div class="alert alert-success"> Successfully signed in the student. </div>');
-                $("#update-user-error-space").stop(true, true).show().fadeOut(5000);
-            });   
-        });
-    }
+        function loadScheduledAppointment() {
+            tutorusername = "{{ app.user.username }}";
 
-    function loadNoShow(){
-    //No show
-        $(".no-show").click(function(){
-            numID = this.id.replace(/\D/g,'');
-            id = $("#row-id-" + numID).attr("value");
-            var confirmed = confirm('Are you sure you want to mark the student as a no show?');
-            if( confirmed == false)
-            {
-                return;
-            }
-            else{
-                
+            //Tutor Starts the appointment.
+            $(".btn-tutor-sign-in").click(function () {
+                numID = this.id.replace(/\D/g, '');
+                id = $("#row-id-" + numID).attr("value");
                 $.ajax({
                     type: "POST",
-                    url: "{{path('wc_tutor_scheduled_appointment_noshow_page')}}",
-                    data: {TutorUsername: tutorusername, id:id}
-                }).done(function ( data ) {
+                    url: "{{ path('wc_tutor_scheduled_appointment_call_tutor_in') }}",
+                    data: {TutorUsername: tutorusername, id: id}
+                }).done(function (data) {
                     $("#results").html(data);
-                    // $("#results").html('<div class="alert alert-success">'.data.'</div>');
-                });   
-            }
-        });
-    }
+                    $("#update-user-error-space").html('<div class="alert alert-success"> Successfully signed in. </div>');
+                    $("#update-user-error-space").stop(true, true).show().fadeOut(5000);
+                });
+            });
+        }
 
-    // Uses the select box to auto-fill the hidden course code field.
-    function loadCourses(){
-            $("#course-select").change(function(){
+        function loadFormPage() {
+            //Student signs in
+            $("#student-sign-in").click(function () {
+                id = $("#bethel_tutorlabsbundle_wcwcappointmentdata_id").attr("value");
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('wc_tutor_scheduled_appointment_call_student_in') }}",
+                    data: {TutorUsername: tutorusername, id: id}
+                }).done(function (data) {
+                    $("#form").css("display", "block");
+                    $("#no-show").css("display", "none");
+                    $("#student-sign-in").css("display", "none");
+                    $("#update-user-error-space").html('<div class="alert alert-success"> Successfully signed in the student. </div>');
+                    $("#update-user-error-space").stop(true, true).show().fadeOut(5000);
+                });
+            });
+        }
+
+        function loadNoShow() {
+            //No show
+            $(".no-show").click(function () {
+                numID = this.id.replace(/\D/g, '');
+                id = $("#row-id-" + numID).attr("value");
+                var confirmed = confirm('Are you sure you want to mark the student as a no show?');
+                if (confirmed == false) {
+                    return;
+                }
+                else {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('wc_tutor_scheduled_appointment_noshow_page') }}",
+                        data: {TutorUsername: tutorusername, id: id}
+                    }).done(function (data) {
+                        $("#results").html(data);
+                        // $("#results").html('<div class="alert alert-success">'.data.'</div>');
+                    });
+                }
+            });
+        }
+
+        // Uses the select box to auto-fill the hidden course code field.
+        function loadCourses() {
+            $("#course-select").change(function () {
                 setCourseValues();
             });
         }
-    function setCourseValues(){
-        courseInfo = $('#course-select').val();
-        courseCode = courseInfo.split(" ")[0];
-        courseSection = courseInfo.split(" ")[1];
-        $("#bethel_tutorlabsbundle_wcwcappointmentdata_CourseSection").val(courseSection);
-        $("#bethel_tutorlabsbundle_wcwcappointmentdata_CourseCode").val(courseCode);
-    }
+        function setCourseValues() {
+            courseInfo = $('#course-select').val();
+            courseCode = courseInfo.split(" ")[0];
+            courseSection = courseInfo.split(" ")[1];
+            $("#bethel_tutorlabsbundle_wcwcappointmentdata_CourseSection").val(courseSection);
+            $("#bethel_tutorlabsbundle_wcwcappointmentdata_CourseCode").val(courseCode);
+        }
 
-    $(document).ready(function() {
-        loadPage();
+        $(document).ready(function () {
+            loadPage();
 
-    });
+        });
     </script>
 {% endblock %}
 
 {% block main_content %}
-    <div class="jumbotron">
-        <div class="hero-unit">
-            <h1>Scheduled Appointments</h1>
-            <p>Please remember to click 'Start' when you arrive.</p>
-        </div>
-        <div id="update-user-error-space"></div>
-        <div id="comments" style="visibility:hidden" class="span12"></div>
-        <div id="results" class="span12"></div>
+
+    <div class="hero-unit">
+        <h1>Scheduled Appointments</h1>
+        <p>Please remember to click 'Start' when you arrive.</p>
     </div>
+    <div id="update-user-error-space"></div>
+    <div id="comments" style="visibility:hidden" class="span12"></div>
+    <div id="results" class="span12"></div>
+
 {% endblock %}

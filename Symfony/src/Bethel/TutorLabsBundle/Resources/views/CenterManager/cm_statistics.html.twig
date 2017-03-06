@@ -1,136 +1,156 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block headadd %}
-  <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <script src="{{asset('js/sorttable.js')}}"></script>
-  <style>
-    table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
-      content: " \25B4\25BE" 
-    }
-  </style>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="{{ asset('js/sorttable.js') }}"></script>
+    <style>
+        table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
+            content: " \25B4\25BE"
+        }
+    </style>
 
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
     <script type="text/javascript">
-    function clearSearch()//Clears parameter values
-    {
-      document.getElementById('startdate').value="";
-      document.getElementById('enddate').value="";
-    };
-    //Load the datepicker jquery
-    $(function() {
-      $( "#startdate" ).datepicker({dateFormat: 'yy-mm-dd'});
-      $( "#enddate" ).datepicker({dateFormat: 'yy-mm-dd'});
-    });
-    //Clear the startdate and enddate
-    $(document).ready(function() {
-      $("#clear").click(function(){      
-        $(".view-reports-input").change();
-        $(".checkbox").prop('checked', false);
-      })
+        function clearSearch()//Clears parameter values
+        {
+            document.getElementById('startdate').value = "";
+            document.getElementById('enddate').value = "";
+        }
+        ;
+        //Load the datepicker jquery
+        $(function () {
+            $("#startdate").datepicker({dateFormat: 'yy-mm-dd'});
+            $("#enddate").datepicker({dateFormat: 'yy-mm-dd'});
+        });
+        //Clear the startdate and enddate
+        $(document).ready(function () {
+            $("#clear").click(function () {
+                $(".view-reports-input").change();
+                $(".checkbox").prop('checked', false);
+            })
 
-    });
-    $(document).ready(function() {
-      $("#search").click(function(){
-    	 		viewAll = false;
-    	 		totalVisits = false;
-    	 		busiestTimeOfDay = false;
-    	 		busiestDay = false;
-    	 		busiestTutor = false;
-    	 		noShows = false;
-    	 		busiestWeek = false;
-          byCourse = false;
-    	 		getStudentEmail = false;
+        });
+        $(document).ready(function () {
+            $("#search").click(function () {
+                viewAll = false;
+                totalVisits = false;
+                busiestTimeOfDay = false;
+                busiestDay = false;
+                busiestTutor = false;
+                noShows = false;
+                busiestWeek = false;
+                byCourse = false;
+                getStudentEmail = false;
 
-      //Date issues.
-      	 if($("#startdate").val() == "" || $("#enddate").val() == ""){
-      	 	alert("Please Select a Date Range.")
-      	 	return;
-      	 }
+                //Date issues.
+                if ($("#startdate").val() == "" || $("#enddate").val() == "") {
+                    alert("Please Select a Date Range.")
+                    return;
+                }
 
-         if($("#startdate").val() != "")
-          startdate = $("#startdate").val();
-         else
-          startdate = "none";
+                if ($("#startdate").val() != "")
+                    startdate = $("#startdate").val();
+                else
+                    startdate = "none";
 
-         if($("#enddate").val() != "")
-          enddate = $("#enddate").val();
-         else
-          enddate = "none";
+                if ($("#enddate").val() != "")
+                    enddate = $("#enddate").val();
+                else
+                    enddate = "none";
 
-         if($("#startdate").val() >= $("#enddate").val() ){
-            alert("Please choose a startdate that comes before the enddate");
-            return;
-         }
+                if ($("#startdate").val() >= $("#enddate").val()) {
+                    alert("Please choose a startdate that comes before the enddate");
+                    return;
+                }
 
-    		//Gets the value of multilingual
-    		 multilingual = $('input[name=multilingual]:checked').val();
+                //Gets the value of multilingual
+                multilingual = $('input[name=multilingual]:checked').val();
 
-      	 if($("#view-all").is(":checked"))
-      	 	   viewAll = true;
-      	 	if($("#total-visits").is(":checked"))
-      	 		totalVisits = true;
-      	 	if($("#busiest-time-of-day").is(":checked"))
-      	 		busiestTimeOfDay = true;
-      	 	if($("#busiest-day").is(":checked"))
-      	 		busiestDay = true;
-      	 	if($("#busiest-tutor").is(":checked"))
-      	 		busiestTutor = true;
-      	 	if($("#no-shows").is(":checked"))
-      	 		noShows = true;
-      	 	if($("#busiest-week").is(":checked"))
-      	 		busiestWeek = true;
-          if($("#by-course").is(":checked"))
-            byCourse = true;
-      	 	if($("#get-student-email").is(":checked"))
-      	 		getStudentEmail = true;
-          $.ajax({
-            type: "POST",
-            url: "{{path('wc_cm_statistics_call')}}",
-            data: { startdate: startdate, enddate: enddate, multilingual:multilingual, viewAll: viewAll, totalVisits: totalVisits, busiestTimeOfDay:busiestTimeOfDay, busiestDay:busiestDay, busiestTutor:busiestTutor, noShows:noShows, busiestWeek:busiestWeek, byCourse: byCourse, getStudentEmail:getStudentEmail}
-          }).done(function ( data ) {
-              $("#content").html(data);
-              var newTableObject = document.getElementById('courseTable');
-              sorttable.makeSortable(newTableObject);
-          });
-      });
-    });
-	</script>
+                if ($("#view-all").is(":checked"))
+                    viewAll = true;
+                if ($("#total-visits").is(":checked"))
+                    totalVisits = true;
+                if ($("#busiest-time-of-day").is(":checked"))
+                    busiestTimeOfDay = true;
+                if ($("#busiest-day").is(":checked"))
+                    busiestDay = true;
+                if ($("#busiest-tutor").is(":checked"))
+                    busiestTutor = true;
+                if ($("#no-shows").is(":checked"))
+                    noShows = true;
+                if ($("#busiest-week").is(":checked"))
+                    busiestWeek = true;
+                if ($("#by-course").is(":checked"))
+                    byCourse = true;
+                if ($("#get-student-email").is(":checked"))
+                    getStudentEmail = true;
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('wc_cm_statistics_call') }}",
+                    data: {
+                        startdate: startdate,
+                        enddate: enddate,
+                        multilingual: multilingual,
+                        viewAll: viewAll,
+                        totalVisits: totalVisits,
+                        busiestTimeOfDay: busiestTimeOfDay,
+                        busiestDay: busiestDay,
+                        busiestTutor: busiestTutor,
+                        noShows: noShows,
+                        busiestWeek: busiestWeek,
+                        byCourse: byCourse,
+                        getStudentEmail: getStudentEmail
+                    }
+                }).done(function (data) {
+                    $("#content").html(data);
+                    var newTableObject = document.getElementById('courseTable');
+                    sorttable.makeSortable(newTableObject);
+                });
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block main_content %}
-    <div class="jumbotron">
-            <div class="hero-unit">
-                <h1>View Statistics.</h1>
-                <p>Displays various statistics over the current term.</p>
-            </div>
-            <div id="statistics-error-space"></div>
-            <div class="row-fluid">
-	              <div class="span3">
-	                <label>Click Start Date:<input type="datetime" id="startdate" style="width:90%" class="view-reports-input" value="" placeholder="Choose a Starting Date…" readonly/></label>
-	              </div>
-	              <div class="span3">
-	                <label>Click End Date:<input type="datetime" id="enddate" style="width:90%" class="view-reports-input" value="" placeholder="Choose an Ending Date…" readonly/></label>
-	              </div>
-	              <div class="span3">
-	              	<label class="radio"><input type="radio" name="multilingual" value="all" checked \>All Appointments</label>
-                  <label class="radio"><input type="radio" name="multilingual" value="normal" \>Only Non-Multilingual Appointments</label>
-                  <label class="radio"><input type="radio" name="multilingual" value="multilingual" \>Only Multilingual Appointments</label>
-	          	  </div>
-	        </div>
-	        <div>
-	        	    <label class="checkbox"><input id="view-all" class="checkbox" type="checkbox" checked/>View All</label>
-	              <label class="checkbox"><input id="total-visits" class="checkbox" type="checkbox"/>Total Visits</label>
-                <label class="checkbox"><input id="busiest-time-of-day" class="checkbox" type="checkbox"/>Busiest Time of Day</label>
-	              <label class="checkbox"><input id="busiest-day" class="checkbox" type="checkbox"/>Busiest Day</label>
-	              <label class="checkbox"><input id="busiest-tutor" class="checkbox" type="checkbox"/>Busiest Tutor</label>
-	              <label class="checkbox"><input id="no-shows" class="checkbox" type="checkbox"/>No Shows</label>
-	              <label class="checkbox"><input id="busiest-week" class="checkbox" type="checkbox"/>Busiest Week</label>
-                <label class="checkbox"><input id="by-course" class="checkbox" type="checkbox"/>By Course</label>
-	              <label class="checkbox"><input id="get-student-email" class="checkbox" type="checkbox"/>Get Students Email</label>
-	              <button id="search" class="btn btn-primary">Search</button>
-                <input type="button" id="clear" class="btn view-reports-input btn-danger" value="Clear Search" onclick="clearSearch()"/>
-          </div>
-        <div id="content"></div>
+
+    <div class="hero-unit">
+        <h1>View Statistics.</h1>
+        <p>Displays various statistics over the current term.</p>
     </div>
+    <div id="statistics-error-space"></div>
+    <div class="row-fluid">
+        <div class="span3">
+            <label>Click Start Date:<input type="datetime" id="startdate" style="width:90%" class="view-reports-input"
+                                           value="" placeholder="Choose a Starting Date…" readonly/></label>
+        </div>
+        <div class="span3">
+            <label>Click End Date:<input type="datetime" id="enddate" style="width:90%" class="view-reports-input"
+                                         value="" placeholder="Choose an Ending Date…" readonly/></label>
+        </div>
+        <div class="span3">
+            <label class="radio"><input type="radio" name="multilingual" value="all" checked \>All Appointments</label>
+            <label class="radio"><input type="radio" name="multilingual" value="normal" \>Only Non-Multilingual
+                Appointments</label>
+            <label class="radio"><input type="radio" name="multilingual" value="multilingual" \>Only Multilingual
+                Appointments</label>
+        </div>
+    </div>
+    <div>
+        <label class="checkbox"><input id="view-all" class="checkbox" type="checkbox" checked/>View All</label>
+        <label class="checkbox"><input id="total-visits" class="checkbox" type="checkbox"/>Total Visits</label>
+        <label class="checkbox"><input id="busiest-time-of-day" class="checkbox" type="checkbox"/>Busiest Time of
+            Day</label>
+        <label class="checkbox"><input id="busiest-day" class="checkbox" type="checkbox"/>Busiest Day</label>
+        <label class="checkbox"><input id="busiest-tutor" class="checkbox" type="checkbox"/>Busiest Tutor</label>
+        <label class="checkbox"><input id="no-shows" class="checkbox" type="checkbox"/>No Shows</label>
+        <label class="checkbox"><input id="busiest-week" class="checkbox" type="checkbox"/>Busiest Week</label>
+        <label class="checkbox"><input id="by-course" class="checkbox" type="checkbox"/>By Course</label>
+        <label class="checkbox"><input id="get-student-email" class="checkbox" type="checkbox"/>Get Students
+            Email</label>
+        <button id="search" class="btn btn-primary">Search</button>
+        <input type="button" id="clear" class="btn view-reports-input btn-danger" value="Clear Search"
+               onclick="clearSearch()"/>
+    </div>
+    <div id="content"></div>
 
 {% endblock %}
