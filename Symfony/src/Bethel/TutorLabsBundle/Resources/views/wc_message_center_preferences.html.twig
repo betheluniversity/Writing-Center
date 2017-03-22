@@ -1,9 +1,8 @@
 {% block messaging %}
-<div class="span12">
 
 	<h2>Message Preferences:</h2>
 
-	<hr />
+	<hr/>
 
 	<div>
 		{{ form_start(form, {'action': path('wc_message_center_preferences'), 'method': 'POST'}) }}
@@ -20,13 +19,11 @@
 			</tr>
 			{% endif %}
 			<tr>
-				<td>{{ form_widget(form.save) }}</td>
+				<td class="btn btn-small btn-students">{{ form_widget(form.save) }}</td>
 			</tr>
-			
-		    
 		    
 		</table>
 		{{ form_end(form) }}
 	</div>
-</div>
+
 {% endblock %}

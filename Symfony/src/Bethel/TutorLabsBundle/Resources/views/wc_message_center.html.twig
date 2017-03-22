@@ -56,7 +56,7 @@
 
 {% block main_content %}
 
-    <div class="hero-unit">
+    <div class="">
         <h1>Welcome to the Message Center</h1>
     </div>
     <div id="message-center-error-space"></div>
@@ -70,6 +70,8 @@
         {% if is_granted('ROLE_CENTER_MANAGER') %}
             <button class="btn btn-small btn-students">Message Students</button>
         {% endif %}
+        <br>
+        <br>
         {% block messaging %}
             <div id="message-content"></div>
         {% endblock %}

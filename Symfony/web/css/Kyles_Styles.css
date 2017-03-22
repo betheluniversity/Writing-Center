@@ -1,4 +1,4 @@
-.main-content{
+main{
     padding: 30px 15px;
     margin-top: 50px;
     float: right;
@@ -13,13 +13,17 @@
     width: 100% !important;
 }
 
-.jumbotron{
-    margin-top: 2em;
+/*.jumbotron{*/
+    /*margin-top: 2em;*/
+/*}*/
+
+footer{
+    position: relative;
 }
 
 .sidebar{
-    width: 16%;
-    position: fixed;
+    /*width: 16%;*/
+    position: fixed !important;
     top: 60px;
     bottom: 0;
     left: 0;
@@ -39,12 +43,20 @@
 html{
     height: 100%;
 }
-
-a.nav-link{
-    line-height: 35px !important;
+.side-home{
+    /*line-height: 35px !important;*/
     /*font-family: Georgia serif !important;*/
     font-size: 12px !important;
     font-weight: 600 !important;
     /*white-space: nowrap;*/
     width: 160px;
+}
+
+
+@media(max-width: 1217px){
+
+    .sidebar{
+
+    }
+
 }
