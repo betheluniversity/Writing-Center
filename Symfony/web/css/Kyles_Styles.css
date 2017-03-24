@@ -6,6 +6,13 @@ main{
     min-height: calc(100% - 123px);
 }
 
+.submit{
+    background: #0F2C52;
+    color: #0F2C52;
+    /*cursor: pointer;*/
+}
+
+
 .navbar{
     top: 0;
     z-index: 1000;
@@ -13,9 +20,9 @@ main{
     width: 100% !important;
 }
 
-/*.jumbotron{*/
-    /*margin-top: 2em;*/
-/*}*/
+.jumbotron{
+    margin-top: 2em;
+}
 
 footer{
     position: relative;
