@@ -3,7 +3,7 @@
 
 {% block main_content %}
 
-    <div class="hero-unit">
+    <div>
         <h1>System Settings</h1>
         <p>Adjust system settings here.</p>
     </div>
@@ -12,21 +12,25 @@
     <p id="apptLimitDescription"><i> Each student can sign up for <b>{{ apptLimit }}</b> appointments in a week.</i></p>
     <input type="text" id="apptLimit" name="apptLimit" value="{{ apptLimit }}" readonly>
     <br/>
+    <br/>
 
     <label for="timeLimit" style="font-size:18px">Time Limit:</label>
     <p id="timeLimitDescription"><i> Each appointment closes sign-ups <b>{{ timeLimit }}</b> hours before the start
             time.</i></p>
     <input type="text" id="timeLimit" name="timeLimit" value="{{ timeLimit }}" readonly>
     <br/>
+    <br/>
 
     <label for="banLimit" style="font-size:18px">Ban Limit:</label>
     <p id="banLimitDescription"><i> Each student will be banned after <b>{{ banLimit }}</b> no shows.</i></p>
     <input type="text" id="banLimit" name="banLimit" value="{{ banLimit }}" readonly>
     <br/>
+    <br/>
 
     <label for="qualtricsLink" style="font-size:18px">Qualtrics Link:</label>
     <p id="apptLimitDescription"><i> Here is the link that will be given after each appointment.</i></p>
-    <input type="text" id="qualtricsLink" name="qualtricsLink" value="{{ qualtricsLink }}" readonly>
+    <input type="text" style="width: 300px;" name="qualtricsLink" value="{{ qualtricsLink }}" readonly>
+    <br/>
     <br/>
 
     <button class="btn btn-primary" id="sys-settings-edit"> Edit</button>

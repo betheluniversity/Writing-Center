@@ -138,26 +138,28 @@
     <div class="hero-unit">
         <h1>Manage Tutor Schedules</h1>
         <p>Assign shifts to a Tutor or view a Tutor's schedule.</p>
+        <hr/>
     </div>
-    <h3> Assign Shifts to a Tutor </h3>
-    <div id="add-tutor-content">
+    <div class="col">
+        <h3> Assign Shifts to a Tutor </h3>
+
 
         <div id="manage-results"></div>
         <div class="row-fluid">
-            <div class="span3"><label><b>Click Start Date</b> <input type="text" style="width:90%" id="start-datepicker"
-                                                                     readonly/></label></div>
-            <div class="span3"><label><b>Click End Date</b> <input type="text" style="width:90%" id="end-datepicker"
-                                                                   readonly/></label></div>
+            <div><label><b>Click Start Date</b> <input type="text" style="width:90%" id="start-datepicker" class="input"
+                                                       readonly/></label></div>
+            <div><label><b>Click End Date</b> <input type="text" style="width:90%" id="end-datepicker"
+                                                     readonly/></label></div>
             <div class="span2">
                 <label for="multilingual"><b>Multilingual Appointment</b></label>
-                <select name="multilingual" style="width:90%" id="MultilingualSelect">
+                <select name="multilingual" style="width:90%" id="multilingual">
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
                 </select>
             </div>
             <div class="span2">
                 <label for="drop-in"><b>Drop-in Hours Appointment</b></label>
-                <select name="drop-in" style="width:90%" id="DropInSelect">
+                <select name="drop-in" style="width:90%" id="drop-in">
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
                 </select>

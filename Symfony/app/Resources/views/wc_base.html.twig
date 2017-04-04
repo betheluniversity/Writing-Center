@@ -6,28 +6,32 @@
 {% block body_content %}
 
 
-        {{ navbar.render() }}
-        <div class="container-fluid">
+    {{ navbar.render() }}
+    <div class="container-fluid">
 
 
-            <div class="row">
-                {{ sidebar.render() }}
+        <div class="row">
+            {{ sidebar.render() }}
 
 
-                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
 
 
-                    <div class="jumbotron">
-                        {% block main_content %}{% endblock %}
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            {% block main_content %}{% endblock %}
+                        </div>
                     </div>
+                </div>
 
 
-                    <hr class="bottom-line">
-                    {{ footer.render() }}
+                <hr class="bottom-line">
+                {{ footer.render() }}
 
-                </main>
-            </div>
+            </main>
         </div>
+    </div>
 
 
 {% endblock %}

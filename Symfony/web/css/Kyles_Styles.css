@@ -1,3 +1,7 @@
+body{
+    font-family: 'Muli', Arial, sans-serif;
+}
+
 main{
     padding: 30px 15px;
     margin-top: 50px;
@@ -7,9 +11,10 @@ main{
 }
 
 .submit{
-    background: #0F2C52;
-    color: #0F2C52;
-    /*cursor: pointer;*/
+    background: #0069AA;
+    color: white;
+    cursor: pointer;
+    font-family: Muli, Helvetica Neue, sans-serif;
 }
 
 
@@ -20,8 +25,12 @@ main{
     width: 100% !important;
 }
 
-.jumbotron{
-    margin-top: 2em;
+.input{
+    margin-bottom: 15px;
+}
+.content{
+    padding: 30px 15px;
+    min-height: calc(100% - 123px);
 }
 
 footer{

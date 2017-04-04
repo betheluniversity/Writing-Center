@@ -61,14 +61,14 @@
     </div>
     <div id="message-center-error-space"></div>
     <div id="message-center-content">
-        <button class="btn btn-small btn-preferences">Message Preferences</button>
+        <button class="btn btn-small btn-preferences submit">Message Preferences</button>
         {% if is_granted('ROLE_TUTOR') %}
-            <button class="btn btn-small btn-users">Message Users</button>
+            <button class="btn btn-small btn-users submit">Message Users</button>
 
-            <button class="btn btn-small btn-tutors">Message Tutors</button>
+            <button class="btn btn-small btn-tutors submit">Message Tutors</button>
         {% endif %}
         {% if is_granted('ROLE_CENTER_MANAGER') %}
-            <button class="btn btn-small btn-students">Message Students</button>
+            <button class="btn btn-small btn-students submit">Message Students</button>
         {% endif %}
         <br>
         <br>
