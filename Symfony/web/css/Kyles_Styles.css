@@ -14,7 +14,7 @@ main{
     background: #0069AA;
     color: white;
     cursor: pointer;
-    font-family: Muli, Helvetica Neue, sans-serif;
+    font-family: Georgia, serif !important;
 }
 
 
