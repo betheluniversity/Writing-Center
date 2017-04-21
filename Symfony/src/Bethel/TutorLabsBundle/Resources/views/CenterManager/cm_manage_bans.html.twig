@@ -126,8 +126,8 @@
 
 {% block main_content %}
 
-    <div class="hero-unit">
-        <h1>Manage Bans.</h1>
+    <div>
+        <h1>Manage Bans</h1>
         <p>Ban or unban a student. A banned student is unable to sign-up for appointments.</p>
     </div>
 
@@ -138,24 +138,47 @@
     </div>
     <div class="row-fluid">
         <div class="span3">
-            <label for="username">Student Username:</label>
-            <input type="text" id="username" style="width:90%" class="input" name="username"
-                   placeholder="Student Username…">
+
+            <div class="input-group">
+                {#<label for="first">First Name</label>#}
+                <input type="text" class="form-control" id="username" placeholder="Student Username" aria-describedby="basic-addon1">
+            </div>
+            <br>
+            {#<label for="username">Student Username:</label>#}
+            {#<input type="text" id="username" style="width:90%" class="input" name="username"#}
+                   {#placeholder="Student Username…">#}
         </div>
         <div class="span3">
-            <label for="firstName">Student First Name:</label>
-            <input type="text" id="firstName" style="width:90%" class="input" name="firstName"
-                   placeholder="Student First Name…">
+
+            <div class="input-group">
+                {#<label for="first">First Name</label>#}
+                <input type="text" class="form-control" id="firstName" placeholder="Student First Name" aria-describedby="basic-addon1">
+            </div>
+            <br>
+
+            {#<label for="firstName">Student First Name:</label>#}
+            {#<input type="text" id="firstName" style="width:90%" class="input" name="firstName"#}
+                   {#placeholder="Student First Name…">#}
         </div>
         <div class="span3">
-            <label for="lastName">Student Last Name:</label>
-            <input type="text" id="lastName" style="width:90%" class="input" name="lastName"
-                   placeholder="Student Last Name…">
+
+            <div class="input-group">
+                {#<label for="first">First Name</label>#}
+                <input type="text" class="form-control" id="lastName" placeholder="Student Last Name" aria-describedby="basic-addon1">
+            </div>
+            <br>
+
+            {#<label for="lastName">Student Last Name:</label>#}
+            {#<input type="text" id="lastName" style="width:90%" class="input" name="lastName"#}
+                   {#placeholder="Student Last Name…">#}
         </div>
         <div class="span3">
-            <button class="btn btn-small btn-primary" id="clear-params">Clear search</button>
+            <button class="btn btn-small btn-primary submit" id="clear-params">Clear search</button>
         </div>
     </div>
+
+    </br>
+
     <div id="new-ban-content">
         <b>Enter parameters to search for a student to ban</b>
     </div>
@@ -163,7 +186,7 @@
     <div class="row-fluid">
         <div class="span4">
             <h1>Remove Ban</h1>
-            <button class="btn btn-small btn-remove-all" id="unban-all"> Remove all bans</button>
+            <button class="btn btn-small btn-remove-all submit" id="unban-all"> Remove all bans</button>
         </div>
     </div>
     <div class="row-fluid" style="margin-top:20px;">

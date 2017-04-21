@@ -113,40 +113,126 @@
 
 {% block main_content %}
 
-    <div class="hero-unit">
+    <div>
         <h1>View Statistics.</h1>
         <p>Displays various statistics over the current term.</p>
     </div>
     <div id="statistics-error-space"></div>
     <div class="row-fluid">
         <div class="span3">
-            <label>Click Start Date:<input type="datetime" id="startdate" style="width:90%" class="view-reports-input"
-                                           value="" placeholder="Choose a Starting Date…" readonly/></label>
+            <label>Start Date:
+                <div class="input-group">
+                    <input type="datetime" class="form-control" id="startdate" value="" placeholder="Choose a Starting Date..." aria-describedby="basic-addon1">
+                </div>
+                {#<input type="datetime" id="startdate" style="width:90%" class="view-reports-input"#}
+                                           {#value="" placeholder="Choose a Starting Date…" readonly/>#}
+            </label>
         </div>
+
+
         <div class="span3">
-            <label>Click End Date:<input type="datetime" id="enddate" style="width:90%" class="view-reports-input"
-                                         value="" placeholder="Choose an Ending Date…" readonly/></label>
+            <label>Click End Date:
+                <div class="input-group">
+                    <input type="datetime" class="form-control" id="enddate" value="" placeholder="Choose a Ending Date..." aria-describedby="basic-addon1">
+                </div>
+
+                {#<input type="datetime" id="enddate" style="width:90%" class="view-reports-input"#}
+                                         {#value="" placeholder="Choose an Ending Date…" readonly/>#}
+            </label>
         </div>
+
+        </br>
+
         <div class="span3">
-            <label class="radio"><input type="radio" name="multilingual" value="all" checked \>All Appointments</label>
-            <label class="radio"><input type="radio" name="multilingual" value="normal" \>Only Non-Multilingual
-                Appointments</label>
-            <label class="radio"><input type="radio" name="multilingual" value="multilingual" \>Only Multilingual
-                Appointments</label>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="multilingual" value="all" checked> All Appointments
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="multilingual" value="normal"> Only Non-Multilingual
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="multilingual" value="all"> Only Multilingual
+                </label>
+            </div>
+
+            {#<label class="radio"><input type="radio" name="multilingual" value="all" checked \>All Appointments</label>#}
+            {#<label class="radio"><input type="radio" name="multilingual" value="normal" \>Only Non-Multilingual#}
+                {#Appointments</label>#}
+            {#<label class="radio"><input type="radio" name="multilingual" value="multilingual" \>Only Multilingual#}
+                {#Appointments</label>#}
         </div>
     </div>
+
+    </br>
+
     <div>
-        <label class="checkbox"><input id="view-all" class="checkbox" type="checkbox" checked/>View All</label>
-        <label class="checkbox"><input id="total-visits" class="checkbox" type="checkbox"/>Total Visits</label>
-        <label class="checkbox"><input id="busiest-time-of-day" class="checkbox" type="checkbox"/>Busiest Time of
-            Day</label>
-        <label class="checkbox"><input id="busiest-day" class="checkbox" type="checkbox"/>Busiest Day</label>
-        <label class="checkbox"><input id="busiest-tutor" class="checkbox" type="checkbox"/>Busiest Tutor</label>
-        <label class="checkbox"><input id="no-shows" class="checkbox" type="checkbox"/>No Shows</label>
-        <label class="checkbox"><input id="busiest-week" class="checkbox" type="checkbox"/>Busiest Week</label>
-        <label class="checkbox"><input id="by-course" class="checkbox" type="checkbox"/>By Course</label>
-        <label class="checkbox"><input id="get-student-email" class="checkbox" type="checkbox"/>Get Students
-            Email</label>
+
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox1 view-all"> View All
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox2 total-visits"> Total Visits
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox3 busiest-time-of-day"> Busiest Time of Day
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox1 busiest-day"> Busiest Day
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox2 busiest-tutor"> Busiest Tutor
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox3 no-shows"> No Shows
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox1 busiest-week" > Busiest Week
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox2 by-course"> By Course
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox3 get-student-email" value="option3"> Get Students Email
+            </label>
+        </div>
+
+
+
+        {#<label class="checkbox"><input id="view-all" class="checkbox" type="checkbox" checked/>View All</label>#}
+        {#<label class="checkbox"><input id="total-visits" class="checkbox" type="checkbox"/>Total Visits</label>#}
+        {#<label class="checkbox"><input id="busiest-time-of-day" class="checkbox" type="checkbox"/>Busiest Time of#}
+            {#Day</label>#}
+        {#<label class="checkbox"><input id="busiest-day" class="checkbox" type="checkbox"/>Busiest Day</label>#}
+        {#<label class="checkbox"><input id="busiest-tutor" class="checkbox" type="checkbox"/>Busiest Tutor</label>#}
+        {#<label class="checkbox"><input id="no-shows" class="checkbox" type="checkbox"/>No Shows</label>#}
+        {#<label class="checkbox"><input id="busiest-week" class="checkbox" type="checkbox"/>Busiest Week</label>#}
+        {#<label class="checkbox"><input id="by-course" class="checkbox" type="checkbox"/>By Course</label>#}
+        {#<label class="checkbox"><input id="get-student-email" class="checkbox" type="checkbox"/>Get Students#}
+            {#Email</label>#}
+
+        </br>
         <button id="search" class="btn btn-primary">Search</button>
         <input type="button" id="clear" class="btn view-reports-input btn-danger" value="Clear Search"
                onclick="clearSearch()"/>

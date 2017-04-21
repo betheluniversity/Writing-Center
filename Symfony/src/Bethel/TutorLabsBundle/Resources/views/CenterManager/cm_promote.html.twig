@@ -1,34 +1,54 @@
 {% extends '::wc_base.html.twig' %}
 
+
+{# TODO get stuff @ bottom to work in Mustache block #}
+
 {% block main_content %}
 
-    <div class="hero-unit">
+    <div>
         <h1>Change Role</h1>
         <p>Search for a user to change their role.</p>
     </div>
     <div id="update-user-error-space"></div>
     <div class="row-fluid">
 
-        <div class="span3">
-            <label for="first">First Name</label>
-            <input class="promote-input" type="text" style="width:90%" id="first" name="first"
-                   placeholder="First Name…">
+        <div class="input-group">
+            {#<label for="first">First Name</label>#}
+            <input type="text" class="form-control" id="first" placeholder="First Name" aria-describedby="basic-addon1">
         </div>
+        <br>
+        {#<div class="span3">#}
+            {#<label for="first">First Name</label>#}
+            {#<input class="promote-input" type="text" style="width:90%" id="first" name="first"#}
+                   {#placeholder="First Name…">#}
+        {#</div>#}
+        <div class="input-group">
+            {#<label for="first">Last Name</label>#}
+            <input type="text" class="form-control" id="last" placeholder="Last Name" aria-describedby="basic-addon1">
+        </div>
+        <br>
 
-        <div class="span3">
-            <label for="last">Last Name</label>
-            <input class="promote-input" type="text" style="width:90%" id="last" name="last" placeholder="Last Name…">
-        </div>
+        {#<div class="span3">#}
+            {#<label for="last">Last Name</label>#}
+            {#<input class="promote-input" type="text" style="width:90%" id="last" name="last" placeholder="Last Name…">#}
+        {#</div>#}
 
-        <div class="span3">
-            <label for="username">Username</label>
-            <input class="promote-input" type="text" style="width:90%" id="username" name="username"
-                   placeholder="Username…">
+        <div class="input-group">
+            {#<label for="first">Username</label>#}
+            <input type="text" class="form-control" id="username" placeholder="Username" aria-describedby="basic-addon1">
         </div>
+        <br>
+
+        {#<div class="span3">#}
+            {#<label for="username">Username</label>#}
+            {#<input class="promote-input" type="text" style="width:90%" id="username" name="username"#}
+                   {#placeholder="Username…">#}
+        {#</div>#}
         <div class="span3">
-            <button class="btn btn-small btn-primary" style="width:90%" id="clear-params">Clear search</button>
+            <button class="btn btn-small btn-primary" id="clear-params">Clear search</button>
         </div>
     </div>
+    </br>
     <div id="results"><b>Enter parameters to search for a user to promote</b>
         <p style="color:gray"></p>
     </div>

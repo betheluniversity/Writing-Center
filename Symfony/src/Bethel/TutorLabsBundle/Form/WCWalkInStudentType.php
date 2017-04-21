@@ -16,75 +16,78 @@ class WCWalkInStudentType extends AbstractType
     {
         $builder
             ->add('CourseCode', 'hidden', array(
-                'required'  =>  true,
-                    )
+                    'required' => true,
                 )
+            )
             ->add('CourseSection', 'hidden', array(
-                'required'  =>  true,
-                    )
+                    'required' => true,
                 )
+            )
             ->add('Assignment', 'text', array(
-                'label' => 'Assignment:', 
-                'required' => true,
-                'attr' => array('style' => 'width:60%;')
-                    )
+                    'label' => 'Assignment:',
+                    'required' => true,
+                    'attr' => array('style' => 'width:60%;'),
+                    'attr' => array('class' => 'form-control'),
                 )
+            )
             ->add('Comment', 'textarea', array(
-                'label' => 'We Worked On:', 
-                'required' => true,
-                'attr' => array('style' => 'width:60%; height:100px')
-                    )
-                )   
+                    'label' => 'We Worked On:',
+                    'required' => true,
+                    'attr' => array('style' => 'width:60%; height:100px')
+                )
+            )
             ->add('Suggestion', 'textarea', array(
-                'label' => 'Suggestions for Further Revision:', 'required' => true,
-                'attr' => array('style' => 'width:60%; height:100px')
-                    )
+                    'label' => 'Suggestions for Further Revision:', 'required' => true,
+                    'attr' => array('style' => 'width:60%; height:100px')
                 )
+            )
             ->add('ferpaAgreement', 'checkbox', array(
-                'label' => "Email this form to the Student's Instructor.",
-                "mapped" => false,
-                'required' => false,
-                    )
+                    'label' => "Email this form to the Student's Instructor.",
+                    "mapped" => false,
+                    'required' => false,
                 )
+            )
             ->add('save', 'submit', array(
-                'label' => 'End Session',
-                'attr' => array('class' => 'btn-primary')
-                    )
+                    'label' => 'End Session',
+                    'attr' => array('class' => 'btn-primary')
                 )
+            )
             ->add('first', 'text', array(
                     "label" => "Enter the Student's first name:",
                     "mapped" => false,
                     'attr' => array('style' => 'width:90%;'),
-                    )
+                    'attr' => array('class' => 'form-control'),
                 )
+            )
             ->add('last', 'text', array(
                     "label" => "Enter the Student's last name:",
                     "mapped" => false,
                     'attr' => array('style' => 'width:90%;'),
-                    )
+                    'attr' => array('class' => 'form-control'),
                 )
+            )
             ->add('email', 'text', array(
                     "label" => "Enter the Student's email:",
                     "mapped" => false,
-                    'attr' => array('style' => 'width:60%;')
-                    )
+                    'attr' => array('style' => 'width:60%;'),
+                    'attr' => array('class' => 'form-control'),
                 )
+            )
             ->add('Multilingual', 'checkbox', array(
-                "label" => "This session was a Multilingual session.",
-                'required' => false,
-                    )
+                    "label" => "This session was a Multilingual session.",
+                    'required' => false,
                 )
+            )
             ->add('StudUsername', 'hidden', array(
-                    'attr'      =>  array(
+                    'attr' => array(
                         'readonly' => 'readonly',
-                        )
                     )
                 )
-            ->add('id', 'hidden')
-            ;
+            )
+            ->add('id', 'hidden');
 
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

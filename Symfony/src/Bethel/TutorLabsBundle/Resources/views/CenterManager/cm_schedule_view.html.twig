@@ -19,13 +19,13 @@
                     <th>Active</th>
                 </tr>
                 </thead>
-                {#{schedule}}#}
-                {#{.}}#}
-                {#<tr class="schedule-row" id="schedule-row{{id}}">#}
-                    {#<td class="timeStart" id="timeStart{{ id }}">{{ readableStartTime }}</td>#}
-                    {#<td class="timeEnd" id="timeEnd{{ id }}">{{ readableEndTime }}</td>#}
-                    {#<td class="active" id="Active{{ id }}">{{ isActive }}</td>#}
-                {#</tr>#}
+                {#{schedule}}#}{# TODO WHY IS THIS NOT WORKING #}
+                {#{{.}}#}
+                <tr class="schedule-row" id="schedule-row{{id}}">
+                    <td class="timeStart" id="timeStart{{ id }}">{{ readableStartTime }}</td>
+                    <td class="timeEnd" id="timeEnd{{ id }}">{{ readableEndTime }}</td>
+                    <td class="active" id="Active{{ id }}">{{ isActive }}</td>
+                </tr>
                 {#{{ /. }}#}
                 {#{{ /schedule }}#}
             </table>
@@ -59,12 +59,12 @@
         </div>
     </script>
 
-    {#<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>#}
-    {#<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>#}
-    {#<link href="{{ asset('css/jquery.ui.timepicker.css') }}" type="text/css" rel="stylesheet">#}
-    {#<script src="{{ asset('js/jquery.ui.timepicker.js') }}"></script>#}
-    {#<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>#}
-    {#<script src="{{ asset('bundles/betheltutorlabs/js/centermanager.js') }}"></script>#}
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    <link href="{{ asset('css/jquery.ui.timepicker.css') }}" type="text/css" rel="stylesheet">
+    <script src="{{ asset('js/jquery.ui.timepicker.js') }}"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <script src="{{ asset('bundles/betheltutorlabs/js/centermanager.js') }}"></script>
 
 
 {% endblock %}

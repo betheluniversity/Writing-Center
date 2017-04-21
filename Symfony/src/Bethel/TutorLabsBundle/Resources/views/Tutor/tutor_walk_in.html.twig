@@ -64,9 +64,13 @@
         <h3>Enter Student Username To Begin Appointment:</h3>
 
         <div class="control-group">
-            <label class="control-label" for="existingStudUsername">Username</label>
-            <input type="text" style="width:150px" id="existingStudUsername" class="existing-student-input"
-                   name="newStudUsername" placeholder="username..."/>
+            {#<label class="control-label" for="existingStudUsername">Username</label>#}
+            <div class="input-group">
+                <input type="text" class="form-control existing-student-input date" id="existingStudUsername" name="newStudUsername" placeholder="Username">
+            </div>
+            <br>
+            {#<input type="text" style="width:150px" id="existingStudUsername" class="existing-student-input"#}
+                   {#name="newStudUsername" placeholder="username..."/>#}
         </div>
 
 
