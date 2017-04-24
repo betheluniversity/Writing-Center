@@ -21,6 +21,13 @@ main{
     width: 235px;
 }
 
+.input-group{
+    width: 25% !important;
+}
+
+.form-control{
+    width: 25% !important;
+}
 
 .navbar{
     top: 0;

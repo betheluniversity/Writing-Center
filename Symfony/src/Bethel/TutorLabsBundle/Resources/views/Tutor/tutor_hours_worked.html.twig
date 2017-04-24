@@ -70,14 +70,25 @@
     </div>
     <div id="tutor-schedule-error-space"></div>
     <div class="span12">
-        <div class="span3">
-            Click Start Date: <input type="datetime" id="startdate" class="view-reports-input"
-                                     placeholder="Choose a Starting Date…" readonly/>
+        {#<div class="span3">#}
+            {#Click Start Date: <input type="datetime" id="startdate" class="view-reports-input"#}
+                                     {#placeholder="Choose a Starting Date…" readonly/>#}
+        {#</div>#}
+        <div class="input-group">
+            {#<label>Click Start Date:</label>#}
+            <input type="datetime" class="form-control view-reports-input" id="startdate" placeholder="Choose a Starting Date…" aria-describedby="basic-addon1" readonly>
         </div>
-        <div class="span3">
-            Click End Date: <input type="datetime" id="enddate" class="view-reports-input"
-                                   placeholder="Choose an Ending Date…" readonly/>
+        <br>
+
+        <div class="input-group">
+            {#<label>Click Start Date:</label>#}
+            <input type="datetime" class="form-control view-reports-input" id="enddate" placeholder="Choose an Ending Date…" aria-describedby="basic-addon1" readonly>
         </div>
+        <br>
+        {#<div class="span3">#}
+            {#Click End Date: <input type="datetime" id="enddate" class="view-reports-input"#}
+                                   {#placeholder="Choose an Ending Date…" readonly/>#}
+        {#</div>#}
         <div class="span3">
             <input type="button" id="clear" class="btn view-reports-input btn-danger" value="Clear Search"
                    onclick="clearSearch()"/>
