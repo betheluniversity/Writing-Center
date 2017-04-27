@@ -137,79 +137,110 @@
 
     {# TODO FIX THE FONT #}
 
-    <div class="hero-unit">
+    <div>
         <h1>Manage Tutor Schedules</h1>
         <p>Assign shifts to a Tutor or view a Tutor's schedule.</p>
         <hr/>
     </div>
 
-    <h3> Assign Shifts to a Tutor </h3>
+    <div class="form">
+        <h3> Assign Shifts to a Tutor </h3>
 
 
-    <div id="manage-results"></div>
-    <div class="row-fluid">
-        <div><label><b>Click Start Date</b> <input type="text" style="width:90%" id="start-datepicker" class="input"
-                                                   readonly/></label></div>
-        <div><label><b>Click End Date</b> <input type="text" style="width:90%" id="end-datepicker"
-                                                 readonly/></label></div>
-        <div class="span2">
-            <label for="multilingual"><b>Multilingual Appointment</b></label>
-            <select name="multilingual" style="width:90%" id="multilingual">
-                <option value="Yes">Yes</option>
-                <option value="No" selected>No</option>
-            </select>
-        </div>
-        <div class="span2">
-            <label for="drop-in"><b>Drop-in Hours Appointment</b></label>
-            <select name="drop-in" style="width:90%" id="drop-in">
-                <option value="Yes">Yes</option>
-                <option value="No" selected>No</option>
-            </select>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span3">
-            <label for="tutorselect"><b>Select Tutors</b></label>
-            <select size="7" multiple="multiple" style="width:90%" id="tutorselect">
-                {% for key, value in tutors %}
-                    <option id="option-{{ value.id }}"
-                            value="{{ value.id }}">{{ value.firstName }} {{ value.lastName }}</option>
-                    {# <option id="option-{{key}}" value="{{value}}">{{value}}</option> #}
-                {% endfor %}
-            </select>
-        </div>
-        <div class="span3">
-            <label for="manage_tutors_days"><b>Select Days</b></label>
-            <select id="manage_tutors_days" size="7" multiple="multiple" style="width:90%;">
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-            </select>
+        <div id="manage-results"></div>
+        <div class="row-fluid">
+            Start Date:
+            <div class="input-group">
+                <input type="datetime" class="form-control input" id="start-datepicker"
+                       placeholder="Choose a Starting Date…" readonly>
+            </div>
+            <br>
+
+            {#<div><label><b>Click Start Date</b> <input type="text" style="width:90%" id="start-datepicker" class="input"#}
+            {#readonly/></label></div>#}
+
+            End Date:
+            <div class="input-group">
+                <input type="datetime" class="form-control input" id="end-datepicker"
+                       placeholder="Choose an Ending Date…"
+                       readonly>
+            </div>
+            <br>
+
+            {#<div><label><b>Click End Date</b> <input type="text" style="width:90%" id="end-datepicker"#}
+            {#readonly/></label></div>#}
+            <div class="span2">
+                <label for="multilingual"><b>Multilingual Appointment</b></label>
+                </br>
+                <select class="custom-select" id="multilingual" name="multilingual">
+                    <option selected>Open this select menu</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                {#<select name="multilingual" style="width:90%" id="multilingual">#}
+                {#<option value="Yes">Yes</option>#}
+                {#<option value="No" selected>No</option>#}
+                {#</select>#}
+            </div>
+            </br>
+            <div class="span2">
+                <label for="drop-in"><b>Drop-in Hours Appointment</b></label>
+                </br>
+                <select class="custom-select" id="drop-in" name="drop-in">
+                    <option selected>Open this select menu</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                {#<select name="drop-in" style="width:90%" id="drop-in">#}
+                {#<option value="Yes">Yes</option>#}
+                {#<option value="No" selected>No</option>#}
+                {#</select>#}
+            </div>
         </div>
         </br>
-        <div class="span3">
-            <label for="timeselect"><b>Select Time Slots</b></label>
+        <div class="row-fluid">
+            <div class="span3">
+                <label for="tutorselect"><b>Select Tutors</b></label>
+                <select size="7" multiple="multiple" style="width:90%" id="tutorselect">
+                    {% for key, value in tutors %}
+                        <option id="option-{{ value.id }}"
+                                value="{{ value.id }}">{{ value.firstName }} {{ value.lastName }}</option>
+                        {# <option id="option-{{key}}" value="{{value}}">{{value}}</option> #}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="span3">
+                <label for="manage_tutors_days"><b>Select Days</b></label>
+                <select id="manage_tutors_days" size="7" multiple="multiple" style="width:90%;">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+            </div>
             </br>
-            <select size="7" id="timeselect" multiple="multiple">
-                {% for key, value in slots %}
-                    <option value="{{ value.timeStart | date('g:i a') }} - {{ value.timeEnd | date('g:i a') }}">{{ value.timeStart | date('g:i a') }}
-                        - {{ value.timeEnd | date('g:i a') }}</option>
-                {% endfor %}
-            </select>
+            <div class="span3">
+                <label for="timeselect"><b>Select Time Slots</b></label>
+                </br>
+                <select size="7" id="timeselect" multiple="multiple">
+                    {% for key, value in slots %}
+                        <option value="{{ value.timeStart | date('g:i a') }} - {{ value.timeEnd | date('g:i a') }}">{{ value.timeStart | date('g:i a') }}
+                            - {{ value.timeEnd | date('g:i a') }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
         </div>
-
+        </br>
+        <div class="row-fluid">
+            <div class="span4">
+                <button class="btn btn-primary" id="manage-tutor-submit"> Submit</button>
+            </div>
+        </div>
     </div>
-    </br>
-    <div class="row-fluid">
-    <div class="span4">
-        <button class="btn btn-primary" id="manage-tutor-submit"> Submit</button>
-    </div>
-</div>
-
     <hr/>
 
     <h3> View Tutor Schedule </h3>
