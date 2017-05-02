@@ -5,6 +5,9 @@
     <div class="col-sm-8 mx-auto">
         <h1>Create Lab Schedule.</h1>
         <p>This is where you create an available time slot for an appointment.</p>
+
+        </hr>
+        <div data-provide="calendar"></div>
     </div>
 
 
@@ -19,7 +22,8 @@
                     <th>Active</th>
                 </tr>
                 </thead>
-                {#{schedule}}#}{# TODO WHY IS THIS NOT WORKING #}
+                {#TODO WHY IS THIS NOT WORKING#}
+                {#{schedule}}#}
                 {#{{.}}#}
                 <tr class="schedule-row" id="schedule-row{{id}}">
                     <td class="timeStart" id="timeStart{{ id }}">{{ readableStartTime }}</td>

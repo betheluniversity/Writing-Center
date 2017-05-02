@@ -82,10 +82,14 @@ html{
 }
 
 
-@media(max-width: 1217px){
+@media(max-width: 1025px){
+
+    .main{
+        width: 70% !important;
+    }
 
     .sidebar{
-
+        width: 30% !important;
     }
 
 }
