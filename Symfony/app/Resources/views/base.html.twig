@@ -14,7 +14,7 @@
             <meta name="author" content="">
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-            {#<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>#}
+            <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
             <script src="{{ asset('js/jquery.mustache.js') }}"></script>
             <script src="{{ asset('js/mustache.js') }}"></script>
             <script src="{{ asset('js/jquery.cookie.js') }}"></script>
@@ -33,7 +33,9 @@
     </head>
 
     <body>
+    {% block footadd %} {% endblock %}
 
+    {% block mustache %} {% endblock %}
 
     {% block body_content %}{% endblock %}
 
@@ -49,9 +51,7 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script src="{{ asset('js/writingcenter.js') }}"></script>
-    {% block footadd %} {% endblock %}
 
-    {% block mustache %} {% endblock %}
 
     </body>
 
