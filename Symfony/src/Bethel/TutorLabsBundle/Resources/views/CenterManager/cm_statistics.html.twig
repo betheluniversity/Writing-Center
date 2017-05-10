@@ -142,98 +142,94 @@
 
         </br>
 
-        <div class="span3">
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="multilingual" value="all" checked> All
-                    Appointments
-                </label>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="multilingual" value="normal"> Only
-                    Non-Multilingual
-                </label>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="multilingual" value="all"> Only Multilingual
-                </label>
-            </div>
+        <label class="custom-control custom-radio">
+            <input id="radio1" name="multilingual" type="radio" class="custom-control-input form-check-input"
+                   value="all" checked>
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">All Appointments</span>
+        </label>
+        <label class="custom-control custom-radio">
+            <input id="radio2" name="multilingual" type="radio" class="custom-control-input form-check-input"
+                   value="normal">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Only Non-Multilingual</span>
+        </label>
+        <label class="custom-control custom-radio">
+            <input id="radio3" name="multilingual" type="radio" class="custom-control-input form-check-input"
+                   value="multilingual">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Only Multilingual</span>
+        </label>
 
-            {#<label class="radio"><input type="radio" name="multilingual" value="all" checked \>All Appointments</label>#}
-            {#<label class="radio"><input type="radio" name="multilingual" value="normal" \>Only Non-Multilingual#}
-            {#Appointments</label>#}
-            {#<label class="radio"><input type="radio" name="multilingual" value="multilingual" \>Only Multilingual#}
-            {#Appointments</label>#}
-        </div>
     </div>
 
     </br>
 
     <div>
 
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox1 view-all"> View All
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox2 total-visits"> Total Visits
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox3 busiest-time-of-day">
-                Busiest Time of Day
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox1 busiest-day"> Busiest Day
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox2 busiest-tutor"> Busiest
-                Tutor
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox3 no-shows"> No Shows
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox1 busiest-week"> Busiest Week
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox2 by-course"> By Course
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input checkbox" type="checkbox" id="inlineCheckbox3 get-student-email"
-                       value="option3"> Get Students Email
-            </label>
-        </div>
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input form-check-input checkbox" id="inlineCheckbox1 view-all">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">View All</span>
+        </label>
+
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input form-check-input checkbox"
+                   id="inlineCheckbox2 total-visits">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Total Visits</span>
+        </label>
+
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input form-check-input checkbox"
+                   id="inlineCheckbox3 busiest-time-of-day">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Busiest Time of Days</span>
+        </label>
+
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input form-check-input checkbox"
+                   id="inlineCheckbox1 busiest-day">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Busiest Day</span>
+        </label>
 
 
-        {#<label class="checkbox"><input id="view-all" class="checkbox" type="checkbox" checked/>View All</label>#}
-        {#<label class="checkbox"><input id="total-visits" class="checkbox" type="checkbox"/>Total Visits</label>#}
-        {#<label class="checkbox"><input id="busiest-time-of-day" class="checkbox" type="checkbox"/>Busiest Time of#}
-        {#Day</label>#}
-        {#<label class="checkbox"><input id="busiest-day" class="checkbox" type="checkbox"/>Busiest Day</label>#}
-        {#<label class="checkbox"><input id="busiest-tutor" class="checkbox" type="checkbox"/>Busiest Tutor</label>#}
-        {#<label class="checkbox"><input id="no-shows" class="checkbox" type="checkbox"/>No Shows</label>#}
-        {#<label class="checkbox"><input id="busiest-week" class="checkbox" type="checkbox"/>Busiest Week</label>#}
-        {#<label class="checkbox"><input id="by-course" class="checkbox" type="checkbox"/>By Course</label>#}
-        {#<label class="checkbox"><input id="get-student-email" class="checkbox" type="checkbox"/>Get Students#}
-        {#Email</label>#}
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input form-check-input checkbox"
+                   id="inlineCheckbox2 busiest-tutor">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Busiest Tutor</span>
+        </label>
+
+
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input form-check-input checkbox" id="inlineCheckbox3 no-shows">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">No Shows</span>
+        </label>
+
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input form-check-input checkbox"
+                   id="inlineCheckbox1 busiest-week">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Busiest Week</span>
+        </label>
+
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input form-check-input checkbox"
+                   id="inlineCheckbox2 by-course">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">By Course</span>
+        </label>
+
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input form-check-input checkbox"
+                   id="inlineCheckbox3 get-student-email">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Get Students Email</span>
+        </label>
+
 
         </br>
         <button id="search" class="btn btn-primary">Search</button>
