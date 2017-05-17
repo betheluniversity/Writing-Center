@@ -33,23 +33,25 @@ class WCWalkInStudentType extends AbstractType
             ->add('Comment', 'textarea', array(
                     'label' => 'We Worked On:',
                     'required' => true,
-                    'attr' => array('style' => 'width:60%; height:100px; display: block;')
+                    'attr' => array('style' => 'width:60%; height:100px; display: block;'),
                 )
             )
             ->add('Suggestion', 'textarea', array(
                     'label' => 'Suggestions for Further Revision:', 'required' => true,
-                    'attr' => array('style' => 'width:60%; height:100px; margin-bottom: 15px; display: block;')
+                    'attr' => array('style' => 'width:60%; height:100px; margin-bottom: 15px; display: block;'),
+                    'attr' => array('class' => 'custom-control-input label' )
                 )
             )
             ->add('ferpaAgreement', 'checkbox', array(
                     'label' => "Email this form to the Student's Instructor.",
                     "mapped" => false,
                     'required' => false,
+                    'attr' => array('class' => 'custom-checkbox' )
                 )
             )
             ->add('save', 'submit', array(
                     'label' => 'End Session',
-                    'attr' => array('class' => 'btn-primary')
+                    'attr' => array('class' => 'btn-primary btn')
                 )
             )
             ->add('first', 'text', array(
