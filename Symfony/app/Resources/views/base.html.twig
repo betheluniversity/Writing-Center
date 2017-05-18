@@ -36,11 +36,12 @@
     </head>
 
     <body>
+
+    {% block body_content %}{% endblock %}
+
     {% block footadd %} {% endblock %}
 
     {% block mustache %} {% endblock %}
-
-    {% block body_content %}{% endblock %}
 
     {# TODO may need another block here modalHTML? #}
 
