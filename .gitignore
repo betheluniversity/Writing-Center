@@ -28,3 +28,6 @@ Symfony/.DS_Store
 Symfony/composer.phar
 Symfony/composer.lock
 ~
+
+
+db_back/*.sql
