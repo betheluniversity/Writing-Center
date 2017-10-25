@@ -34,12 +34,14 @@ class WCWalkInStudentType extends AbstractType
                     'label' => 'We Worked On:',
                     'required' => true,
                     'attr' => array('style' => 'width:60%; height:100px; display: block;'),
+                    'attr' => array('class' => 'form-control')
                 )
             )
             ->add('Suggestion', 'textarea', array(
                     'label' => 'Suggestions for Further Revision:', 'required' => true,
                     'attr' => array('style' => 'width:60%; height:100px; margin-bottom: 15px; display: block;'),
-                    'attr' => array('class' => 'custom-control-input label' )
+                    'attr' => array('class' => 'custom-control-input label' ),
+                    'attr' => array('class' => 'form-control')
                 )
             )
             ->add('ferpaAgreement', 'checkbox', array(
@@ -58,7 +60,7 @@ class WCWalkInStudentType extends AbstractType
                     "label" => "Enter the Student's first name:",
                     "mapped" => false,
                     'attr' => array('style' => 'width:90%;'),
-                    'attr' => array('class' => 'form-control'),
+                    'attr' => array('class' => 'form-control')
                 )
             )
             ->add('last', 'text', array(

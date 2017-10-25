@@ -138,7 +138,7 @@
 {% endblock %}
 
 {% block main_content %}
-    <div class="hero-unit">
+    <div>
         <h1>View Tutor Schedule.</h1>
         <p>Displays the appointments a tutor is assigned to.</p>
     </div>
@@ -149,27 +149,30 @@
         <div class="row">
             <div class="col-2">
                 <label><b>Color</b></label>
-                <div class="span1">Blue</div>
-                <div class="span1">Yellow</div>
-                <div class="span1">Green</div>
+                {# TODO turn the spans into color blocks instead of text labels #}
+                <div class="span1 calendarKey" id="blueKey"></div>
+                <div class="span1 calendarKey" id="yellowKey"></div>
+                <div class="span1 calendarKey" id="greenKey"></div>
             </div>
             <div class="col-lg">
                 <label><b>Type</b></label>
-                <div class="span3">General Appointment</div>
-                <div class="span3">Multilingual Writing Support Appointment</div>
-                <div class="span3">Drop-in Hours</div>
+                <div class="span3 formSpacing">General Appointment</div>
+                <div class="span3 formSpacing">Multilingual Writing Support Appointment</div>
+                <div class="span3 formSpacing">Drop-in Hours</div>
             </div>
         </div>
     </div>
     <hr/>
     <label for="lookup-tutor-username" style="display:block"><b>Tutors</b></label>
-    <select size="7" multiple="multiple" id="lookup-tutor-username">
+    <select size="7" multiple="multiple" class="form-control" id="lookup-tutor-username">
         {% for key, value in tutors %}
             <option id="option-{{ value.id }}"
                     value="{{ value.username }}">{{ value.firstName }} {{ value.lastName }}</option>
             {# <option id="option-{{key}}" value="{{value}}">{{value}}</option> #}
         {% endfor %}
     </select>
+    <hr>
+    <div class="formSpacing"></div>
     <div id="calendar"></div>
     <div id="dialog-confirm" style="display:none" title="View Appointment"></div>
 

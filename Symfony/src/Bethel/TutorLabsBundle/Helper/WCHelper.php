@@ -861,7 +861,7 @@ class WCHelper extends Controller{
 
         usort($students, array( $this, "sort_user_array_by_names"));
 
-        $select = "<select id='select-student-username' size='5' style='width:90%'>";
+        $select = "<select class='form-control' id='select-student-username' size='5'>";
             foreach ($students as $student) {
                 $studentUsername = $student->getUsername();
                 $studentName = $student->getFirstName()." ".$student->getLastName()." | '".$studentUsername."'";
@@ -902,7 +902,7 @@ class WCHelper extends Controller{
         usort($tutors, array( $this, "sort_user_array_by_names"));
         
 
-        $select = "<select id='select-tutor-username' size='5' style='width:90%'>";
+        $select = "<select id='select-tutor-username' class='form-control' size='5'>";
             foreach ($tutors as $tutor) {
                 $tutorUsername = $tutor->getUsername();
                 $tutorName = $tutor->getFirstName()." ".$tutor->getLastName()." | '".$tutorUsername."'";
@@ -937,7 +937,7 @@ class WCHelper extends Controller{
 
         sort($arrayOfUniqueProfUsernames);
 
-        $select = "<select id='select-prof-username' size='5' style='width:90%'>";
+        $select = "<select id='select-prof-username' class='form-control' size='5'>";
         $select .= "<option value='No instructor'>No instructor</option>";
             foreach ($arrayOfUniqueProfUsernames as $profUsername) {
                 // $profUsername = $prof->getUsername();

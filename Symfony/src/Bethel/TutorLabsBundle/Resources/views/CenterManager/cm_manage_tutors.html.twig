@@ -156,9 +156,6 @@
             </div>
             <br>
 
-            {#<div><label><b>Click Start Date</b> <input type="text" style="width:90%" id="start-datepicker" class="input"#}
-            {#readonly/></label></div>#}
-
             End Date:
             <div class="input-group">
                 <input type="datetime" class="form-control input" id="end-datepicker"
@@ -167,8 +164,6 @@
             </div>
             <br>
 
-            {#<div><label><b>Click End Date</b> <input type="text" style="width:90%" id="end-datepicker"#}
-            {#readonly/></label></div>#}
             <div class="span2">
                 <label for="multilingual"><b>Multilingual Appointment</b></label>
                 </br>
@@ -176,10 +171,6 @@
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
                 </select>
-                {#<select name="multilingual" style="width:90%" id="multilingual">#}
-                {#<option value="Yes">Yes</option>#}
-                {#<option value="No" selected>No</option>#}
-                {#</select>#}
             </div>
             </br>
             <div class="span2">
@@ -189,17 +180,13 @@
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
                 </select>
-                {#<select name="drop-in" style="width:90%" id="drop-in">#}
-                {#<option value="Yes">Yes</option>#}
-                {#<option value="No" selected>No</option>#}
-                {#</select>#}
             </div>
         </div>
         </br>
         <div class="row-fluid">
             <div class="span3">
                 <label for="tutorselect"><b>Select Tutors</b></label>
-                <select size="7" multiple="multiple" style="width:90%" id="tutorselect">
+                <select size="7" multiple="multiple" class="form-control" id="tutorselect">
                     {% for key, value in tutors %}
                         <option id="option-{{ value.id }}"
                                 value="{{ value.id }}">{{ value.firstName }} {{ value.lastName }}</option>
@@ -207,9 +194,10 @@
                     {% endfor %}
                 </select>
             </div>
+            </br>
             <div class="span3">
                 <label for="manage_tutors_days"><b>Select Days</b></label>
-                <select id="manage_tutors_days" size="7" multiple="multiple" style="width:90%;">
+                <select class="form-control" id="manage_tutors_days" size="7" multiple="multiple" >
                     <option value="Monday">Monday</option>
                     <option value="Tuesday">Tuesday</option>
                     <option value="Wednesday">Wednesday</option>
@@ -223,7 +211,7 @@
             <div class="span3">
                 <label for="timeselect"><b>Select Time Slots</b></label>
                 </br>
-                <select size="7" id="timeselect" multiple="multiple">
+                <select class="form-control" size="7" id="timeselect" multiple="multiple">
                     {% for key, value in slots %}
                         <option value="{{ value.timeStart | date('g:i a') }} - {{ value.timeEnd | date('g:i a') }}">{{ value.timeStart | date('g:i a') }}
                             - {{ value.timeEnd | date('g:i a') }}</option>
@@ -241,12 +229,12 @@
     </div>
     <hr/>
 
-    <h3> View Tutor Schedule </h3>
+    <h3>View Tutor Schedule </h3>
     <p>Click a tutor or multiple tutors to have their schedules display.</p>
     <p>If you assign shifts to a tutor, make sure you click the tutor's name here to see the new shifts. </p>
     <div id="lookup-tutor-error-space"></div>
     <label for="lookup-tutor-username" style="display:block"><b>Tutors</b></label>
-    <select size="7" multiple="multiple" id="lookup-tutor-username">
+    <select class="form-control" size="7" multiple="multiple" id="lookup-tutor-username">
         {% for key, value in tutors %}
             <option id="option-{{ value.id }}"
                     value="{{ value.username }}">{{ value.firstName }} {{ value.lastName }}</option>
@@ -256,7 +244,6 @@
     <div id="lookup-tutor-results"></div>
     <hr/>
 
-    {# TODO GET THE CALENDAR TO SHOW UP#}
     <div id="calendar"></div>
     <div id="dialog-confirm" style="display:none" title="View Appointment"></div>
 

@@ -1,7 +1,7 @@
 {% extends '::wc_base.html.twig' %}
 
 
-{# TODO get stuff @ bottom to work in Mustache block #}
+{# TODO get stuff @ bottom tot work#}
 
 {% block main_content %}
 
@@ -9,41 +9,26 @@
         <h1>Change Role</h1>
         <p>Search for a user to change their role.</p>
     </div>
-    <div id="update-user-error-space"></div>
-    <div class="row-fluid">
+    <div>
+        <div>
+            <input type="text" class="form-control" id="first" placeholder="First Name..." aria-describedby="basic-addon1">
+        </div>
 
-        <div class="input-group">
-            {#<label for="first">First Name</label>#}
-            <input type="text" class="form-control" id="first" placeholder="First Name" aria-describedby="basic-addon1">
-        </div>
-        <br>
-        {#<div class="span3">#}
-            {#<label for="first">First Name</label>#}
-            {#<input class="promote-input" type="text" style="width:90%" id="first" name="first"#}
-                   {#placeholder="First Name…">#}
-        {#</div>#}
-        <div class="input-group">
-            {#<label for="first">Last Name</label>#}
-            <input type="text" class="form-control" id="last" placeholder="Last Name" aria-describedby="basic-addon1">
-        </div>
         <br>
 
-        {#<div class="span3">#}
-            {#<label for="last">Last Name</label>#}
-            {#<input class="promote-input" type="text" style="width:90%" id="last" name="last" placeholder="Last Name…">#}
-        {#</div>#}
-
-        <div class="input-group">
-            {#<label for="first">Username</label>#}
-            <input type="text" class="form-control" id="username" placeholder="Username" aria-describedby="basic-addon1">
+        <div>
+            <input type="text" class="form-control" id="last" placeholder="Last Name..." aria-describedby="basic-addon1">
         </div>
+
         <br>
 
-        {#<div class="span3">#}
-            {#<label for="username">Username</label>#}
-            {#<input class="promote-input" type="text" style="width:90%" id="username" name="username"#}
-                   {#placeholder="Username…">#}
-        {#</div>#}
+        <div>
+            <input type="text" class="form-control" id="username" placeholder="Username..."
+                   aria-describedby="basic-addon1">
+        </div>
+
+        <br>
+
         <div class="span3">
             <button class="btn btn-small btn-primary" id="clear-params">Clear search</button>
         </div>
@@ -79,7 +64,6 @@
                 <div class="span2"><b>Current Role</b></div>
                 <div class="span2"></div>
                 <div class="span1"></div>
-        </div>
         {{#users}}
           {{#.}}
             <div class="row-fluid">

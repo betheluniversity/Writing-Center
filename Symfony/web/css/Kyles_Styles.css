@@ -14,6 +14,11 @@ main{
     background: #0069AA;
     color: white;
     cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.collapse.in {
+    display: block;
 }
 
 .logo{
@@ -26,7 +31,7 @@ main{
 }
 
 .form-control{
-    width: 25% !important;
+    width: 40% !important;
 }
 
 .navbar{
@@ -49,6 +54,30 @@ footer{
     position: relative;
 }
 
+.calendarKey{
+    width: 50px !important;
+    height: 25px !important;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: .5px solid black;
+}
+
+.formSpacing{
+    margin-bottom: 7px;
+}
+
+#blueKey{
+    background-color: blue;
+}
+
+#yellowKey{
+    background-color: yellow;
+}
+
+#greenKey{
+    background-color: green;
+}
+
 .sidebar{
     /*width: 16%;*/
     position: fixed !important;
@@ -69,6 +98,10 @@ footer{
     color: white !important;
 }
 
+.name-select{
+    width: 40% !important;
+}
+
 html{
     height: 100%;
 }
@@ -79,19 +112,7 @@ html{
     font-weight: 600 !important;
     /*white-space: nowrap;*/
     width: 160px;
-}
-
-
-@media(max-width: 1025px){
-
-    .main{
-        width: 70% !important;
-    }
-
-    .sidebar{
-        width: 30% !important;
-    }
-
+    padding: .5em 1em;
 }
 
 @media(max-width: 1490px){

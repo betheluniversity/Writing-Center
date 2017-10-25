@@ -7,42 +7,37 @@
         <h1>System Settings</h1>
         <p>Adjust system settings here.</p>
     </div>
-    <div id="sys-settings-error-space"></div>
     <label for="apptLimit" style="font-size:18px">Appointment Limit:</label>
     <p id="apptLimitDescription"><i> Each student can sign up for <b>{{ apptLimit }}</b> appointments in a week.</i></p>
-    {#<input type="text" id="apptLimit" name="apptLimit" value="{{ apptLimit }}" readonly>#}
-    {#<div clas="readInput">#}
-        <div class="input-group">
-            <input type="text" class="form-control readInput" value="{{ apptLimit }}" readonly>
-        </div>
-    {#</div>#}
+
+    <div class="input-group">
+        <input type="text" class="form-control readInput" value="{{ apptLimit }}" readonly>
+    </div>
+
     <br/>
 
 
     <label for="timeLimit" style="font-size:18px">Time Limit:</label>
     <p id="timeLimitDescription"><i> Each appointment closes sign-ups <b>{{ timeLimit }}</b> hours before the start
             time.</i></p>
-    {#<input type="text" id="timeLimit" name="timeLimit" value="{{ timeLimit }}" readonly>#}
-    {#<br/>#}
-    {#<br/>#}
+
     <div clas="col-lg-6 readInput">
         <div class="input-group">
             <input type="text" class="form-control readInput" value="{{ timeLimit }}" readonly>
         </div>
     </div>
+
     <br/>
 
     <label for="banLimit" style="font-size:18px">Ban Limit:</label>
     <p id="banLimitDescription"><i> Each student will be banned after <b>{{ banLimit }}</b> no shows.</i></p>
-    <input type="text" id="banLimit" name="banLimit" value="{{ banLimit }}" readonly>
-    <br/>
+    <div class="input-group">
+        <input type="text" class="form-control" id="banLimit" name="banLimit" value="{{ banLimit }}" readonly>
+    </div>
     <br/>
 
     <label for="qualtricsLink" style="font-size:18px">Qualtrics Link:</label>
     <p id="apptLimitDescription"><i> Here is the link that will be given after each appointment.</i></p>
-    {#<input type="text" style="width: 300px;" name="qualtricsLink" value="{{ qualtricsLink }}" readonly>#}
-    {#<br/>#}
-    {#<br/>#}
 
     <div clas="col-lg-6 readInput">
         <div class="input-group">
