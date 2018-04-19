@@ -391,7 +391,9 @@
       });
     });
 
-    $("#manage-tutor-submit").click(function(){
+
+// TODO clear the cache on the server to load this change
+   function mts(){
         startdate = $("#start-datepicker").val();
         enddate = $("#end-datepicker").val();
         if(startdate == "" || enddate == ""){
@@ -438,7 +440,7 @@
             $("#manage-results").html('<div class="alert alert-success">Added appointments successfully</div>');
             $("#manage-results").stop(true, true).show().fadeOut(5000);
         });
-    });
+    };
 
 
   //---------------------------------

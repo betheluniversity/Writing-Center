@@ -56,7 +56,7 @@
 
 {% block mustache %}
     {% verbatim %}
-        <script id="promotion-table" type="text/html">
+        <div id="promotion-table" type="text/html">
                 <div class=""></div>
                 <div class="span2"><b>First</b></div>
                 <div class="span2"><b>Last</b></div>
@@ -76,13 +76,13 @@
                         {{roles.0.name}}
                     </div>
                 </div>
-                <div class="span2" id="new-role{{id}}">{% endverbatim %} {{ select | raw }} {% verbatim %}</div>
+                <div class="span2" id="new-role{{id}}"> {{ select | raw }} </div>
                 <div class="span1">
                     <button class="btn btn-small btn-promote btn-primary" id="promote-btn-{{id}}"> Update </button>
                 </div>
             </div>
           {{/.}}
         {{/users}}
-        </script>
+        </div>
     {% endverbatim %}
 {% endblock %}

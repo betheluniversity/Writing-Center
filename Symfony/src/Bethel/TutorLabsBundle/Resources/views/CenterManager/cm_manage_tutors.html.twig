@@ -1,8 +1,8 @@
 {% extends '::wc_base.html.twig' %}
 
 {% block headadd %}
-    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+    {#<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>#}
+    {#<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>#}
     <link href="{{ asset('css/jquery.ui.timepicker.css') }}" type="text/css" rel="stylesheet">
 
     <!--FullCalendar Dependencies-->
@@ -222,8 +222,8 @@
         </div>
         </br>
         <div class="row-fluid">
-            <div class="span4">
-                <button class="btn btn-primary" id="manage-tutor-submit"> Submit</button>
+            <div class="span4" id="manage-tutor">
+                <button class="btn btn-primary" onclick="mts()" id="manage-tutor-submit"> Submit</button>
             </div>
         </div>
     </div>

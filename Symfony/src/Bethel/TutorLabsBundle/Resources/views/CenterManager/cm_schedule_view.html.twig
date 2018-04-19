@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 {#TODO WHY IS THIS NOT WORKING#}
-                {#{{schedule}}#}
+                {{schedule}}
                 {#{{.}}#}
                 <tr class="schedule-row" id="schedule-row{{ id }}">
                     <td class="timeStart" id="timeStart{{ id }}">{{ readableStartTime }}</td>
@@ -31,7 +31,7 @@
                     <td class="active" id="Active{{ id }}">{{ isActive }}</td>
                 </tr>
                 {#{{ /. }}#}
-                {#{{ /schedule }}#}
+                {{ schedule }}
             </table>
             <p id="schedule-add-btn">
                 <button id="scheduleAddButton" class="btn btn-primary" type="button">Add</button>

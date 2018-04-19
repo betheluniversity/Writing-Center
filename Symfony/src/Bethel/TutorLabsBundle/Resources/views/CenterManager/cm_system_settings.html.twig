@@ -1,6 +1,5 @@
 {% extends '::wc_base.html.twig' %}
 
-
 {% block main_content %}
 
     <div>
@@ -11,7 +10,7 @@
     <p id="apptLimitDescription"><i> Each student can sign up for <b>{{ apptLimit }}</b> appointments in a week.</i></p>
 
     <div class="input-group">
-        <input type="text" class="form-control readInput" value="{{ apptLimit }}" readonly>
+        <input type="text" class="form-control readInput" id="apptLimit" value="{{ apptLimit }}" readonly>
     </div>
 
     <br/>
@@ -23,7 +22,7 @@
 
     <div clas="col-lg-6 readInput">
         <div class="input-group">
-            <input type="text" class="form-control readInput" value="{{ timeLimit }}" readonly>
+            <input type="text" class="form-control readInput" id="timeLimit" value="{{ timeLimit }}" readonly>
         </div>
     </div>
 
@@ -41,7 +40,7 @@
 
     <div clas="col-lg-6 readInput">
         <div class="input-group">
-            <input type="text" class="form-control readInput" value="{{ qualtricsLink }}" readonly>
+            <input type="text" class="form-control readInput" id="qualtricsLink" value="{{ qualtricsLink }}" readonly>
         </div>
     </div>
     <br/>
