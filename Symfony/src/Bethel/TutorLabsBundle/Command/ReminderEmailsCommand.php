@@ -48,7 +48,7 @@ class ReminderEmailsCommand extends ContainerAwareCommand
             $subject = "Writing Center -- Reminder";
             
             $body = "Thank you for signing up for an appointment with the Writing Center. Here are the details of your appointment tomorrow:\n\n";
-            $body .= "Tutor: " . $helper->getFirstLastNameByUsername($appt->getTutorUsername()) . "\nStart Time: ".$appt->getStartTime()->format("m/d/Y g:i a")."\nEnd Time: ".$appt->getEndTime()->format("m/d/Y g:i a");
+            $body .= "Tutor: " . $helper->getFirstLastNameByUsername($appt->getTutorUsername()) . "\nStart Time: ".$appt->getStartTime()->format("m/d/Y g:i a")."\nEnd Time: ".$appt->getEndTime()->format("m/d/Y g:i a")."\nLocation: Writing Center (HC 324)";
             if( $appt->getMultilingual() )
                 $body .= "\nMultilingual: ".$appt->getMultilingual();
 

@@ -259,11 +259,12 @@ class ScheduleAppointmentController extends Controller{
         $Student = "Student: ".$helper->getFirstLastNameByUsername( $appt->getStudUsername() )."\n";
         $StartTime = "Start Time: ".$appt->getStartTime()->format("m/d/Y g:i a")."\n";
         $EndTime = "End Time: ".$appt->getEndTime()->format("m/d/Y g:i a")."\n";
+        $location = "Location: Writing Center (HC 324)";
         $assignment = "Assignment: ".$appt->getAssignment()."\n";
         $Multilingual = "";
         if($appt->getMultilingual())
           $Multilingual = "This is a Multilingual Appointment.\n";
-        $body = "Hello! A student has signed up for one of your appointments at the Writing Center.\n\n".$Student.$StartTime.$EndTime.$assignment.$Multilingual;
+        $body = "Hello! A student has signed up for one of your appointments at the Writing Center.\n\n".$Student.$StartTime.$EndTime.$location.$assignment.$Multilingual;
         $helper->sendMessage($email, $subject, $body);
 
         return;
@@ -279,7 +280,7 @@ class ScheduleAppointmentController extends Controller{
         $subject = "Writing Center: Appointment Reminder";
 
         $body = "Thank you for signing up for an appointment with the Writing Center. Here are the details of the appointment:\n\n";
-        $body .= "Tutor: " . $helper->getFirstLastNameByUsername($tutorusername) . "\nStart Time: ".$newAppt->getStartTime()->format("m/d/Y g:i a")."\nEnd Time: ".$newAppt->getEndTime()->format("m/d/Y g:i a");
+        $body .= "Tutor: " . $helper->getFirstLastNameByUsername($tutorusername) . "\nStart Time: ".$newAppt->getStartTime()->format("m/d/Y g:i a")."\nEnd Time: ".$newAppt->getEndTime()->format("m/d/Y g:i a")."\nLocation: Writing Center (HC 324)";
         if( $newAppt->getMultilingual() )
           $body .= "\nMultilingual: ".$newAppt->getMultilingual();
     
