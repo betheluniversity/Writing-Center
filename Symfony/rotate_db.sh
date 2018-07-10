@@ -27,5 +27,5 @@ if [ ! -d "$parameters__app_root/db_back" ]; then
   mkdir $parameters__app_root/db_back
 fi
 touch $parameters__app_root/db_back/db.sql.back_$DATEVAR
-mysqldump -u $parameters__database_user --password=$parameters__database_password $parameters__database_name > db_back/db.sql.back_$DATEVAR
+mysqldump -u $parameters__database_user --password=$parameters__database_password $parameters__database_name > $parameters__app_root/db_back/db.sql.back_$DATEVAR
 find $parameters__app_root/db_back/db.sql.back* -mtime +13 -type f -exec rm {} \;
