@@ -214,17 +214,18 @@ class ScheduleAppointmentController extends Controller{
         $helper = $this->get('wchelper');
         $studentusername = $newAppt->getStudUsername();
         $tutorusername = $newAppt->getTutorUsername();
-
         $studentemail = $email;
-        $studentemail = 'ces55739@bethel.edu';  //   ************* Remove this when it goes live ********* //
 
-        $subject = "Writing Center: Appointment Reminder";
+        if( $newAppt->getMultilingual() )
+            $subject = "Writing Center: Multilingual Appointment Reminder";
+        else
+            $subject = "Writing Center: Appointment Reminder";
 
-        $body = "Thank you for signing up for an appointment with the Writing Center. Here are the details of the appointment:\n\n";
+        $body = "Thank you for signing up for a multilingual writing support appointment with the Writing Center. Here are the details of the appointment:\n\n";
         $body = $body."Tutor Username: ".$tutorusername."\nTime: ".$newAppt->getStartTime()->format("m/d/Y g:i a");
         $body = $body."\nMultilingual: ".$newAppt->getMultilingual();
         $body = $body."\n\nAssignment: ".$newAppt->getAssignment()."\nComments: ".$newAppt->getComment()."\nSuggestions: ".$newAppt->getSuggestion();
-    
+
         $helper->SendMessage($studentemail, $subject, $body);
         return;
     }

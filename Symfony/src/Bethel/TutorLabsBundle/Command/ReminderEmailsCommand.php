@@ -45,17 +45,17 @@ class ReminderEmailsCommand extends ContainerAwareCommand
             $data2 = $data2[0];
 
             $to = $data2->getEmail();
-            $subject = "Writing Center -- Reminder";
+            if( $appt->getMultilingual() )
+                $subject = "Writing Center: Multilingual Appointment Reminder";
+            else
+                $subject = "Writing Center: Appointment Reminder";
             
-            $body = "Thank you for signing up for an appointment with the Writing Center. Here are the details of your appointment tomorrow:\n\n";
+            $body = "Thank you for signing up for a multilingual writing support appointment with the Writing Center. Here are the details of your appointment tomorrow:\n\n";
             $body .= "Tutor: " . $helper->getFirstLastNameByUsername($appt->getTutorUsername()) . "\nStart Time: ".$appt->getStartTime()->format("m/d/Y g:i a")."\nEnd Time: ".$appt->getEndTime()->format("m/d/Y g:i a")."\nLocation: Writing Center (HC 324)";
             if( $appt->getMultilingual() )
                 $body .= "\nMultilingual: ".$appt->getMultilingual();
 
-            $body .= "\n\nIf you are unable to keep this appointment, please cancel it. To cancel
-your appointment, visit the Writing Center scheduling page, click on 'View
-Your Scheduled Appointments,'' select the appointment from the calendar and
-click 'Remove.'";
+            $body .= "\n\nIf there's an error or you need to cancel, visit the Writing Center website, click View Your Scheduled Appointments, and click on the appointment to cancel.";
 
             mail( $to, $subject, $body, "From: no-reply@bethel.edu\r\n");
 
