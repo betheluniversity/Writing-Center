@@ -91,9 +91,9 @@ be_simple_sso_auth:
             version: 2
         server:
             id: cas
-            login_url: https://auth-prod.bethel.edu/cas/login
-            logout_url: https://auth-prod.bethel.edu/cas/logout
-            validation_url: https://auth-prod.bethel.edu/cas/serviceValidate
+            login_url: %cas.login%
+            logout_url: %cas.logout%
+            validation_url: %cas.validate%
 
 fos_rest:
     view:
