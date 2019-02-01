@@ -91,9 +91,9 @@ be_simple_sso_auth:
             version: 2
         server:
             id: cas
-            login_url: https://192.168.56.102:8443/cas-server-webapp-3.5.2/login
-            logout_url: https://192.168.56.102:8443/cas-server-webapp-3.5.2/logout
-            validation_url: https://192.168.56.102:8443/cas-server-webapp-3.5.2/serviceValidate
+            login_url: https://auth-prod.bethel.edu/cas/login
+            logout_url: https://auth-prod.bethel.edu/cas/logout
+            validation_url: https://auth-prod.bethel.edu/cas/serviceValidate
 
 fos_rest:
     view:
