@@ -1,4 +1,0 @@
-fos_user:
-    registration:
-        form:
-            type: bethel_user_registration
